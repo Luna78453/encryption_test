@@ -3,9 +3,11 @@
 intrada = 'lorem ipsum pene polla'
 outter = ''
 
+shift = 3
+
 for char in intrada:
-    if isalpha(char):
-        c = ord(char) + 3
+    if char.isalpha():
+        c = ord(char) + shift
         outter += chr(c)
 
 print(outter)
