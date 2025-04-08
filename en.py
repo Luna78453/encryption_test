@@ -1,11 +1,16 @@
 #!/bin/python3
 
-intrada = 'lorem ipsum pene polla'
+intrada = open("testo.txt")
 outter = ''
 
-for char in intrada:
-    if isalpha(char):
-        c = ord(char) + 3
-        outter += chr(c)
+def transform(_input):
+    _return = ''
+
+    for char in _input:
+        if isalpha(char):
+            c = ord(char) + 3
+            _return += chr(c)
+
+    return _return
 
 print(outter)
