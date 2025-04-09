@@ -40,6 +40,7 @@ while True:
 
         if opt != 'a' and opt != 'b' and opt != 'q':
             print("Select one of the options presented.")
+            continue
 
         break
 
