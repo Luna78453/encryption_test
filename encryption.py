@@ -5,10 +5,11 @@ import os
 #intrada = open("testo.txt")
 #outter = open("testo_en.txt", "w")
 
+opt = ''
+
 def shift(_input, _output, shift_amnt):
-    if _input.isalpha():
-        c = chr(ord(_input) + shift_amnt)
-        _output.write(c)
+    c = chr(ord(_input) + shift_amnt)
+    _output.write(c)
 
 def encryption(_input, _output, shift_amnt):
     for line in _input:
@@ -31,11 +32,9 @@ def encrypt(decrypt):
     intrada.close()
     outter.close()
 
-opt = ''
-
 while True:
     while True:
-        print("Select option: \nA) encrypt\nB) decrypt")
+        print("Select option: \nA) encrypt\nB) decrypt\nQ) quit")
         opt = str.lower(input())
 
         if opt != 'a' and opt != 'b' and opt != 'q':
@@ -45,7 +44,7 @@ while True:
         break
 
     if opt == 'a':
-        encrypt()
+        encrypt(False)
     elif opt == 'b':
         encrypt(True)
     elif opt == 'q':
