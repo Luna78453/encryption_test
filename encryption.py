@@ -5,7 +5,11 @@ import sys
 def shift(_input, _output, shift_amnt):
     c = chr(ord(_input) + shift_amnt)
     print('{} {} {} {}'.format(_input, ord(_input) + shift_amnt, ord(_input), c))
-    _output.write(c)
+
+    if ord(_input) == 10:
+        _output.write(_input)
+    else:
+        _output.write(c)
 
 def encryption(_input, _output, shift_amnt):
     for line in _input:
