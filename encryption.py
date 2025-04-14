@@ -2,14 +2,16 @@
 import os
 import sys
 
-def shift(_input, _output, shift_amnt):
-    c = chr(ord(_input) + shift_amnt)
-    print('{} {} {} {}'.format(_input, ord(_input) + shift_amnt, ord(_input), c))
+mode = str.lower(sys.argv[1])
+_type = str.lower(sys.argv[2])
+path = sys.argv[3]
+key = sys.argv[4]
+path_out = sys.argv[5]
 
-    if ord(_input) == 10:
-        _output.write(_input)
-    else:
-        _output.write(c)
+def shift(_input, _output, shift_amnt):
+    c = chr(_input + shift_amnt).encode(encoding="utf-8")
+    #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_amnt, ord(str(_input)), c))
+    _output.write(c)
 
 def encryption(_input, _output, shift_amnt):
     for line in _input:
@@ -21,20 +23,14 @@ def encrypt(dir, shifts, decrypt, dir_out):
         shifts *= -1
 
     if str.lower(dir_out) == 'none':
-        with open(dir) as intrada, open(os.path.splitext(intrada.name)[0] + "_en.txt", "w") as outter:
+        with open(dir, "rb") as intrada, open(os.path.splitext(intrada.name)[0] + "_en.txt", "wb") as outter:
             encryption(intrada, outter, shifts)    
     else:
-        with open(dir) as intrada, open(dir_out, "w") as outter:
+        with open(dir, "rb") as intrada, open(dir_out, "wb") as outter:
             encryption(intrada, outter, shifts)
 
     intrada.close()
     outter.close()
-
-mode = str.lower(sys.argv[1])
-type = str.lower(sys.argv[2])
-path = sys.argv[3]
-key = sys.argv[4]
-path_out = sys.argv[5]
 
 if mode == 'decrypt':
     encrypt(path, int(key), True, path_out)

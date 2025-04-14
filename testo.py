@@ -1,5 +1,5 @@
-intrada = open("testo_en.txt")
+intrada = open("testo.txt", "rb")
 
 for ln in intrada:
     for o in ln:
-        print(o, ord(o))
+        print(o, chr(o))
