@@ -2,8 +2,14 @@
 import os
 import sys
 
+mode = str.lower(sys.argv[1])
+_type = str.lower(sys.argv[2])
+path = sys.argv[3]
+key = sys.argv[4]
+path_out = sys.argv[5]
+
 def shift(_input, _output, shift_amnt):
-    c = _input + shift_amnt
+    c = chr(_input + shift_amnt).encode(encoding="utf-8")
     #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_amnt, ord(str(_input)), c))
     _output.write(c)
 
@@ -25,12 +31,6 @@ def encrypt(dir, shifts, decrypt, dir_out):
 
     intrada.close()
     outter.close()
-
-mode = str.lower(sys.argv[1])
-type = str.lower(sys.argv[2])
-path = sys.argv[3]
-key = sys.argv[4]
-path_out = sys.argv[5]
 
 if mode == 'decrypt':
     encrypt(path, int(key), True, path_out)
