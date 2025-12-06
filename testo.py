@@ -1,5 +1,11 @@
-intrada = open("testo.txt", "rb")
+iintrada = open("testo.txt", "rb")
+intrada = iintrada.read()
+decrypt = False
 
-for ln in intrada:
-    for o in ln:
-        print(o, chr(o))
+key_shifts = [int(c) - 97 for c in intrada]
+key_shifts2 = [-(int(c) - 97) for c in intrada]
+
+print(key_shifts)
+print(key_shifts2)
+
+iintrada.close()
