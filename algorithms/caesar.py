@@ -1,4 +1,5 @@
 import os
+from typing import List, IO
 
 def shift(_input, _output, shift_amnt):
     c = chr(_input + shift_amnt).encode(encoding="utf-8")
@@ -10,16 +11,19 @@ def encryption(_input, _output, shift_amnt):
         for char in line:
             shift(char, _output, shift_amnt)
  
-def caesar_encrypt(dir, shifts, decrypt, dir_out):
+ #dir: str, key: str, decrypt: bool, dir_out: Optional[str]
+def caesar_encrypt(entrata: IO, shifts: int, decrypt: bool, uscita: IO):
     if decrypt:
         shifts *= -1
 
-    if str.lower(dir_out) == 'none':
-        with open(dir, "rb") as intrada, open(os.path.splitext(intrada.name)[0] + "_en.txt", "wb") as outter:
-            encryption(intrada, outter, shifts)    
-    else:
-        with open(dir, "rb") as intrada, open(dir_out, "wb") as outter:
-            encryption(intrada, outter, shifts)
+#   if str.lower(dir_out) == 'none':
+#       with open(dir, "rb") as intrada, open(os.path.splitext(intrada.name)[0] + "_en.txt", "wb") as outter:
+#           encryption(intrada, outter, shifts)    
+#   else:
+#       with open(dir, "rb") as intrada, open(dir_out, "wb") as outter:
+#           encryption(intrada, outter, shifts)
+    
+    encryption(entrata, uscita, shifts)
 
-    intrada.close()
-    outter.close()
+    entrata.close()
+    uscita.close()
