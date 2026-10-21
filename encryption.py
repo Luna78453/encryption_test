@@ -9,7 +9,7 @@ if len(sys.argv) == 6:
     en_type = str.lower(sys.argv[1])
     path = sys.argv[2]
     path_out = sys.argv[3]
-    mode = str.lower(sys.argv[2])
+    mode = str.lower(sys.argv[4])
     key = str.lower(sys.argv[5])
 
 if len(sys.argv) == 5:
@@ -35,10 +35,13 @@ def matchEncryptionType(entrata: IO, uscita: IO):
             elif mode == 'encrypt' or mode == 'en' or mode == 'e':
                 vigenere.vigenere_encrypt(entrata, key, False, uscita)
             else:
-                print('mode parse error: not found')
+                print('ERROR: invalid mode')
+        case _: 
+            print("ERROR: invalid encryption type")
 
 if path_out == '':
     with open(path, "rb") as entrata, open(os.path.splitext(entrata.name)[0] + "_en.txt", "wb") as uscita:
+        print(entrata)
         matchEncryptionType(entrata, uscita)
 else:
     with open(path, "rb") as entrata, open(path_out, "wb") as uscita:

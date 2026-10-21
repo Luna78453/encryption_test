@@ -1,9 +1,26 @@
-import os
+import os, io
 from typing import List, IO
 
-def shift(_input: str, _output, shift_key: List[int], _iterator: int):
-    c = chr((int(_input) - 97 + shift_key[_iterator]) % 26 + 97).lower().encode(encoding="utf-8")
-    _output.write(c)
+def shift(_input, _output, shift_key: List[int], _iterator: int):
+    print(len(shift_key))
+    print(_iterator)
+#   c = chr(_input + shift_key[_iterator]).encode(encoding="utf-8")
+#   _output.write(c)
+#   _iterator += 1
+    if chr(_input).isalpha():   
+        if chr(_input).islower():
+            c = chr((_input - 97 + shift_key[_iterator]) % 26 + 97).encode(encoding="utf-8")
+            #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_key[_iterator], ord(str(_input)), c))
+            _output.write(c)
+            _iterator = _iterator + 1
+        else: 
+            c = chr((_input - 65 + shift_key[_iterator]) % 26 + 65).encode(encoding="utf-8")
+            #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_key[_iterator], ord(str(_input)), c))
+            _output.write(c)
+            _iterator = _iterator + 1
+    else:
+        _output.write(chr(_input).encode(encoding="utf-8"))
+    
 
 def encryption(_input, _output, shift_key: List[int]):
     cycling_iterator = 0
@@ -11,12 +28,8 @@ def encryption(_input, _output, shift_key: List[int]):
         for char in line:
             if cycling_iterator == len(shift_key):
                 cycling_iterator = 0                          
-            if chr(char).isalpha():
-                print(chr(char), cycling_iterator)
-                shift(char, _output, shift_key, cycling_iterator)
-                cycling_iterator += 1
-            else:
-                _output.write(chr(char).encode(encoding="utf-8"))
+            shift(char, _output, shift_key, cycling_iterator)
+            cycling_iterator += 1
 
 #entrata: IO, shifts: int, decrypt: bool, uscita: IO
 def vigenere_encrypt(entrata: IO, key: str, decrypt: bool, uscita: IO):

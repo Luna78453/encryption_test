@@ -2,9 +2,17 @@ import os
 from typing import List, IO
 
 def shift(_input, _output, shift_amnt):
-    c = chr(_input + shift_amnt).encode(encoding="utf-8")
-    #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_amnt, ord(str(_input)), c))
-    _output.write(c)
+    if chr(_input).isalpha():   
+        if chr(_input).islower():
+            c = chr((_input - 97 + shift_amnt) % 26 + 97).encode(encoding="utf-8")
+            #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_amnt, ord(str(_input)), c))
+            _output.write(c)
+        else: 
+            c = chr((_input - 65 + shift_amnt) % 26 + 65).encode(encoding="utf-8")
+            #print('{} {} {} {}'.format(str(_input), ord(str(_input)) + shift_amnt, ord(str(_input)), c))
+            _output.write(c)
+    else:
+        _output.write(chr(_input).encode(encoding="utf-8"))
 
 def encryption(_input, _output, shift_amnt):
     for line in _input:
