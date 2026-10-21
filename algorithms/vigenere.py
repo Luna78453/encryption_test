@@ -1,4 +1,3 @@
-import os, io
 from typing import List, IO
 
 def shift(_input, _output, shift_key: List[int], _iterator: int):

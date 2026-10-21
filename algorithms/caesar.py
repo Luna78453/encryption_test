@@ -1,5 +1,4 @@
-import os
-from typing import List, IO
+from typing import IO
 
 def shift(_input, _output, shift_amnt):
     if chr(_input).isalpha():   
