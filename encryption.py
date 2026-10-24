@@ -1,5 +1,6 @@
 import algorithms.caesar as caesar
 import algorithms.vigenere as vigenere
+import algorithms.sha256 as sha256
 import sys, os
 from typing import IO
 
@@ -17,6 +18,15 @@ if len(sys.argv) == 5:
     path = sys.argv[2]
     mode = str.lower(sys.argv[3])
     key = str.lower(sys.argv[4])
+
+if len(sys.argv) == 4:
+    en_type = str.lower(sys.argv[1])
+    path = sys.argv[2]
+    path_out = sys.argv[3]
+
+if len(sys.argv) == 3:
+    en_type = str.lower(sys.argv[1])
+    path = sys.argv[2]
 
 algorithm_dict = {}
 
@@ -36,12 +46,13 @@ def matchEncryptionType(entrata: IO, uscita: IO):
                 vigenere.vigenere_encrypt(entrata, key, False, uscita)
             else:
                 print('ERROR: invalid mode')
+        case 'sha256':
+            sha256.sha256_encrypt(entrata, uscita)
         case _: 
             print("ERROR: invalid encryption type")
 
 if path_out == '':
     with open(path, "rb") as entrata, open(os.path.splitext(entrata.name)[0] + "_en.txt", "wb") as uscita:
-        print(entrata)
         matchEncryptionType(entrata, uscita)
 else:
     with open(path, "rb") as entrata, open(path_out, "wb") as uscita:

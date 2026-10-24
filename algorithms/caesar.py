@@ -18,7 +18,7 @@ def encryption(_input, _output, shift_amnt):
         for char in line:
             shift(char, _output, shift_amnt)
  
- #dir: str, key: str, decrypt: bool, dir_out: Optional[str]
+#dir: str, key: str, decrypt: bool, dir_out: Optional[str]
 def caesar_encrypt(entrata: IO, shifts: int, decrypt: bool, uscita: IO):
     if decrypt:
         shifts *= -1
