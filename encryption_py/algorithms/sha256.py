@@ -48,9 +48,9 @@ def encryption(entrata: IO, uscita: IO):
             message_block += char.to_bytes()
 
     original_len = (len(message_block)*8).to_bytes(8, 'big')
-
+    
     #print(message_block)
-    #print(len(message_block)*8)
+    #print(len(message_block))
 
     message_block += 0b10000000.to_bytes()
 

@@ -1,13 +1,19 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public static void main(String[] args) {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println("Hello and welcome!");
+import java.util.ArrayList;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) {
+        Sha256 fuckYou = new Sha256();
+        fuckYou.Encrypt("Java/testo.txt", "Java/testo-sha256.txt");
+
+        /*System.out.println(fuckYouToo);
+
+        for(Byte c : fuckYouToo){
+            System.out.println("times two");
+            System.out.println((byte)(c * 2) + " " + (c * 2) + " " + c);
+            System.out.println("times three");
+            System.out.println((byte)(c * 3) + " " + (c * 3) + " " + c);
+            System.out.println("times four");
+            System.out.println((byte)(c * 4) + " " + (c * 4) + " " + (char)c);
+        }*/
     }
 }

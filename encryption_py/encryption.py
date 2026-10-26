@@ -1,6 +1,6 @@
-import encryption_py.algorithms.caesar as caesar
-import encryption_py.algorithms.vigenere as vigenere
-import encryption_py.algorithms.sha256 as sha256
+import algorithms.caesar as caesar
+import algorithms.vigenere as vigenere
+import algorithms.sha256 as sha256
 import sys, os
 from typing import IO
 
