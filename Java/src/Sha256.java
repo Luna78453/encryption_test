@@ -1,5 +1,7 @@
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Sha256 extends EncryptionAlgorithm {
     public String name = "sha256";
@@ -36,17 +38,25 @@ public class Sha256 extends EncryptionAlgorithm {
 
         readFileEntrata(entrata);
 
-        int original_len = buffer.size()*8;
+        long original_len = buffer.size() * 8L;
+        byte[] original_len_bytes = ByteBuffer.allocate(Long.BYTES).putLong(original_len).array();
 
         buffer.add((byte)0b10000000);
 
-        int num_of_blocks = buffer.size();
+        int num_of_blocks = Math.floorDiv(buffer.size(), 64) + 1;
         int num_of_bytes = 64*num_of_blocks;
-        int zero_padding_amnt = num_of_bytes - 8 - buffer.size();
-        byte[] zero_padding = new byte[zero_padding_amnt];
 
-        buffer.addAll(Arrays.asList(zero_padding));
+        buffer.addAll(Collections.nCopies(num_of_bytes - 8 - buffer.size(), (byte) 0));
 
-        //buffer += original_len;
+        for(int i = 0; i < buffer.size(); i += 4){
+            System.out.println(Integer.toHexString(buffer.get(i).intValue()) +
+                    Integer.toHexString(buffer.get(i + 1).intValue()) +
+                    Integer.toHexString(buffer.get(i + 2).intValue()) +
+                    Integer.toHexString(buffer.get(i + 3).intValue()));
+        }
+        for(byte b : original_len_bytes){
+            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(b)) + " ");
+        }
+        System.out.println(buffer.size());
     }
 }
