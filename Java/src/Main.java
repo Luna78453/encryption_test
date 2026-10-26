@@ -6,7 +6,7 @@ public class Main {
         fuckYou.Encrypt("Java/testo.txt", "Java/testo-sha256.txt");
 
         /*System.out.println(fuckYouToo);
-
+|
         for(Byte c : fuckYouToo){
             System.out.println("times two");
             System.out.println((byte)(c * 2) + " " + (c * 2) + " " + c);

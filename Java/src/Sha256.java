@@ -3,20 +3,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static java.lang.Byte.toUnsignedInt;
+import static java.lang.Integer.rotateRight;
+
 public class Sha256 extends EncryptionAlgorithm {
     public String name = "sha256";
     @Override
     public void Encrypt(String entrata, String uscita) {
-        Integer h0 = 0x6a09e667;
-        Integer h1 = 0xbb67ae85;
-        Integer h2 = 0x3c6ef372;
-        Integer h3 = 0xa54ff53a;
-        Integer h4 = 0x510e527f;
-        Integer h5 = 0x9b05688c;
-        Integer h6 = 0x1f83d9ab;
-        Integer h7 = 0x5be0cd19;
+        int[] hashes = {0x6a09e667,
+        0xbb67ae85,
+        0x3c6ef372,
+        0xa54ff53a,
+        0x510e527f,
+        0x9b05688c,
+        0x1f83d9ab,
+        0x5be0cd19};
 
-        Integer[] k = {
+        int[] k = {
                 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
                 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
                 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
@@ -27,36 +30,94 @@ public class Sha256 extends EncryptionAlgorithm {
                 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
         };
 
-        Integer work_a = h0;
-        Integer work_b = h1;
-        Integer work_c = h2;
-        Integer work_d = h3;
-        Integer work_e = h4;
-        Integer work_f = h5;
-        Integer work_g = h6;
-        Integer work_h = h7;
+        int work_a = hashes[0];
+        int work_b = hashes[1];
+        int work_c = hashes[2];
+        int work_d = hashes[3];
+        int work_e = hashes[4];
+        int work_f = hashes[5];
+        int work_g = hashes[6];
+        int work_h = hashes[7];
 
         readFileEntrata(entrata);
 
         long original_len = buffer.size() * 8L;
         byte[] original_len_bytes = ByteBuffer.allocate(Long.BYTES).putLong(original_len).array();
 
-        buffer.add((byte)0b10000000);
+        buffer.add((byte)128);
+
+        /*for(int i = 0; i < buffer.size(); i++){
+            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i))) + " ");
+            System.out.print(((i + 1)%4 == 0) ? "\n" : "");
+        }*/
 
         int num_of_blocks = Math.floorDiv(buffer.size(), 64) + 1;
         int num_of_bytes = 64*num_of_blocks;
 
         buffer.addAll(Collections.nCopies(num_of_bytes - 8 - buffer.size(), (byte) 0));
 
-        for(int i = 0; i < buffer.size(); i += 4){
-            System.out.println(Integer.toHexString(buffer.get(i).intValue()) +
-                    Integer.toHexString(buffer.get(i + 1).intValue()) +
-                    Integer.toHexString(buffer.get(i + 2).intValue()) +
-                    Integer.toHexString(buffer.get(i + 3).intValue()));
-        }
         for(byte b : original_len_bytes){
-            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(b)) + " ");
+            //System.out.println(b);
+            buffer.add(b);
         }
-        System.out.println(buffer.size());
+
+        /*for(int i = 0; i < buffer.size(); i += 4){
+            System.out.println(Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 1))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 2))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 3))));
+        }
+        System.out.println(buffer.size());*/
+
+        for(int sec = 0; sec < 64; sec += 64){
+            int[] messageSchedule = new int[64];
+
+            for(int offset = 0; offset < 16; offset++){
+                messageSchedule[offset] = (toUnsignedInt(buffer.get(offset*4))<<24) +
+                        (toUnsignedInt(buffer.get(offset*4 + 1))<<16) +
+                        (toUnsignedInt(buffer.get(offset*4 + 2))<<8) +
+                        (toUnsignedInt(buffer.get(offset*4 + 3)));
+            }
+
+            for (int offset = 16; offset < 64; offset++){
+                int sigma0 = (rotateRight(messageSchedule[offset - 15], 7))^(rotateRight(messageSchedule[offset - 15], 18))^(messageSchedule[offset - 15]>>3);
+                int sigma1 = (rotateRight(messageSchedule[offset - 2], 17))^(rotateRight(messageSchedule[offset - 2], 19))^(messageSchedule[offset - 2]>>10);
+                messageSchedule[offset] = messageSchedule[offset - 16] + sigma0 + messageSchedule[offset - 7] + sigma1;
+            }
+
+            for(int offset = 0; offset < 64; offset++){
+                int captsigma0 = rotateRight(work_a, 2)^ rotateRight(work_a, 13)^ rotateRight(work_a, 22);
+                int captsigma1 = rotateRight(work_e, 6)^rotateRight(work_e, 11)^rotateRight(work_e, 25);
+
+                int choice = (work_e&work_f) ^ ((~work_e)&work_g);
+                int majority = (work_a&work_b) ^ (work_a&work_c) ^ (work_b&work_c);
+
+                int temp1 = work_h + captsigma1 + choice + k[offset] + messageSchedule[offset];
+
+                int temp2 = captsigma0 + majority;
+
+                work_h = work_g;
+                work_g = work_f;
+                work_f = work_e;
+                work_e = work_d + temp1;
+                work_d = work_c;
+                work_c = work_b;
+                work_b = work_a;
+                work_a = temp1 + temp2;
+            }
+
+            hashes[0] = hashes[0] + work_a;
+            hashes[1] = hashes[1] + work_b;
+            hashes[2] = hashes[2] + work_c;
+            hashes[3] = hashes[3] + work_d;
+            hashes[4] = hashes[4] + work_e;
+            hashes[5] = hashes[5] + work_f;
+            hashes[6] = hashes[6] + work_g;
+            hashes[7] = hashes[7] + work_h;
+
+            for(Integer i : messageSchedule){
+                System.out.println(Integer.toBinaryString(i));
+            }
+        }
     }
 }
