@@ -1,6 +1,5 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 abstract class EncryptionAlgorithm {
     public String name;
@@ -17,7 +16,7 @@ abstract class EncryptionAlgorithm {
     }
 
     protected void readFileEntrata(String path){
-        StringBuilder data = new StringBuilder("");
+        StringBuilder data = new StringBuilder();
 
         try (FileInputStream input = new FileInputStream(path)) {
             int i;
