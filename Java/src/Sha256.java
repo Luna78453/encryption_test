@@ -11,6 +11,7 @@ import static java.lang.Integer.rotateRight;
 
 public class Sha256 extends EncryptionAlgorithm {
     public String name = "sha256";
+    // TODO: fix the fucking integer overloading problem
     @Override
     public void Encrypt(String entrata, String uscita) {
         int[] hashes = {0x6a09e667,
