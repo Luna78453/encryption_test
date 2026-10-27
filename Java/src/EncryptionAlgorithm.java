@@ -1,31 +1,34 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 abstract class EncryptionAlgorithm {
     public String name;
-    public ArrayList<Byte> buffer;
+    public byte[] buffer;
 
-    protected void makeFileUscita(String path){
+    protected void makeFileUscita(String path, String uscita){
         try (var output = new FileOutputStream(path)) {
-            output.write(buffer.toString().getBytes());
+            for(byte c : uscita.getBytes(StandardCharsets.UTF_8)){
+                output.write(c);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     protected void readFileEntrata(String path){
-        ArrayList<Byte> data = new ArrayList<Byte>(0);
+        StringBuilder data = new StringBuilder("");
 
-        try (var input = new FileInputStream(path)) {
+        try (FileInputStream input = new FileInputStream(path)) {
             int i;
             while ((i = input.read()) != -1) {
-                data.add((byte)i);
+                data.append((char) i);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        buffer = data;
+        buffer = data.toString().getBytes(StandardCharsets.UTF_8);
     }
 
     public abstract void Encrypt(String entrata, String uscita);

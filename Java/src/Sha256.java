@@ -1,7 +1,10 @@
+import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Integer.rotateRight;
@@ -11,13 +14,13 @@ public class Sha256 extends EncryptionAlgorithm {
     @Override
     public void Encrypt(String entrata, String uscita) {
         int[] hashes = {0x6a09e667,
-        0xbb67ae85,
-        0x3c6ef372,
-        0xa54ff53a,
-        0x510e527f,
-        0x9b05688c,
-        0x1f83d9ab,
-        0x5be0cd19};
+            0xbb67ae85,
+            0x3c6ef372,
+            0xa54ff53a,
+            0x510e527f,
+            0x9b05688c,
+            0x1f83d9ab,
+            0x5be0cd19};
 
         int[] k = {
                 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -41,42 +44,50 @@ public class Sha256 extends EncryptionAlgorithm {
 
         readFileEntrata(entrata);
 
-        long original_len = buffer.size() * 8L;
+        System.out.println(new String(buffer, StandardCharsets.UTF_8));
+        System.out.println(buffer.length);
+
+        long original_len = buffer.length * 8L;
         byte[] original_len_bytes = ByteBuffer.allocate(Long.BYTES).putLong(original_len).array();
 
-        buffer.add((byte)128);
+        List<Byte> message = new ArrayList<>();
+        for(byte b : buffer){
+            message.add(b);
+        }
 
-        /*for(int i = 0; i < buffer.size(); i++){
-            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i))) + " ");
+        message.add((byte)128);
+
+        /*for(int i = 0; i < message.size(); i++){
+            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(message.get(i))) + " ");
             System.out.print(((i + 1)%4 == 0) ? "\n" : "");
         }*/
 
-        int num_of_blocks = Math.floorDiv(buffer.size(), 64) + 1;
+        int num_of_blocks = Math.floorDiv(message.size(), 64) + 1;
         int num_of_bytes = 64*num_of_blocks;
 
-        buffer.addAll(Collections.nCopies(num_of_bytes - 8 - buffer.size(), (byte) 0));
+        message.addAll(Collections.nCopies(num_of_bytes - 8 - message.size(), (byte) 0));
 
         for(byte b : original_len_bytes){
             //System.out.println(b);
-            buffer.add(b);
+            message.add(b);
         }
 
-        /*for(int i = 0; i < buffer.size(); i += 4){
-            System.out.println(Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 1))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 2))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(buffer.get(i + 3))));
+        /*for(int i = 0; i < message.size(); i += 4){
+            System.out.println(Integer.toBinaryString(Byte.toUnsignedInt(message.get(i))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 1))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 2))) + " " +
+                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 3))));
         }
-        System.out.println(buffer.size());*/
+        System.out.println(message.size());*/
 
-        for(int sec = 0; sec < 64; sec += 64){
+        for(int sec = 0; sec < num_of_bytes; sec += 64){
             int[] messageSchedule = new int[64];
 
             for(int offset = 0; offset < 16; offset++){
-                messageSchedule[offset] = (toUnsignedInt(buffer.get(offset*4))<<24) +
-                        (toUnsignedInt(buffer.get(offset*4 + 1))<<16) +
-                        (toUnsignedInt(buffer.get(offset*4 + 2))<<8) +
-                        (toUnsignedInt(buffer.get(offset*4 + 3)));
+                messageSchedule[offset] = (toUnsignedInt(message.get(offset*4))<<24) +
+                        (toUnsignedInt(message.get(offset*4 + 1))<<16) +
+                        (toUnsignedInt(message.get(offset*4 + 2))<<8) +
+                        (toUnsignedInt(message.get(offset*4 + 3)));
             }
 
             for (int offset = 16; offset < 64; offset++){
@@ -115,9 +126,32 @@ public class Sha256 extends EncryptionAlgorithm {
             hashes[6] = hashes[6] + work_g;
             hashes[7] = hashes[7] + work_h;
 
-            for(Integer i : messageSchedule){
-                System.out.println(Integer.toBinaryString(i));
+            /*for(Integer i : messageSchedule){
+                if(Integer.toBinaryString(i).length() == 32){
+                    System.out.println(Integer.toBinaryString(i));
+                } else if (i == 0) {
+                    System.out.println("0".repeat(32));
+                } else {
+                    System.out.println("0".repeat(32 - Integer.toBinaryString(i).length())
+                            + Integer.toBinaryString(i));
+                }
+            }*/
+        }
+
+        String o =  new String();
+
+        for(int hash : hashes){
+            if(Integer.toHexString(hash).length() == 8){
+                o += Integer.toHexString(hash);
+            } else if (Integer.toHexString(hash).length() < 8 && hash == 0) {
+                o += "00000000";
+            } else {
+                o += "0".repeat(8 - Integer.toHexString(hash).length()) + (Integer.toHexString(hash));
             }
         }
+
+        System.out.println(o);
+
+        makeFileUscita(uscita, o);
     }
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         Sha256 fuckYou = new Sha256();
-        fuckYou.Encrypt("Java/testo.txt", "Java/testo-sha256.txt");
+        fuckYou.Encrypt("C:\\Users\\hecto\\Documents\\GitHub\\encryption_test\\Java\\testo1.txt", "C:\\Users\\hecto\\Documents\\GitHub\\encryption_test\\Java\\testo1-sha256.txt");
 
         /*System.out.println(fuckYouToo);
 |
