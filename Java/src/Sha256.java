@@ -11,9 +11,13 @@ import static java.lang.Integer.rotateRight;
 
 public class Sha256 extends EncryptionAlgorithm {
     public String name = "sha256";
-    // TODO: fix the fucking integer overloading problem
+    // TODOne: fix the fucking integer overloading problem
+    /*  it wasn't a wrapping around problem I was just accessing the incorrect parts
+        of the message Byte list buffer in the message schedule for loop lol
+     */
     @Override
     public void Encrypt(String entrata, String uscita) {
+        //this will become the output
         int[] hashes = {0x6a09e667,
             0xbb67ae85,
             0x3c6ef372,
@@ -45,12 +49,12 @@ public class Sha256 extends EncryptionAlgorithm {
 
         readFileEntrata(entrata);
 
-        System.out.println(new String(buffer, StandardCharsets.UTF_8));
-        System.out.println(buffer.length);
+        long originalLen = buffer.length * 8L;
+        byte[] originalLenBytes = ByteBuffer.allocate(Long.BYTES).putLong(originalLen).array();
 
-        long original_len = buffer.length * 8L;
-        byte[] original_len_bytes = ByteBuffer.allocate(Long.BYTES).putLong(original_len).array();
-
+        //There should be a cleaner way to do this shit bro
+        //from immutable original message to mutable message copy list
+        //to make the following operations easier
         List<Byte> message = new ArrayList<>();
         for(byte b : buffer){
             message.add(b);
@@ -58,51 +62,40 @@ public class Sha256 extends EncryptionAlgorithm {
 
         message.add((byte)128);
 
-        /*for(int i = 0; i < message.size(); i++){
-            System.out.print(Integer.toBinaryString(Byte.toUnsignedInt(message.get(i))) + " ");
-            System.out.print(((i + 1)%4 == 0) ? "\n" : "");
-        }*/
+        //I miss python floor divisions already
+        int numOfBlocks = Math.floorDiv(message.size(), 64) + 1;
+        int numOfBytes = 64*numOfBlocks;
 
-        int num_of_blocks = Math.floorDiv(message.size(), 64) + 1;
-        int num_of_bytes = 64*num_of_blocks;
+        //go fuck yourself
+        message.addAll(Collections.nCopies(numOfBytes - 8 - message.size(), (byte) 0));
 
-        message.addAll(Collections.nCopies(num_of_bytes - 8 - message.size(), (byte) 0));
-
-        for(byte b : original_len_bytes){
-            //System.out.println(b);
+        for(byte b : originalLenBytes){
             message.add(b);
         }
 
-        /*for(int i = 0; i < message.size(); i += 4){
-            System.out.println(Integer.toBinaryString(Byte.toUnsignedInt(message.get(i))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 1))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 2))) + " " +
-                    Integer.toBinaryString(Byte.toUnsignedInt(message.get(i + 3))));
-        }
-        System.out.println(message.size());*/
-
-        for(int sec = 0; sec < num_of_bytes; sec += 64){
+        //main message schedule encrypting
+        for(int sec = 0; sec < numOfBytes; sec += 64){
             int[] messageSchedule = new int[64];
 
             for(int offset = 0; offset < 16; offset++){
-                messageSchedule[offset] = (toUnsignedInt(message.get(offset*4))<<24) +
-                        (toUnsignedInt(message.get(offset*4 + 1))<<16) +
-                        (toUnsignedInt(message.get(offset*4 + 2))<<8) +
-                        (toUnsignedInt(message.get(offset*4 + 3)));
+                messageSchedule[offset] = (toUnsignedInt(message.get(sec + offset*4))<<24) +
+                        (toUnsignedInt(message.get(sec + offset*4 + 1))<<16) +
+                        (toUnsignedInt(message.get(sec + offset*4 + 2))<<8) +
+                        (toUnsignedInt(message.get(sec + offset*4 + 3)));
             }
 
             for (int offset = 16; offset < 64; offset++){
-                int sigma0 = (rotateRight(messageSchedule[offset - 15], 7))^(rotateRight(messageSchedule[offset - 15], 18))^(messageSchedule[offset - 15]>>3);
-                int sigma1 = (rotateRight(messageSchedule[offset - 2], 17))^(rotateRight(messageSchedule[offset - 2], 19))^(messageSchedule[offset - 2]>>10);
+                int sigma0 = (rotateRight(messageSchedule[offset - 15], 7))^(rotateRight(messageSchedule[offset - 15], 18))^(messageSchedule[offset - 15]>>>3);
+                int sigma1 = (rotateRight(messageSchedule[offset - 2], 17))^(rotateRight(messageSchedule[offset - 2], 19))^(messageSchedule[offset - 2]>>>10);
                 messageSchedule[offset] = messageSchedule[offset - 16] + sigma0 + messageSchedule[offset - 7] + sigma1;
             }
 
             for(int offset = 0; offset < 64; offset++){
-                int captsigma0 = rotateRight(work_a, 2)^ rotateRight(work_a, 13)^ rotateRight(work_a, 22);
+                int captsigma0 = rotateRight(work_a, 2)^rotateRight(work_a, 13)^rotateRight(work_a, 22);
                 int captsigma1 = rotateRight(work_e, 6)^rotateRight(work_e, 11)^rotateRight(work_e, 25);
 
-                int choice = (work_e&work_f) ^ ((~work_e)&work_g);
-                int majority = (work_a&work_b) ^ (work_a&work_c) ^ (work_b&work_c);
+                int choice = (work_e&work_f)^((~work_e)&work_g);
+                int majority = (work_a&work_b)^(work_a&work_c)^(work_b&work_c);
 
                 int temp1 = work_h + captsigma1 + choice + k[offset] + messageSchedule[offset];
 
@@ -126,33 +119,18 @@ public class Sha256 extends EncryptionAlgorithm {
             hashes[5] = hashes[5] + work_f;
             hashes[6] = hashes[6] + work_g;
             hashes[7] = hashes[7] + work_h;
-
-            /*for(Integer i : messageSchedule){
-                if(Integer.toBinaryString(i).length() == 32){
-                    System.out.println(Integer.toBinaryString(i));
-                } else if (i == 0) {
-                    System.out.println("0".repeat(32));
-                } else {
-                    System.out.println("0".repeat(32 - Integer.toBinaryString(i).length())
-                            + Integer.toBinaryString(i));
-                }
-            }*/
         }
 
-        String o =  new String();
+        //apparently string builders are better than just concatenating onto a string?
+        StringBuilder o = new StringBuilder();
 
         for(int hash : hashes){
-            if(Integer.toHexString(hash).length() == 8){
-                o += Integer.toHexString(hash);
-            } else if (Integer.toHexString(hash).length() < 8 && hash == 0) {
-                o += "00000000";
-            } else {
-                o += "0".repeat(8 - Integer.toHexString(hash).length()) + (Integer.toHexString(hash));
-            }
+            //toHexString doesn't include leftmost zero bits so they're added with the repeat call
+            //looking back on this it's a bit overboard given how unlikely this is to happen,
+            //but I don't fucking care
+            o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
-        System.out.println(o);
-
-        makeFileUscita(uscita, o);
+        makeFileUscita(uscita, o.toString());
     }
 }
