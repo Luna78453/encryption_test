@@ -1,5 +1,4 @@
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public class Vigenere extends EncryptionAlgorithm{
     public void Encrypt(String entrata, String uscita, boolean decrypt, String key) {

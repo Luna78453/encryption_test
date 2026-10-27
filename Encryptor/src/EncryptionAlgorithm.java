@@ -1,6 +1,6 @@
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 abstract class EncryptionAlgorithm {
     public byte[] buffer;
@@ -17,7 +17,9 @@ abstract class EncryptionAlgorithm {
 
     protected void readFileEntrata(String path){
         // TODOne: research how unicode utf8 works before doing anything retarded again
-        //genuinely no idea why that worked
+        // NOTE: genuinely no idea why that worked
+        // NOTE(1): genuinely no idea why I was using a string on this
+        // NOTE(2): ***look into potentially more efficient way to read bytes***
         try (FileInputStream input = new FileInputStream(path)) {
             buffer = new byte[input.available()];
             input.read(buffer);

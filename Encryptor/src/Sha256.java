@@ -121,9 +121,13 @@ public class Sha256 extends EncryptionAlgorithm {
         StringBuilder o = new StringBuilder();
 
         for(int hash : hashes){
-            //toHexString doesn't include leftmost zero bits so they're added with the repeat call
-            //looking back on this it's a bit overboard given how unlikely this is to happen,
-            //but I don't fucking care
+            /* toXString methods don't include leftmost zero characters if they're
+               smaller than the biggest representation possible so they're added with the repeat call
+               in the case they exist
+
+               looking back on this it's a bit overboard given how unlikely this is to happen,
+               but I don't fucking care
+               */
             o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
