@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,12 +8,10 @@ import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Integer.rotateRight;
 
 public class Sha256 extends EncryptionAlgorithm {
-    public String name = "sha256";
     // TODOne: fix the fucking integer overloading problem
     /*  it wasn't a wrapping around problem I was just accessing the incorrect parts
         of the message Byte list buffer in the message schedule for loop lol
      */
-    @Override
     public void Encrypt(String entrata, String uscita) {
         //this will become the output
         int[] hashes = {0x6a09e667,
@@ -128,6 +127,6 @@ public class Sha256 extends EncryptionAlgorithm {
             o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
-        makeFileUscita(uscita, o.toString());
+        makeFileUscita(uscita, o.toString().getBytes(StandardCharsets.UTF_8));
     }
 }

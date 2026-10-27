@@ -1,13 +1,13 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 abstract class EncryptionAlgorithm {
-    public String name;
     public byte[] buffer;
 
-    protected void makeFileUscita(String path, String uscita){
+    protected void makeFileUscita(String path, byte[] uscita){
         try (var output = new FileOutputStream(path)) {
-            for(byte c : uscita.getBytes(StandardCharsets.UTF_8)){
+            for(byte c : uscita){
                 output.write(c);
             }
         } catch (IOException e) {
@@ -16,19 +16,13 @@ abstract class EncryptionAlgorithm {
     }
 
     protected void readFileEntrata(String path){
-        StringBuilder data = new StringBuilder();
-
+        // TODOne: research how unicode utf8 works before doing anything retarded again
+        //genuinely no idea why that worked
         try (FileInputStream input = new FileInputStream(path)) {
-            int i;
-            while ((i = input.read()) != -1) {
-                data.append((char) i);
-            }
+            buffer = new byte[input.available()];
+            input.read(buffer);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        buffer = data.toString().getBytes(StandardCharsets.UTF_8);
     }
-
-    public abstract void Encrypt(String entrata, String uscita);
 }
