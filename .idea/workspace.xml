@@ -2,48 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/Encryptor.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/src/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Caesar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/src/EncryptionAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/src/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Sha256.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/src/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Vigenere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo-sha256.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo-sha256.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo1-sha256.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo1-sha256.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo_Caesar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo_Caesar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo_Caesar_de.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo_Caesar_de.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo_Vigenere.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo_Vigenere.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/testo_Vigenere_de.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/testo_Vigenere_de.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/algorithms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/algorithms/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/algorithms/caesar.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/algorithms/caesar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/algorithms/sha256.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/algorithms/sha256.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/algorithms/vigenere.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/algorithms/vigenere.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/encryption.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/encryption.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/ffgjjg.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/ffgjjg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/outerteto.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/outerteto.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo1.py" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo1_sha256.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo1_sha256.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_cae.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_cae.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_cae_de.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_cae_de.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_en.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_en.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_sha256.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_sha256.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_vig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_vig.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testo_vig_de.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testo_vig_de.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testovigenere_dec.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testovigenere_dec.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/testovignere_old.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/testovignere_old.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/ttrd.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/ttrd.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption_py/wao.txt" beforeDir="false" afterPath="$PROJECT_DIR$/legacy_encryption_py/wao.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testo-sha256.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
