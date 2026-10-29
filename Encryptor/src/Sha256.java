@@ -3,6 +3,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Integer.rotateRight;
@@ -12,7 +13,10 @@ public class Sha256 extends EncryptionAlgorithm {
     /*  it wasn't a wrapping around problem I was just accessing the incorrect parts
         of the message Byte list buffer in the message schedule for loop lol
      */
-    public void Encrypt(String entrata, String uscita) {
+    String name = "sha256";
+
+    @Override
+    public void Encrypt(String entrata, Optional<String> uscita) {
         //this will become the output
         int[] hashes = {0x6a09e667,
             0xbb67ae85,
@@ -131,6 +135,6 @@ public class Sha256 extends EncryptionAlgorithm {
             o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
-        makeFileUscita(uscita, o.toString().getBytes(StandardCharsets.UTF_8));
+        makeFileUscita(o.toString().getBytes(StandardCharsets.UTF_8), uscita);
     }
 }

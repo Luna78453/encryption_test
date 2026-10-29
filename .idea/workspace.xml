@@ -7,11 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Encryptor_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Encryptor/src/Encryptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Encryptor/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Caesar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Encryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Sha256.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/Vigenere.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +60,10 @@
     "node.js.selected.package.jshint": "",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/hecto/Documents/GitHub/encryption_test/Java/src/Main.java",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -106,21 +108,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="NONE" type="java-line">
           <url>file://$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java</url>
-          <line>13</line>
+          <line>19</line>
           <log-expression expression="&quot;Error writing file&quot;" language="JAVA" mode="CODE_FRAGMENT" />
           <placement>INTER_LINE</placement>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="NONE" type="java-line">
           <url>file://$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java</url>
-          <line>26</line>
+          <line>33</line>
           <log-expression expression="&quot;Error reading file&quot;" language="JAVA" mode="CODE_FRAGMENT" />
           <placement>INTER_LINE</placement>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Encryptor/src/Sha256.java</url>
-          <line>45</line>
+          <line>49</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

@@ -1,5 +1,20 @@
+import java.util.Optional;
+
 public class Caesar extends EncryptionAlgorithm{
-    public void Encrypt(String entrata, String uscita, boolean decrypt, int key) {
+    private boolean decrypt;
+    private int key;
+    String name = "caesar";
+
+    public void setDecrypt(boolean decrypt){
+        this.decrypt = decrypt;
+    }
+
+    public void setKey(int key){
+        this.key = key;
+    }
+
+    @Override
+    public void Encrypt(String entrata, Optional<String> uscita) {
         readFileEntrata(entrata);
         byte[] message = buffer;
 
@@ -9,6 +24,6 @@ public class Caesar extends EncryptionAlgorithm{
                     (byte) ((message[i] + key) % 256);
         }
 
-        makeFileUscita(uscita, message);
+        makeFileUscita(message, uscita);
     }
 }
