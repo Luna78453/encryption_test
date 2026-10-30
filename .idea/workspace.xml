@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Encryptor/src/EncryptorGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
