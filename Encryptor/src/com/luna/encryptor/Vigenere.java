@@ -1,3 +1,5 @@
+package com.luna.encryptor;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -7,7 +9,7 @@ public class Vigenere extends EncryptionAlgorithm{
     private final String key;
 
     public Vigenere(String key, boolean decrypt){
-        this.name = "Vigenere";
+        this.name = "com.luna.encryptor.Vigenere";
         this.decrypt = decrypt;
         this.key = key;
     }

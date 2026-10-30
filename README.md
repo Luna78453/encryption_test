@@ -5,7 +5,7 @@ ALGORITHMS IMPLEMENTED: CAESAR, VIGENERE, SHA256
 ## RUN JAR:
 
 ```
-$ java -jar path/Encryptor.jar [encryptionMethod] [inputFilePath] [outputFilePath(optional)] [mode(optional)] [key(optional]
+$ java -jar path/com.luna.encryptor.Encryptor.jar [encryptionMethod] [inputFilePath] [outputFilePath(optional)] [mode(optional)] [key(optional]
 ```
 
 MODE AND KEY ARE ONLY AVAILABLE FOR TWO WAY ALGORITHMS (CAESAR, VIGENERE).

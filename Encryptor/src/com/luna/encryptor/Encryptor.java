@@ -1,14 +1,28 @@
+package com.luna.encryptor;
+
 import java.util.Optional;
 
 public class Encryptor {
     static void main(String[] args) {
-        // TODOne: actual command line interface
-        String genusCryptographiae, introitus, modus, clavis;
-        Optional<String> exitus = Optional.empty();
+        if(args.length > 0){
+            CLI(args);
+        } else {
+            GUI();
+        }
+    }
 
+    private static void GUI(){
+        EncryptorGUI gui = new EncryptorGUI();
+        gui.makeGUI();
+    }
+
+    private static void CLI(String[] args){
         try {
-            genusCryptographiae =  args[0].toLowerCase();
-            introitus = args[1];
+            String genusCryptographiae = args[0].toLowerCase();
+            String introitus = args[1];
+            String modus;
+            String clavis;
+            Optional<String> exitus = Optional.empty();
             EncryptionAlgorithm encryptor = switch(genusCryptographiae){
                 case "caesar" -> {
                     if (args.length > 4) {

@@ -1,3 +1,5 @@
+package com.luna.encryptor;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -6,7 +8,7 @@ public class Caesar extends EncryptionAlgorithm{
     private final int key;
 
     public Caesar(int key, boolean decrypt){
-        this.name = "Caesar";
+        this.name = "com.luna.encryptor.Caesar";
         this.decrypt = decrypt;
         this.key = key;
     }
