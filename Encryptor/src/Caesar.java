@@ -1,20 +1,18 @@
+import java.io.IOException;
 import java.util.Optional;
 
 public class Caesar extends EncryptionAlgorithm{
-    private boolean decrypt;
-    private int key;
-    String name = "caesar";
+    private final boolean decrypt;
+    private final int key;
 
-    public void setDecrypt(boolean decrypt){
+    public Caesar(int key, boolean decrypt){
+        this.name = "Caesar";
         this.decrypt = decrypt;
-    }
-
-    public void setKey(int key){
         this.key = key;
     }
 
     @Override
-    public void Encrypt(String entrata, Optional<String> uscita) {
+    public void Encrypt(String entrata, Optional<String> uscita) throws IOException {
         readFileEntrata(entrata);
         byte[] message = buffer;
 

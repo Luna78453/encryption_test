@@ -56,6 +56,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/hecto/Documents/GitHub/encryption_test/out/artifacts/Encryptor_jar",
     "node.js.detected.package.jshint": "true",
     "node.js.selected.package.jshint": "",
     "nodejs_package_manager_path": "npm",
@@ -67,6 +68,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hecto\Documents\GitHub\encryption_test\out\artifacts\Encryptor_jar" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hecto\Documents\GitHub\encryption_test\encryption_java\Java" />
     </key>
@@ -102,30 +106,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="NONE" type="java-line">
-          <url>file://$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java</url>
-          <line>19</line>
-          <log-expression expression="&quot;Error writing file&quot;" language="JAVA" mode="CODE_FRAGMENT" />
-          <placement>INTER_LINE</placement>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="NONE" type="java-line">
-          <url>file://$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java</url>
-          <line>33</line>
-          <log-expression expression="&quot;Error reading file&quot;" language="JAVA" mode="CODE_FRAGMENT" />
-          <placement>INTER_LINE</placement>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Encryptor/src/Sha256.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

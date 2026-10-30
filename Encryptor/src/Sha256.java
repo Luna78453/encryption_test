@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -13,10 +14,13 @@ public class Sha256 extends EncryptionAlgorithm {
     /*  it wasn't a wrapping around problem I was just accessing the incorrect parts
         of the message Byte list buffer in the message schedule for loop lol
      */
-    String name = "sha256";
+    public Sha256(){
+        this.name = "sha256";
+    }
+
 
     @Override
-    public void Encrypt(String entrata, Optional<String> uscita) {
+    public void Encrypt(String entrata, Optional<String> uscita) throws IOException {
         //this will become the output
         int[] hashes = {0x6a09e667,
             0xbb67ae85,

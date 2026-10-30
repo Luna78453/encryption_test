@@ -1,20 +1,19 @@
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 public class Vigenere extends EncryptionAlgorithm{
-    private boolean decrypt;
-    private String key;
+    private final boolean decrypt;
+    private final String key;
 
-    public void setDecrypt(boolean decrypt){
+    public Vigenere(String key, boolean decrypt){
+        this.name = "Vigenere";
         this.decrypt = decrypt;
-    }
-
-    public void setKey(String key){
         this.key = key;
     }
 
     @Override
-    public void Encrypt(String entrata, Optional<String> uscita) {
+    public void Encrypt(String entrata, Optional<String> uscita) throws IOException {
         byte[] key_values = key.getBytes(StandardCharsets.UTF_8);
         readFileEntrata(entrata);
         byte[] message = buffer;
