@@ -11,11 +11,14 @@ $ java -jar path/Encryptor.jar [encryptionMethod] [inputFilePath] [outputFilePat
 MODE AND KEY ARE ONLY AVAILABLE FOR TWO WAY ALGORITHMS (CAESAR, VIGENERE).
 
 CAESAR KEY MUST BE AN INTEGER
+
 VIGENERE KEY CAN BE ANY CHARACTERS
 
 ### MODE OPTIONS:
 **Encrypt**
-encrypt, en, e
+
+  encrypt, en, e
 
 **Decrypt**
-decrypt, de, d
+
+  decrypt, de, d
