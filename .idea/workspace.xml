@@ -7,18 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/EncryptionAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptionAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptorGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +31,65 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0000000000858138" />
+      <entry key="MS500" value="1.0097043863835364" />
+      <entry key="S2" value="1.3631043214139305" />
+      <entry key="S5" value="1.991569653526877" />
+      <entry key="S10" value="2.8324805414060523" />
+      <entry key="S30" value="5.471489495118537" />
+      <entry key="S60" value="7.402204813197121" />
+      <entry key="M2" value="8.902161338886788" />
+      <entry key="M5" value="10.122391418280769" />
+      <entry key="M10" value="10.751007946318778" />
+      <entry key="M15" value="11.079419032120612" />
+      <entry key="M30" value="11.62610365618478" />
+      <entry key="H1" value="12.123476058424334" />
+      <entry key="H2" value="12.494390367838857" />
+      <entry key="H4" value="12.726865405201742" />
+      <entry key="D1" value="12.951294144639181" />
+      <entry key="W1" value="12.992958865340295" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="4.7764674636381035E-67" />
+      <entry key="S2" value="3.659233922817683E-17" />
+      <entry key="S5" value="3.941327574135232E-7" />
+      <entry key="S10" value="8.841759853234606E-4" />
+      <entry key="S30" value="0.1522171881141081" />
+      <entry key="S60" value="0.551692663458063" />
+      <entry key="M2" value="1.0520950806891598" />
+      <entry key="M5" value="1.6967090696576448" />
+      <entry key="M10" value="2.437696743712664" />
+      <entry key="M15" value="2.978381248252057" />
+      <entry key="M30" value="3.927602600979375" />
+      <entry key="H1" value="4.730721476325175" />
+      <entry key="H2" value="5.28669175208389" />
+      <entry key="H4" value="5.620191962495528" />
+      <entry key="D1" value="5.933128165032566" />
+      <entry key="W1" value="5.990354353055056" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.16042823726653008" />
+      <entry key="MS500" value="0.7028632665844172" />
+      <entry key="S2" value="1.2720876558136882" />
+      <entry key="S5" value="1.9506092746349972" />
+      <entry key="S10" value="2.8086435633199787" />
+      <entry key="S30" value="5.607005502252424" />
+      <entry key="S60" value="7.939381496226562" />
+      <entry key="M2" value="9.943613985166838" />
+      <entry key="M5" value="11.813075717682723" />
+      <entry key="M10" value="13.184537098250717" />
+      <entry key="M15" value="14.05441872147915" />
+      <entry key="M30" value="15.551435018029066" />
+      <entry key="H1" value="16.852789664487723" />
+      <entry key="H2" value="17.780277799092207" />
+      <entry key="H4" value="18.346624090382257" />
+      <entry key="D1" value="18.88434513061109" />
+      <entry key="W1" value="18.98330206170283" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5,
   &quot;fromUser&quot;: false
@@ -49,32 +99,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Encryptor.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/luna/Downloads/learn-CelsiusConverterProject&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/hecto/Documents/GitHub/encryption_test/Java/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.CLI.executor": "Run",
+    "Application.Encryptor.executor": "Run",
+    "Application.Main.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/luna/Downloads/learn-CelsiusConverterProject",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/hecto/Documents/GitHub/encryption_test/Java/src/Main.java",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hecto\Documents\GitHub\encryption_test\out\artifacts\Encryptor_jar" />
@@ -101,8 +152,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+        <option value="bundled-jdk-30f59d01ecdd-2df11533d9fe-intellij.indexing.shared.core-IU-262.11879.100" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.11879.100" />
       </set>
     </attachedChunks>
   </component>
