@@ -1,5 +1,8 @@
 package com.luna.encryptor;
 
+import com.luna.encryptor.forms.EncryptorGUI;
+
+import javax.swing.*;
 import java.util.Optional;
 
 public class Encryptor {
@@ -7,13 +10,13 @@ public class Encryptor {
         if(args.length > 0){
             CLI(args);
         } else {
-            GUI();
-        }
-    }
+            SwingUtilities.invokeLater(() -> {
+                EncryptorGUI gui = new EncryptorGUI();
+                gui.setVisible(true);
+            });
 
-    private static void GUI(){
-        EncryptorGUI gui = new EncryptorGUI();
-        gui.makeGUI();
+
+        }
     }
 
     private static void CLI(String[] args){

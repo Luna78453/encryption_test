@@ -37,5 +37,19 @@ abstract class EncryptionAlgorithm {
         }
     }
 
+    protected void readFileEntrata(File file) throws IOException {
+        // TODOne: research how unicode utf8 works before doing anything retarded again
+        // NOTE: genuinely no idea why that worked
+        // NOTE(1): genuinely no idea why I was using a string on this
+        // NOTE(2): ***look into potentially more efficient way to read bytes***
+        fileName = file.getName().split("\\.");
+        try (FileInputStream input = new FileInputStream(file)) {
+            buffer = new byte[input.available()];
+            input.read(buffer);
+        } catch (IOException e) {
+            throw new IOException();
+        }
+    }
+
     public abstract void Encrypt(String entrata, Optional<String> uscita) throws IOException;
 }
