@@ -58,7 +58,11 @@ public class Encryptor {
                 }
                 default -> throw new MatchException("ENCRYPTION TYPE MATCH FAILURE", null);
             };
-            encryptor.Encrypt(introitus, exitus);
+
+            encryptor.readFileEntrata(introitus);
+            encryptor.Encrypt();
+            encryptor.makeFileUscita(encryptor.getEventum(), exitus);
+
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ArrayIndexOutOfBoundsException("NOT ENOUGH ARGUMENTS PROVIDED");
         } catch (Throwable _){}

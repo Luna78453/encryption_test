@@ -1,24 +1,23 @@
 package com.luna.encryptor;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 public class Vigenere extends EncryptionAlgorithm{
-    private final boolean decrypt;
-    private final String key;
+    private boolean decrypt;
+    private String key;
 
     public Vigenere(String key, boolean decrypt){
-        this.name = "com.luna.encryptor.Vigenere";
+        this.name = "Vigenere";
         this.decrypt = decrypt;
         this.key = key;
     }
 
+    public Vigenere() { this.name = "Vigenere"; }
+
     @Override
-    public void Encrypt(String entrata, Optional<String> uscita) throws IOException {
+    public void Encrypt() {
         byte[] key_values = key.getBytes(StandardCharsets.UTF_8);
-        readFileEntrata(entrata);
-        byte[] message = buffer;
+        byte[] message = getBuffer();
 
         for(int i = 0; i < message.length; i++){
             message[i] = (decrypt) ?
@@ -26,6 +25,6 @@ public class Vigenere extends EncryptionAlgorithm{
                     (byte) ((message[i] + key_values[i % key_values.length]) % 256);
         }
 
-        makeFileUscita(message, uscita);
+        setEventum(message);
     }
 }

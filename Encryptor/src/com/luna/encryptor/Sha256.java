@@ -1,12 +1,10 @@
 package com.luna.encryptor;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Integer.rotateRight;
@@ -22,7 +20,7 @@ public class Sha256 extends EncryptionAlgorithm {
 
 
     @Override
-    public void Encrypt(String entrata, Optional<String> uscita) throws IOException {
+    public void Encrypt() {
         //this will become the output
         int[] hashes = {0x6a09e667,
             0xbb67ae85,
@@ -53,16 +51,14 @@ public class Sha256 extends EncryptionAlgorithm {
         int work_g = hashes[6];
         int work_h = hashes[7];
 
-        readFileEntrata(entrata);
-
-        long originalLen = buffer.length * 8L;
+        long originalLen = getBuffer().length * 8L;
         byte[] originalLenBytes = ByteBuffer.allocate(Long.BYTES).putLong(originalLen).array();
 
         //There should be a cleaner way to do this shit bro
         //from immutable original message to mutable message copy list
         //to make the following operations easier
         List<Byte> message = new ArrayList<>();
-        for(byte b : buffer){
+        for(byte b : getBuffer()){
             message.add(b);
         }
 
@@ -141,6 +137,6 @@ public class Sha256 extends EncryptionAlgorithm {
             o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
-        makeFileUscita(o.toString().getBytes(StandardCharsets.UTF_8), uscita);
+        setEventum(o.toString().getBytes(StandardCharsets.UTF_8));
     }
 }
