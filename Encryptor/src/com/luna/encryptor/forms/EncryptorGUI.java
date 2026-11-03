@@ -1,8 +1,8 @@
 package com.luna.encryptor.forms;
 
+import com.luna.encryptor.AlgorithmType;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class EncryptorGUI extends JFrame{
@@ -17,7 +17,11 @@ public class EncryptorGUI extends JFrame{
     private JScrollPane exitusShow;
     private JPanel exitusPane;
     private JPanel introitusPane;
+    private JComboBox<AlgorithmType> algorithmSelector;
+    private JPanel introitusExitusPanel;
     private final JFileChooser fc = new JFileChooser();
+    private File introitusFile;
+    private File exitusFile;
 
     public EncryptorGUI(){
         setTitle("Encryptor");
@@ -25,17 +29,28 @@ public class EncryptorGUI extends JFrame{
         setContentPane(contentPane);
         pack();
 
+        populateGenreComboBox();
+
         setLocationRelativeTo(null);
 
         introitusFilePickButton.addActionListener(_ -> introitusFileChoose());
+        exitusFilePickButton.addActionListener(_ -> exitusFileChoose());
     }
 
-    public void introitusFileChoose(){
+    private void introitusFileChoose(){
         int returnVal = fc.showOpenDialog(EncryptorGUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) { this.introitusFile = fc.getSelectedFile(); }
+    }
 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-        } else {
+    private void exitusFileChoose(){
+        int returnVal = fc.showOpenDialog(EncryptorGUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) { this.exitusFile = fc.getSelectedFile(); }
+    }
+
+    private void populateGenreComboBox() {
+        DefaultComboBoxModel<AlgorithmType> comboBoxModel = (DefaultComboBoxModel<AlgorithmType>) algorithmSelector.getModel();
+        for (AlgorithmType algorithm : AlgorithmType.values()) {
+            comboBoxModel.addElement(algorithm);
         }
     }
 }
