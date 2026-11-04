@@ -4,9 +4,12 @@ import com.luna.encryptor.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class EncryptorGUI extends JFrame {
     private JPanel contentPane;
@@ -31,32 +34,15 @@ public class EncryptorGUI extends JFrame {
     private JButton saveButton;
     private JPanel introitusSelect;
     private JPanel exitusSelect;
+    private JButton resetButton;
     // Source - https://stackoverflow.com/a/3729157
     // Posted by Roberto Luis Bisbé, modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-11-03, License - CC BY-SA 3.0
-    private final JFileChooser fc = new JFileChooser(){
-        @Override
-        public void approveSelection() {
-            File file = fc.getSelectedFile();
-            if (file != null && getDialogType() == SAVE_DIALOG) {
-                int result = JOptionPane.showConfirmDialog(this,
-                        "The file exists, overwrite?",
-                        "Existing file",JOptionPane.YES_NO_CANCEL_OPTION);
-                switch(result){
-                    case JOptionPane.YES_OPTION:
-                        super.approveSelection();
-                        return;
-                    case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION:
-                        return;
-                    case JOptionPane.CANCEL_OPTION:
-                        cancelSelection();
-                }
-            }
-        }
-    };
+    // Retrieved 2026-11-03, Licence - CC BY-SA 3.0
+    private final JFileChooser fc = new JFileChooser();
 
     private EncryptionAlgorithm encryptor;
     private File exitusFile;
+    private File introitusFile;
 
     public EncryptorGUI(){
         setTitle("Encryptor");
@@ -66,7 +52,7 @@ public class EncryptorGUI extends JFrame {
 
         populateAlgorithmComboBox();
         algorithmSelector.setRenderer(new AlgorithmListCellRenderer());
-        encryptorSelection();
+        algorithmSelector.setSelectedIndex(0);
 
         setLocationRelativeTo(null);
 
@@ -82,7 +68,7 @@ public class EncryptorGUI extends JFrame {
             try {
                 introitusFieldFileChoose();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                introitusShowText.setText("[INVALID FILE PATH]");
             }
         });
         exitusFilePickButton.addActionListener(_ -> exitusFileChoose());
@@ -91,18 +77,20 @@ public class EncryptorGUI extends JFrame {
             try {
                 writeEventum();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                introitusShowText.setText("[INVALID FILE PATH]");
             }
         });
+        resetButton.addActionListener(_ -> Reset());
+        focusFunctionality();
     }
 
     private void introitusButtonFileChoose() throws IOException {
         int returnVal = fc.showOpenDialog(EncryptorGUI.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File introitusFile = fc.getSelectedFile();
+            introitusFile = fc.getSelectedFile();
             encryptor.readFileEntrata(introitusFile);
-            String bufferString = new String(encryptor.getBuffer(), StandardCharsets.UTF_8);
-            introitusShowText.setText(bufferString);
+            introitusShowText.setText(new String(encryptor.getBuffer(),
+                    StandardCharsets.UTF_8));
             introitusPath.setText(introitusFile.getAbsolutePath());
             encryptButton.setEnabled(true);
         }
@@ -121,25 +109,34 @@ public class EncryptorGUI extends JFrame {
             introitusShowText.setText("[NO FILE PATH FOUND]");
             return;
         }
-        try {
-            String path = introitusPath.getText();
-            encryptor.readFileEntrata(path);
-            String bufferString = new String(encryptor.getBuffer(), StandardCharsets.UTF_8);
-            introitusShowText.setText(bufferString);
-            encryptButton.setEnabled(true);
-        } catch (IOException e) {
-            introitusShowText.setText("[INVALID FILE PATH]");
-            throw new RuntimeException(e);
-        }
+        introitusFile = new File(introitusPath.getText());
+        encryptor.readFileEntrata(introitusFile);
+        introitusShowText.setText(new String(encryptor.getBuffer(),
+                StandardCharsets.UTF_8));
+        encryptButton.setEnabled(true);
     }
 
     // Redundant file save behaviour just in case
     // with option to skip with other functions o algo
     private void writeEventum() throws IOException {
-        if (exitusPath.getText() == null) exitusFileChoose();
+        if (exitusPath.getText().isBlank()) exitusFileChoose();
         else if (exitusFile == null) exitusFile = new File(exitusPath.getText());
 
-        encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
+        if(exitusFile.isFile()){
+            int result = JOptionPane.showConfirmDialog(this,
+                    "The file exists, overwrite?",
+                    "Existing file",JOptionPane.OK_CANCEL_OPTION);
+            switch(result){
+                case JOptionPane.OK_OPTION:
+                    encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
+                    exitusFile = null;
+                    return;
+                case JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION:
+            }
+        } else {
+            encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
+            exitusFile = null;
+        }
     }
 
     private void populateAlgorithmComboBox() {
@@ -151,34 +148,33 @@ public class EncryptorGUI extends JFrame {
     }
 
     private void encryptorSelection() {
+        if(introitusFile != null && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
+            encryptor = EncryptionAlgorithm.instantiateAlgorithm((AlgorithmType)
+                    Objects.requireNonNull(algorithmSelector.getSelectedItem()));
+            assert encryptor != null;
+            encryptor.readFileEntrata(introitusFile);
+        } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
+            encryptor = EncryptionAlgorithm.instantiateAlgorithm((AlgorithmType)
+                Objects.requireNonNull(algorithmSelector.getSelectedItem()));
+
         switch (algorithmSelector.getSelectedItem()){
-            case AlgorithmType.CAESAR -> {
-                encryptor = new Caesar();
-                keyInput.setEnabled(true);
-                decryptSwitch.setEnabled(true);
-                enableStuff(true);
-            }
-            case AlgorithmType.VIGENERE -> {
-                encryptor = new Vigenere();
+            case AlgorithmType.CAESAR, AlgorithmType.VIGENERE -> {
                 keyInput.setEnabled(true);
                 decryptSwitch.setEnabled(true);
                 enableStuff(true);
             }
             case AlgorithmType.SHA256 -> {
-                encryptor = new Sha256();
                 keyInput.setEnabled(false);
                 decryptSwitch.setEnabled(false);
                 enableStuff(true);
             }
-            case AlgorithmType.NONE -> {
-                encryptor = null;
-                keyInput.setEnabled(false);
-                decryptSwitch.setEnabled(false);
-                enableStuff(false);
-            }
+            case AlgorithmType.NONE -> Reset();
             case null -> {}
-            default -> throw new IllegalStateException("Unexpected value: " + algorithmSelector.getSelectedItem());
+            default -> throw new IllegalStateException("Unexpected value: "
+                    + algorithmSelector.getSelectedItem());
         }
+
+        exitusShowText.setText("");
     }
 
     private void enableStuff(boolean b) {
@@ -206,9 +202,71 @@ public class EncryptorGUI extends JFrame {
             encryptor.Encrypt();
             exitusShowText.setText(new String(
                     encryptor.getEventum(), StandardCharsets.UTF_8));
+            saveButton.setEnabled(true);
         } else {
             exitusShowText.setText("[NO FILE SELECTED]");
         }
+    }
+
+    private void Reset(){
+        encryptor = null;
+        keyInput.setEnabled(false);
+        decryptSwitch.setEnabled(false);
+        enableStuff(false);
+    }
+
+    private void focusFunctionality(){
+        keyInput.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if(keyInput.getText().equals("Write the key..."))
+                    keyInput.setText("");
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(keyInput.getText().isBlank()){
+                    keyInput.setText("Write the key...");
+                }
+            }
+        });
+        introitusPath.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SwingUtilities.invokeLater(() -> {
+                    if(introitusPath.getText().equals("Archivum inputus..."))
+                        introitusPath.setText("");
+                    else introitusPath.selectAll();
+                });
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(introitusPath.getText().isBlank()){
+                    introitusPath.setText("Archivum inputus...");
+                } else {
+                    try {
+                        introitusFieldFileChoose();
+                    } catch (IOException ex) {
+                        introitusShowText.setText("[INVALID FILE PATH]");
+                    }
+                }
+            }
+        });
+        exitusPath.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SwingUtilities.invokeLater(() -> {
+                    if(exitusPath.getText().equals("Archivum exitus..."))
+                        exitusPath.setText("");
+                    else exitusPath.selectAll();
+                });
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(exitusPath.getText().isBlank()){
+                    exitusPath.setText("Archivum exitus...");
+                }
+            }
+        });
     }
 }
 

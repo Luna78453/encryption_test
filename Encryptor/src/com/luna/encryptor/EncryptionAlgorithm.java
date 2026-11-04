@@ -1,16 +1,28 @@
 package com.luna.encryptor;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
-public abstract class EncryptionAlgorithm {
+public class EncryptionAlgorithm {
     private byte[] buffer;
     private byte[] eventum;
     private String[] fileName;
     public AlgorithmType type;
+
+    public static @Nullable EncryptionAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
+        return switch(type){
+            case NONE -> null;
+            case CAESAR -> new Caesar();
+            case VIGENERE -> new Vigenere();
+            case SHA256 -> new Sha256();
+        };
+    }
 
     public void makeFileUscita(byte[] data, Optional<String> pathOpt) {
         String path = pathOpt.orElseGet(() -> fileName[0] + "_" + type.getName() + "." + fileName[1]);
@@ -34,7 +46,7 @@ public abstract class EncryptionAlgorithm {
         }
     }
 
-    public void readFileEntrata(String path) throws IOException {
+    public void readFileEntrata(String path) {
         // TODOne: research how unicode utf8 works before doing anything retarded again
         // NOTE: genuinely no idea why that worked
         // NOTE(1): genuinely no idea why I was using a string on this
@@ -58,7 +70,7 @@ public abstract class EncryptionAlgorithm {
         }
     }
 
-    public abstract void Encrypt();
+    public void Encrypt(){}
 
     public byte[] getBuffer() {
         return buffer;

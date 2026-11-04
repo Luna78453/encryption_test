@@ -18,7 +18,6 @@ public class Sha256 extends EncryptionAlgorithm {
         this.type = AlgorithmType.SHA256;
     }
 
-
     @Override
     public void Encrypt() {
         //this will become the output

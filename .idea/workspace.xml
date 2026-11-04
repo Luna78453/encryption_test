@@ -7,15 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/AlgorithmType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/AlgorithmType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/Encryptor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/Encryptor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptionAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptionAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo-sha256.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo1-sha256.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Caesar.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Caesar_de.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Vigenere.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Vigenere_de.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +120,11 @@
     "Application.Encryptor.executor": "Run",
     "Application.GUI.executor": "Run",
     "Application.Main.executor": "Debug",
+    "Downloaded.Files.Path.Enabled": "false",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -194,5 +204,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="exitusPath.getText()" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
