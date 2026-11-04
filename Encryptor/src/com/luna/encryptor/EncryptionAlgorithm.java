@@ -10,17 +10,27 @@ public abstract class EncryptionAlgorithm {
     private byte[] buffer;
     private byte[] eventum;
     private String[] fileName;
-    public String name;
+    public AlgorithmType type;
 
-    public void makeFileUscita(byte[] data, Optional<String> pathOpt) throws IOException {
-        String path = pathOpt.orElseGet(() -> fileName[0] + "_" + name + "." + fileName[1]);
+    public void makeFileUscita(byte[] data, Optional<String> pathOpt) {
+        String path = pathOpt.orElseGet(() -> fileName[0] + "_" + type.getName() + "." + fileName[1]);
 
         try (var output = new FileOutputStream(path)) {
             for(byte c : data){
                 output.write(c);
             }
         } catch (IOException e) {
-            throw new IOException();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void makeFileUscita(byte[] data, File exitus) {
+        try (var output = new FileOutputStream(exitus)) {
+            for(byte c : data){
+                output.write(c);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -34,17 +44,17 @@ public abstract class EncryptionAlgorithm {
             buffer = new byte[input.available()];
             int _ = input.read(getBuffer());
         } catch (IOException e) {
-            throw new IOException();
+            throw new RuntimeException(e);
         }
     }
 
-    public void readFileEntrata(File file) throws IOException {
+    public void readFileEntrata(File file) {
         fileName = file.getName().split("\\.");
         try (FileInputStream input = new FileInputStream(file)) {
             buffer = new byte[input.available()];
             int _ = input.read(getBuffer());
         } catch (IOException e) {
-            throw new IOException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -61,4 +71,10 @@ public abstract class EncryptionAlgorithm {
     protected void setEventum(byte[] eventum) {
         this.eventum = eventum;
     }
+
+    public void setDecrypt(boolean decrypt) {}
+
+    public void setKey(int key) {}
+
+    public void setKey(String key) {}
 }

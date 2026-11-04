@@ -7,12 +7,12 @@ public class Vigenere extends EncryptionAlgorithm{
     private String key;
 
     public Vigenere(String key, boolean decrypt){
-        this.name = "Vigenere";
+        this.type = AlgorithmType.VIGENERE;
         this.decrypt = decrypt;
         this.key = key;
     }
 
-    public Vigenere() { this.name = "Vigenere"; }
+    public Vigenere() { this.type = AlgorithmType.VIGENERE; }
 
     @Override
     public void Encrypt() {
@@ -27,4 +27,10 @@ public class Vigenere extends EncryptionAlgorithm{
 
         setEventum(message);
     }
+
+    @Override
+    public void setDecrypt(boolean decrypt) { this.decrypt = decrypt; }
+
+    @Override
+    public void setKey(String key) { this.key = key; }
 }

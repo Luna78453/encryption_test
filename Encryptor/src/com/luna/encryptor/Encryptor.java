@@ -14,8 +14,6 @@ public class Encryptor {
                 EncryptorGUI gui = new EncryptorGUI();
                 gui.setVisible(true);
             });
-
-
         }
     }
 

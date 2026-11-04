@@ -15,7 +15,7 @@ public class Sha256 extends EncryptionAlgorithm {
         of the message Byte list buffer in the message schedule for loop lol
      */
     public Sha256(){
-        this.name = "sha256";
+        this.type = AlgorithmType.SHA256;
     }
 
 

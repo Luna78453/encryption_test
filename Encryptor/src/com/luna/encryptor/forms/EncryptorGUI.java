@@ -7,9 +7,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
-public class EncryptorGUI extends JFrame{
+public class EncryptorGUI extends JFrame {
     private JPanel contentPane;
     private JButton introitusFilePickButton;
     private JTextField introitusPath;
@@ -25,14 +24,39 @@ public class EncryptorGUI extends JFrame{
     private JPanel introitusExitusPanel;
     private JTextArea introitusShowText;
     private JButton encryptButton;
-    private JCheckBox encryptDecryptSwitch;
+    private JCheckBox decryptSwitch;
     private JTextField keyInput;
     private JTextArea exitusShowText;
     private JPanel miscellaneaPanel;
-    private final JFileChooser fc = new JFileChooser();
+    private JButton saveButton;
+    private JPanel introitusSelect;
+    private JPanel exitusSelect;
+    // Source - https://stackoverflow.com/a/3729157
+    // Posted by Roberto Luis Bisbé, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-11-03, License - CC BY-SA 3.0
+    private final JFileChooser fc = new JFileChooser(){
+        @Override
+        public void approveSelection() {
+            File file = fc.getSelectedFile();
+            if (file != null && getDialogType() == SAVE_DIALOG) {
+                int result = JOptionPane.showConfirmDialog(this,
+                        "The file exists, overwrite?",
+                        "Existing file",JOptionPane.YES_NO_CANCEL_OPTION);
+                switch(result){
+                    case JOptionPane.YES_OPTION:
+                        super.approveSelection();
+                        return;
+                    case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION:
+                        return;
+                    case JOptionPane.CANCEL_OPTION:
+                        cancelSelection();
+                }
+            }
+        }
+    };
 
-    private File exitusFile;
     private EncryptionAlgorithm encryptor;
+    private File exitusFile;
 
     public EncryptorGUI(){
         setTitle("Encryptor");
@@ -46,9 +70,7 @@ public class EncryptorGUI extends JFrame{
 
         setLocationRelativeTo(null);
 
-        algorithmSelector.addActionListener(_ -> {
-            encryptorSelection();
-        });
+        algorithmSelector.addActionListener(_ -> encryptorSelection());
         introitusFilePickButton.addActionListener(_ -> {
             try {
                 introitusButtonFileChoose();
@@ -56,26 +78,20 @@ public class EncryptorGUI extends JFrame{
                 throw new RuntimeException(e);
             }
         });
-        exitusFilePickButton.addActionListener(_ -> exitusFileChoose());
         introitusPath.addActionListener(_ -> {
-            if (introitusPath.getText() == null || introitusPath.getText().trim().isEmpty()){
-                introitusShowText.setText("[NO FILE PATH FOUND]");
-                return;
-            }
             try {
                 introitusFieldFileChoose();
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            } finally {
-                introitusShowText.setText("[FILE PATH INCORRECT]");
             }
         });
-        encryptButton.addActionListener(_ -> {
-            if (encryptor.getBuffer() != null){
-                encryptor.Encrypt();
-                exitusShowText.setText(new String(encryptor.getEventum(), StandardCharsets.UTF_8));
-            } else {
-                exitusShowText.setText("[NO FILE SELECTED]");
+        exitusFilePickButton.addActionListener(_ -> exitusFileChoose());
+        encryptButton.addActionListener(_ -> encrypt());
+        saveButton.addActionListener(_ -> {
+            try {
+                writeEventum();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
     }
@@ -88,19 +104,42 @@ public class EncryptorGUI extends JFrame{
             String bufferString = new String(encryptor.getBuffer(), StandardCharsets.UTF_8);
             introitusShowText.setText(bufferString);
             introitusPath.setText(introitusFile.getAbsolutePath());
+            encryptButton.setEnabled(true);
+        }
+    }
+
+    private void exitusFileChoose() {
+        int returnVal = fc.showSaveDialog(EncryptorGUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            exitusFile = fc.getSelectedFile();
+            exitusPath.setText(exitusFile.getAbsolutePath());
         }
     }
 
     private void introitusFieldFileChoose() throws IOException {
-        String path = introitusPath.getText();
-        encryptor.readFileEntrata(path);
-        String bufferString = new String(encryptor.getBuffer(), StandardCharsets.UTF_8);
-        introitusShowText.setText(bufferString);
+        if (introitusPath.getText() == null || introitusPath.getText().trim().isEmpty()){
+            introitusShowText.setText("[NO FILE PATH FOUND]");
+            return;
+        }
+        try {
+            String path = introitusPath.getText();
+            encryptor.readFileEntrata(path);
+            String bufferString = new String(encryptor.getBuffer(), StandardCharsets.UTF_8);
+            introitusShowText.setText(bufferString);
+            encryptButton.setEnabled(true);
+        } catch (IOException e) {
+            introitusShowText.setText("[INVALID FILE PATH]");
+            throw new RuntimeException(e);
+        }
     }
 
-    private void exitusFileChoose(){
-        int returnVal = fc.showOpenDialog(EncryptorGUI.this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) { this.exitusFile = fc.getSelectedFile(); }
+    // Redundant file save behaviour just in case
+    // with option to skip with other functions o algo
+    private void writeEventum() throws IOException {
+        if (exitusPath.getText() == null) exitusFileChoose();
+        else if (exitusFile == null) exitusFile = new File(exitusPath.getText());
+
+        encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
     }
 
     private void populateAlgorithmComboBox() {
@@ -111,48 +150,65 @@ public class EncryptorGUI extends JFrame{
         }
     }
 
-    private void encryptorSelection(){
+    private void encryptorSelection() {
         switch (algorithmSelector.getSelectedItem()){
-            case AlgorithmType.caesar -> {
+            case AlgorithmType.CAESAR -> {
                 encryptor = new Caesar();
                 keyInput.setEnabled(true);
-                encryptDecryptSwitch.setEnabled(true);
-                enableStuff();
+                decryptSwitch.setEnabled(true);
+                enableStuff(true);
             }
-            case AlgorithmType.vigenere -> {
+            case AlgorithmType.VIGENERE -> {
                 encryptor = new Vigenere();
                 keyInput.setEnabled(true);
-                encryptDecryptSwitch.setEnabled(true);
-                enableStuff();
+                decryptSwitch.setEnabled(true);
+                enableStuff(true);
             }
-            case AlgorithmType.sha256 -> {
+            case AlgorithmType.SHA256 -> {
                 encryptor = new Sha256();
                 keyInput.setEnabled(false);
-                encryptDecryptSwitch.setEnabled(false);
-                enableStuff();
+                decryptSwitch.setEnabled(false);
+                enableStuff(true);
             }
-            case AlgorithmType.none -> {
+            case AlgorithmType.NONE -> {
                 encryptor = null;
                 keyInput.setEnabled(false);
-                encryptDecryptSwitch.setEnabled(false);
-                encryptButton.setEnabled(false);
-                introitusPath.setEnabled(false);
-                exitusPath.setEnabled(false);
-                introitusFilePickButton.setEnabled(false);
-                exitusFilePickButton.setEnabled(false);
-                encryptButton.setEnabled(false);
+                decryptSwitch.setEnabled(false);
+                enableStuff(false);
             }
             case null -> {}
             default -> throw new IllegalStateException("Unexpected value: " + algorithmSelector.getSelectedItem());
         }
     }
 
-    private void enableStuff(){
-        encryptButton.setEnabled(true);
-        introitusPath.setEnabled(true);
-        exitusPath.setEnabled(true);
-        introitusFilePickButton.setEnabled(true);
-        exitusFilePickButton.setEnabled(true);
+    private void enableStuff(boolean b) {
+        encryptButton.setEnabled(b);
+        introitusPath.setEnabled(b);
+        exitusPath.setEnabled(b);
+        introitusFilePickButton.setEnabled(b);
+        exitusFilePickButton.setEnabled(b);
+    }
+
+    private void encrypt() {
+        if (encryptor.getBuffer() != null) {
+            if (encryptor.type == AlgorithmType.CAESAR) {
+                try {
+                    encryptor.setKey(Integer.parseInt(keyInput.getText()));
+                } catch (NumberFormatException e) {
+                    exitusShowText.setText("[INVALID CAESAR KEY: MUST BE A NUMBER]");
+                    throw new RuntimeException(e);
+                }
+                encryptor.setDecrypt(decryptSwitch.isSelected());
+            } else if (encryptor.type == AlgorithmType.VIGENERE) {
+                encryptor.setKey(keyInput.getText());
+                encryptor.setDecrypt(decryptSwitch.isSelected());
+            }
+            encryptor.Encrypt();
+            exitusShowText.setText(new String(
+                    encryptor.getEventum(), StandardCharsets.UTF_8));
+        } else {
+            exitusShowText.setText("[NO FILE SELECTED]");
+        }
     }
 }
 
