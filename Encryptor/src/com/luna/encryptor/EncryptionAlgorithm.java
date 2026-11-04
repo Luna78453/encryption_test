@@ -60,13 +60,13 @@ public class EncryptionAlgorithm {
         }
     }
 
-    public void readFileEntrata(File file) {
+    public void readFileEntrata(File file) throws IOException {
         fileName = file.getName().split("\\.");
         try (FileInputStream input = new FileInputStream(file)) {
             buffer = new byte[input.available()];
             int _ = input.read(getBuffer());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
     }
 

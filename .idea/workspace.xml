@@ -7,21 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/Encryptor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/Encryptor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptionAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/EncryptionAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo-sha256.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo1-sha256.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Caesar.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Caesar_de.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Vigenere.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/testo_Vigenere_de.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,61 +38,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.3258102212520875E-252" />
-      <entry key="S2" value="2.7003882384788093E-63" />
-      <entry key="S5" value="1.810590080813033E-25" />
-      <entry key="S10" value="7.575798246800363E-13" />
-      <entry key="S30" value="2.3624390476093546E-4" />
-      <entry key="S60" value="0.037458842108862606" />
-      <entry key="M2" value="0.5861403097024676" />
-      <entry key="M5" value="3.768131015793444" />
-      <entry key="M10" value="8.055113087835903" />
-      <entry key="M15" value="11.901043011577435" />
-      <entry key="M30" value="24.264497432859795" />
-      <entry key="H1" value="45.29597996389523" />
-      <entry key="H2" value="71.37149169218074" />
-      <entry key="H4" value="97.37446124592846" />
-      <entry key="D1" value="136.66708438953052" />
-      <entry key="W1" value="146.28497114961647" />
+      <entry key="MS100" value="1.0121745252059957" />
+      <entry key="MS500" value="1.4520293728843163" />
+      <entry key="S2" value="2.3242457315417937" />
+      <entry key="S5" value="3.8916125587129597" />
+      <entry key="S10" value="6.509936687042856" />
+      <entry key="S30" value="13.163354180102404" />
+      <entry key="S60" value="18.574553777192797" />
+      <entry key="M2" value="23.598802459729036" />
+      <entry key="M5" value="28.761868313092503" />
+      <entry key="M10" value="31.570444665964267" />
+      <entry key="M15" value="33.10184758523248" />
+      <entry key="M30" value="37.58353338881899" />
+      <entry key="H1" value="51.59575176892216" />
+      <entry key="H2" value="82.54903849649692" />
+      <entry key="H4" value="124.27487020825166" />
+      <entry key="D1" value="200.62268082082323" />
+      <entry key="W1" value="221.24969487780078" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000001137705" />
-      <entry key="S30" value="1.000539348586284" />
-      <entry key="S60" value="1.0324671913706345" />
-      <entry key="M2" value="1.2937684200056285" />
-      <entry key="M5" value="2.330014041542997" />
-      <entry key="M10" value="3.9804253639821487" />
-      <entry key="M15" value="5.546402070525356" />
-      <entry key="M30" value="9.95360385486886" />
-      <entry key="H1" value="17.864845931428835" />
-      <entry key="H2" value="28.80342423494609" />
-      <entry key="H4" value="40.074396402657776" />
-      <entry key="D1" value="57.10513008403584" />
-      <entry key="W1" value="61.25968957488313" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="5.872297789587608E-307" />
+      <entry key="S5" value="3.217534618927264E-123" />
+      <entry key="S10" value="5.672331636044623E-62" />
+      <entry key="S30" value="3.8422640268248804E-21" />
+      <entry key="S60" value="6.198623252536819E-11" />
+      <entry key="M2" value="7.888412664742445E-6" />
+      <entry key="M5" value="0.009859262403435072" />
+      <entry key="M10" value="0.13338768055624675" />
+      <entry key="M15" value="0.3959874152230754" />
+      <entry key="M30" value="2.0024844016690446" />
+      <entry key="H1" value="7.778938674106064" />
+      <entry key="H2" value="20.636624922784314" />
+      <entry key="H4" value="38.20777688163685" />
+      <entry key="D1" value="70.6235577253573" />
+      <entry key="W1" value="79.40319362774129" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="8.94802054772857E-6" />
-      <entry key="MS500" value="0.09780147271706391" />
-      <entry key="S2" value="0.5592247044152436" />
-      <entry key="S5" value="0.7925643606434771" />
-      <entry key="S10" value="0.8902608386469154" />
-      <entry key="S30" value="0.962749228147366" />
-      <entry key="S60" value="1.0496922552757042" />
-      <entry key="M2" value="1.8619726730809771" />
-      <entry key="M5" value="6.072870510612006" />
-      <entry key="M10" value="12.010309258287318" />
-      <entry key="M15" value="17.42388852067855" />
-      <entry key="M30" value="34.19787115530534" />
-      <entry key="H1" value="63.14424992118656" />
-      <entry key="H2" value="100.16263643848916" />
-      <entry key="H4" value="137.44079360408224" />
-      <entry key="D1" value="193.77041108119775" />
-      <entry key="W1" value="207.54438755659896" />
+      <entry key="MS100" value="0.9313131146497243" />
+      <entry key="MS500" value="1.427458021471051" />
+      <entry key="S2" value="2.3142164727583157" />
+      <entry key="S5" value="3.8851265166479387" />
+      <entry key="S10" value="6.504582810360111" />
+      <entry key="S30" value="13.157520200818142" />
+      <entry key="S60" value="18.56794872131771" />
+      <entry key="M2" value="23.59298669784008" />
+      <entry key="M5" value="28.767771272459047" />
+      <entry key="M10" value="31.70101013426927" />
+      <entry key="M15" value="33.49515372537725" />
+      <entry key="M30" value="39.58179106580045" />
+      <entry key="H1" value="59.366955119521144" />
+      <entry key="H2" value="103.17592590227703" />
+      <entry key="H4" value="162.4740964279908" />
+      <entry key="D1" value="271.2437722675113" />
+      <entry key="W1" value="300.6524977571634" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -120,7 +111,7 @@
     "Application.Encryptor.executor": "Run",
     "Application.GUI.executor": "Run",
     "Application.Main.executor": "Debug",
-    "Downloaded.Files.Path.Enabled": "false",
+    "Downloaded.Files.Path.Enabled": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -140,7 +131,7 @@
     "node.js.selected.package.jshint": "",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/hecto/Documents/GitHub/encryption_test/Java/src/Main.java",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
