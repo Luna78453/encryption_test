@@ -3,10 +3,7 @@ package com.luna.encryptor;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class Vigenere extends EncryptionAlgorithm{
-    private boolean decrypt;
-    private String key;
-
+public class Vigenere extends SubCipher {
     public Vigenere(String key, boolean decrypt){
         this.type = AlgorithmType.VIGENERE;
         this.decrypt = decrypt;
@@ -28,10 +25,4 @@ public class Vigenere extends EncryptionAlgorithm{
 
         setEventum(message);
     }
-
-    @Override
-    public void setDecrypt(boolean decrypt) { this.decrypt = decrypt; }
-
-    @Override
-    public void setKey(String key) { this.key = key; }
 }

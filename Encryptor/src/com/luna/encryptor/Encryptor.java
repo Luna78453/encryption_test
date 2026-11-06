@@ -24,7 +24,7 @@ public class Encryptor {
             String modus;
             String clavis;
             Optional<String> exitus = Optional.empty();
-            EncryptionAlgorithm encryptor = switch(genusCryptographiae){
+            Cipher encryptor = switch(genusCryptographiae){
                 case "caesar" -> {
                     if (args.length > 4) {
                         exitus = Optional.of(args[2]);
@@ -37,7 +37,7 @@ public class Encryptor {
                     if (!clavis.chars().allMatch(Character::isDigit)){
                         throw new IllegalArgumentException("CAESAR KEY MUST BE INTEGER NUMBER");
                     }
-                    yield new Caesar(Integer.parseInt(clavis), parseModus(modus));
+                    yield new Caesar(clavis, parseModus(modus));
                 }
                 case "vigenere" -> {
                     if (args.length > 4) {

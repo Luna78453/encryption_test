@@ -9,13 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
-public class EncryptionAlgorithm {
+public class Cipher {
     private byte[] buffer;
     private byte[] eventum;
     private String[] fileName;
     public AlgorithmType type;
 
-    public static @Nullable EncryptionAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
+    public static @Nullable Cipher instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
             case NONE -> null;
             case CAESAR -> new Caesar();
@@ -83,10 +83,4 @@ public class EncryptionAlgorithm {
     protected void setEventum(byte[] eventum) {
         this.eventum = eventum;
     }
-
-    public void setDecrypt(boolean decrypt) {}
-
-    public void setKey(int key) {}
-
-    public void setKey(String key) {}
 }

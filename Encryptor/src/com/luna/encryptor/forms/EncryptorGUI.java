@@ -37,7 +37,7 @@ public class EncryptorGUI extends JFrame {
     private JButton resetButton;
     private final JFileChooser fc = new JFileChooser();
 
-    private EncryptionAlgorithm encryptor;
+    private Cipher encryptor;
     private File exitusFile;
     private File introitusFile;
     private boolean resetAvailable = false;
@@ -118,12 +118,12 @@ public class EncryptorGUI extends JFrame {
     private void encryptorSelection() throws IOException {
         try {
             if(introitusFile != null && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
-                encryptor = EncryptionAlgorithm.instantiateAlgorithm((AlgorithmType)
+                encryptor = Cipher.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
                 assert encryptor != null;
                 encryptor.readFileEntrata(introitusFile);
             } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
-                encryptor = EncryptionAlgorithm.instantiateAlgorithm((AlgorithmType)
+                encryptor = Cipher.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
         } catch (NullPointerException e) { return; }
         if(!resetAvailable) {
@@ -155,23 +155,39 @@ public class EncryptorGUI extends JFrame {
         exitusFilePickButton.setEnabled(b);
         exitusPath.setEnabled(b);
         resetButton.setEnabled(b);
+        introitusShowText.setEnabled(b);
+        exitusShowText.setEnabled(b);
+        if(!b){
+            keyInput.setEnabled(false);
+            decryptSwitch.setEnabled(false);
+            saveButton.setEnabled(false);
+            encryptButton.setEnabled(false);
+        }
     }
 
     private void encrypt() {
         if (encryptor.getBuffer() != null) {
-            if (encryptor.type == AlgorithmType.CAESAR) {
-                try { encryptor.setKey(Integer.parseInt(keyInput.getText())); }
+            if (encryptor instanceof SubCipher sc){
+                try {
+                    if(
+                            !keyInput.getText().chars()
+                            .allMatch(Character::isDigit)
+                            && sc instanceof Caesar
+                    )
+                        throw new NumberFormatException();
+
+                    sc.setKey(keyInput.getText());
+                }
                 catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog
                             (null,
-                             "INVALID CAESAR KEY: MUST BE A NUMBER.");
+                                    "INVALID CAESAR KEY: MUST BE A NUMBER.");
                     return;
                 }
-                encryptor.setDecrypt(decryptSwitch.isSelected());
-            } else if (encryptor.type == AlgorithmType.VIGENERE) {
-                encryptor.setKey(keyInput.getText());
-                encryptor.setDecrypt(decryptSwitch.isSelected());
+
+                sc.setDecrypt(decryptSwitch.isSelected());
             }
+
             encryptor.Encrypt();
             exitusShowText.setText(new String(
                     encryptor.getEventum(), StandardCharsets.UTF_8));

@@ -2,14 +2,13 @@ package com.luna.encryptor;
 
 import java.util.Arrays;
 
-public class Caesar extends EncryptionAlgorithm{
-    private boolean decrypt;
-    private int key;
+public class Caesar extends SubCipher {
+    private int intKey;
 
-    public Caesar(int key, boolean decrypt){
+    public Caesar(String key, boolean decrypt){
         this.type = AlgorithmType.CAESAR;
-        this.setDecrypt(decrypt);
-        this.setKey(key);
+        this.decrypt = decrypt;
+        this.key = key;
     }
 
     public Caesar() { this.type = AlgorithmType.CAESAR; }
@@ -20,20 +19,10 @@ public class Caesar extends EncryptionAlgorithm{
 
         for(int i = 0; i < message.length; i++){
             message[i] = (this.decrypt) ?
-                    (byte) ((message[i] - this.key) % 256) :
-                    (byte) ((message[i] + this.key) % 256);
+                    (byte) ((message[i] - Integer.parseInt(this.key)) % 256) :
+                    (byte) ((message[i] + Integer.parseInt(this.key)) % 256);
         }
 
         setEventum(message);
-    }
-
-    @Override
-    public void setDecrypt(boolean decrypt) {
-        this.decrypt = decrypt;
-    }
-
-    @Override
-    public void setKey(int key) {
-        this.key = key;
     }
 }
