@@ -24,7 +24,7 @@ public class Encryptor {
             String modus;
             String clavis;
             Optional<String> exitus = Optional.empty();
-            Cipher encryptor = switch(genusCryptographiae){
+            CriptographicAlgorithm encryptor = switch(genusCryptographiae){
                 case "caesar" -> {
                     if (args.length > 4) {
                         exitus = Optional.of(args[2]);

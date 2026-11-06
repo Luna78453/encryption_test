@@ -37,7 +37,7 @@ public class EncryptorGUI extends JFrame {
     private JButton resetButton;
     private final JFileChooser fc = new JFileChooser();
 
-    private Cipher encryptor;
+    private CriptographicAlgorithm encryptor;
     private File exitusFile;
     private File introitusFile;
     private boolean resetAvailable = false;
@@ -118,12 +118,12 @@ public class EncryptorGUI extends JFrame {
     private void encryptorSelection() throws IOException {
         try {
             if(introitusFile != null && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
-                encryptor = Cipher.instantiateAlgorithm((AlgorithmType)
+                encryptor = CriptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
                 assert encryptor != null;
                 encryptor.readFileEntrata(introitusFile);
             } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
-                encryptor = Cipher.instantiateAlgorithm((AlgorithmType)
+                encryptor = CriptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
         } catch (NullPointerException e) { return; }
         if(!resetAvailable) {
@@ -167,7 +167,7 @@ public class EncryptorGUI extends JFrame {
 
     private void encrypt() {
         if (encryptor.getBuffer() != null) {
-            if (encryptor instanceof SubCipher sc){
+            if (encryptor instanceof Cipher sc){
                 try {
                     if(
                             !keyInput.getText().chars()
