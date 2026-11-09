@@ -1,6 +1,6 @@
 package com.luna.encryptor;
 
-import java.util.Arrays;
+import java.nio.ByteBuffer;
 
 public class Caesar extends Cipher {
     public Caesar(String key, boolean decrypt){
@@ -13,14 +13,37 @@ public class Caesar extends Cipher {
 
     @Override
     public void Encrypt() {
-        byte[] message = Arrays.copyOf(this.getBuffer(), this.getBuffer().length);
+        ByteBuffer message = cloneByteBuffer((ByteBuffer) this.getIntroitus());
 
-        for(int i = 0; i < message.length; i++){
-            message[i] = (this.decrypt) ?
-                    (byte) ((message[i] - Integer.parseInt(this.key)) % 256) :
-                    (byte) ((message[i] + Integer.parseInt(this.key)) % 256);
+        for(int i = 0; i < message.capacity(); i++){
+            message.put(i, (this.decrypt) ?
+                    (byte) ((message.get(i) - Integer.parseInt(this.key)) % 256) :
+                    (byte) ((message.get(i) + Integer.parseInt(this.key)) % 256)
+            );
         }
 
         setEventum(message);
     }
+
+    // Source - https://stackoverflow.com/a/21388198
+    // Posted by jdmichal, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-11-09, Licence - CC BY-SA 3.0
+
+    public static ByteBuffer cloneByteBuffer(final ByteBuffer original) {
+        // Create clone with same capacity as original.
+        final ByteBuffer clone = (original.isDirect()) ?
+                ByteBuffer.allocateDirect(original.capacity()) :
+                ByteBuffer.allocate(original.capacity());
+
+        // Create a read-only copy of the original.
+        // This allows reading from the original without modifying it.
+        final ByteBuffer readOnlyCopy = original.asReadOnlyBuffer();
+
+        // Flip and read from the original.
+        readOnlyCopy.flip();
+        clone.put(readOnlyCopy);
+
+        return clone;
+    }
+
 }
