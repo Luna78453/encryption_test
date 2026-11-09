@@ -7,15 +7,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Optional;
 
-public class CriptographicAlgorithm {
+public class CryptographicAlgorithm {
     private byte[] buffer;
     private byte[] eventum;
     private String[] fileName;
     public AlgorithmType type;
 
-    public static @Nullable CriptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
+    public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
             case NONE -> null;
             case CAESAR -> new Caesar();
@@ -24,10 +23,9 @@ public class CriptographicAlgorithm {
         };
     }
 
-    public void makeFileUscita(byte[] data, Optional<String> pathOpt) {
-        String path = pathOpt.orElseGet(() -> fileName[0] + "_" + type.getName() + "." + fileName[1]);
-
-        try (var output = new FileOutputStream(path)) {
+    // TODO: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
+    public void makeFileUscita(byte[] data, String uscita) {
+        try (var output = new FileOutputStream(uscita)) {
             for(byte c : data){
                 output.write(c);
             }
@@ -83,4 +81,6 @@ public class CriptographicAlgorithm {
     protected void setEventum(byte[] eventum) {
         this.eventum = eventum;
     }
+
+    public String[] getFileName() { return fileName; }
 }

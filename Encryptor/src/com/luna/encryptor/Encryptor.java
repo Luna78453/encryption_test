@@ -3,7 +3,7 @@ package com.luna.encryptor;
 import com.luna.encryptor.forms.EncryptorGUI;
 
 import javax.swing.*;
-import java.util.Optional;
+import java.util.Objects;
 
 public class Encryptor {
     static void main(String[] args) {
@@ -23,11 +23,11 @@ public class Encryptor {
             String introitus = args[1];
             String modus;
             String clavis;
-            Optional<String> exitus = Optional.empty();
-            CriptographicAlgorithm encryptor = switch(genusCryptographiae){
+            String exitus = "";
+            CryptographicAlgorithm encryptor = switch(genusCryptographiae){
                 case "caesar" -> {
                     if (args.length > 4) {
-                        exitus = Optional.of(args[2]);
+                        exitus = args[2];
                         modus = args[3].toLowerCase();
                         clavis = args[4];
                     } else {
@@ -41,7 +41,7 @@ public class Encryptor {
                 }
                 case "vigenere" -> {
                     if (args.length > 4) {
-                        exitus = Optional.of(args[2]);
+                        exitus = args[2];
                         modus = args[3].toLowerCase();
                         clavis = args[4].toLowerCase();
                     } else {
@@ -51,7 +51,7 @@ public class Encryptor {
                     yield new Vigenere(clavis, parseModus(modus));
                 }
                 case "sha256" -> {
-                    if (args.length > 2) exitus = Optional.of(args[2]);
+                    if (args.length > 2) exitus = args[2];
                     yield new Sha256();
                 }
                 default -> throw new MatchException("ENCRYPTION TYPE MATCH FAILURE", null);
@@ -59,6 +59,7 @@ public class Encryptor {
 
             encryptor.readFileEntrata(introitus);
             encryptor.Encrypt();
+            exitus = (Objects.equals(exitus, "")) ? encryptor.getFileName()[0] + "_" + genusCryptographiae + "." + encryptor.getFileName()[1] : exitus;
             encryptor.makeFileUscita(encryptor.getEventum(), exitus);
 
         } catch (ArrayIndexOutOfBoundsException e) {

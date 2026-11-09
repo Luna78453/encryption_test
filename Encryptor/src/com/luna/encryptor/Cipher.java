@@ -1,6 +1,6 @@
 package com.luna.encryptor;
 
-public class Cipher extends CriptographicAlgorithm {
+public class Cipher extends CryptographicAlgorithm {
     protected String key;
     protected boolean decrypt;
 

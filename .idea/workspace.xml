@@ -5,17 +5,12 @@
       <artifact name="Encryptor:jar" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CriptographicAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Cipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Cipher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/SubCipher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,11 +23,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="SimpleSourceFile" />
         <option value="Interface" />
         <option value="Enum" />
         <option value="Record" />
         <option value="Class" />
+        <option value="SimpleSourceFile" />
       </list>
     </option>
   </component>
@@ -41,61 +36,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.100613979838889E-73" />
-      <entry key="MS500" value="3.30151500836155E-15" />
-      <entry key="S2" value="3.726562571887541E-4" />
-      <entry key="S5" value="0.06429630740910082" />
-      <entry key="S10" value="0.3823685235715415" />
-      <entry key="S30" value="1.5940122551650397" />
-      <entry key="S60" value="2.658904491973215" />
-      <entry key="M2" value="4.48405449389633" />
-      <entry key="M5" value="8.731873566055864" />
-      <entry key="M10" value="12.132712180534188" />
-      <entry key="M15" value="13.760262092742453" />
-      <entry key="M30" value="17.083465152287772" />
-      <entry key="H1" value="29.202992304690387" />
-      <entry key="H2" value="62.859676016269994" />
-      <entry key="H4" value="119.48818039258192" />
-      <entry key="D1" value="249.48823364333356" />
-      <entry key="W1" value="289.52002876316334" />
+      <entry key="MS100" value="1.0000000000175469" />
+      <entry key="MS500" value="1.0070605681783806" />
+      <entry key="S2" value="1.2907700900538117" />
+      <entry key="S5" value="1.676203351758054" />
+      <entry key="S10" value="2.146575842637829" />
+      <entry key="S30" value="3.5331987523361947" />
+      <entry key="S60" value="4.465044772762577" />
+      <entry key="M2" value="5.378532906365258" />
+      <entry key="M5" value="10.383244788097857" />
+      <entry key="M10" value="21.25669414318089" />
+      <entry key="M15" value="29.81488156427727" />
+      <entry key="M30" value="44.799087285398166" />
+      <entry key="H1" value="62.292616430520226" />
+      <entry key="H2" value="95.75968919632568" />
+      <entry key="H4" value="165.62407808318395" />
+      <entry key="D1" value="430.87847139585864" />
+      <entry key="W1" value="544.1651810718421" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.000000000251975" />
-      <entry key="S5" value="1.0001447248217417" />
-      <entry key="S10" value="1.0120302305699858" />
-      <entry key="S30" value="1.2341623476238774" />
-      <entry key="S60" value="1.57395511144023" />
-      <entry key="M2" value="2.149210546036301" />
-      <entry key="M5" value="3.303871567118289" />
-      <entry key="M10" value="4.249229175721893" />
-      <entry key="M15" value="4.717063799991676" />
-      <entry key="M30" value="5.5099455896892175" />
-      <entry key="H1" value="7.708879263019642" />
-      <entry key="H2" value="15.620451624097848" />
-      <entry key="H4" value="32.65999125196629" />
-      <entry key="D1" value="78.29807684126685" />
-      <entry key="W1" value="93.190275132215" />
+      <entry key="MS100" value="7.629731674283467E-172" />
+      <entry key="MS500" value="5.977255949289159E-35" />
+      <entry key="S2" value="2.7805164145248973E-9" />
+      <entry key="S5" value="3.781378802266821E-4" />
+      <entry key="S10" value="0.019445767668741756" />
+      <entry key="S30" value="0.2689108746486404" />
+      <entry key="S60" value="0.5186228983477635" />
+      <entry key="M2" value="0.737631544818629" />
+      <entry key="M5" value="1.5416274985817973" />
+      <entry key="M10" value="3.4780493992411476" />
+      <entry key="M15" value="5.038153427064959" />
+      <entry key="M30" value="7.887931417615447" />
+      <entry key="H1" value="12.281028427908893" />
+      <entry key="H2" value="21.712924540583856" />
+      <entry key="H4" value="40.44780657016052" />
+      <entry key="D1" value="117.40427635237077" />
+      <entry key="W1" value="152.75104495078438" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0016310310926335343" />
-      <entry key="MS500" value="0.27700808696623275" />
-      <entry key="S2" value="0.7257528883301371" />
-      <entry key="S5" value="0.9362681658675387" />
-      <entry key="S10" value="1.305319362485761" />
-      <entry key="S30" value="2.7521217750820863" />
-      <entry key="S60" value="4.170433102633963" />
-      <entry key="M2" value="6.5856682002207" />
-      <entry key="M5" value="12.005054254843136" />
-      <entry key="M10" value="16.362306471177927" />
-      <entry key="M15" value="18.462884918944283" />
-      <entry key="M30" value="22.584859797838764" />
-      <entry key="H1" value="36.90522295193154" />
-      <entry key="H2" value="78.47276343907816" />
-      <entry key="H4" value="152.14055125413998" />
-      <entry key="D1" value="327.7834454696758" />
-      <entry key="W1" value="382.7098240095086" />
+      <entry key="MS100" value="4.889342527199435E-5" />
+      <entry key="MS500" value="0.13998809277703522" />
+      <entry key="S2" value="0.8358468713436176" />
+      <entry key="S5" value="1.4288012014620044" />
+      <entry key="S10" value="2.0036784926345517" />
+      <entry key="S30" value="3.7012843097720602" />
+      <entry key="S60" value="4.915140263171461" />
+      <entry key="M2" value="6.074027080763841" />
+      <entry key="M5" value="11.898127040261326" />
+      <entry key="M10" value="24.71135830345961" />
+      <entry key="M15" value="34.83224528990903" />
+      <entry key="M30" value="52.67208641919482" />
+      <entry key="H1" value="74.56320465766439" />
+      <entry key="H2" value="117.46400219756079" />
+      <entry key="H4" value="206.0637162172608" />
+      <entry key="D1" value="548.2786460473963" />
+      <entry key="W1" value="696.9154638143301" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -114,6 +109,7 @@
     &quot;Application.Encryptor.executor&quot;: &quot;Run&quot;,
     &quot;Application.GUI.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.test.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
@@ -130,8 +126,12 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/luna/ideaSwingEx/build-UI-using-Swing-sample-project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/hecto/Documents/GitHub/encryption_test/Java/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -170,8 +170,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2df11533d9fe-intellij.indexing.shared.core-IU-262.11879.100" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.11879.100" />
+        <option value="bundled-jdk-30f59d01ecdd-ac68fc9d2b05-intellij.indexing.shared.core-IU-263.7307.200" />
       </set>
     </attachedChunks>
   </component>

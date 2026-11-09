@@ -17,27 +17,27 @@ public class EncryptorGUI extends JFrame {
     private JTextField introitusPath;
     private JButton exitusFilePickButton;
     private JTextField exitusPath;
-    JLabel introitusLabel;
-    JLabel exitusLabel;
-    JScrollPane introitusShow;
-    JScrollPane exitusShow;
-    JPanel exitusPane;
-    JPanel introitusPane;
+    private JLabel introitusLabel;
+    private JLabel exitusLabel;
+    private JScrollPane introitusShow;
+    private JScrollPane exitusShow;
+    private JPanel exitusPane;
+    private JPanel introitusPane;
     private JComboBox<AlgorithmType> algorithmSelector;
-    JPanel introitusExitusPanel;
+    private JPanel introitusExitusPanel;
     private JTextArea introitusShowText;
     private JButton encryptButton;
     private JCheckBox decryptSwitch;
     private JTextField keyInput;
     private JTextArea exitusShowText;
-    JPanel miscellaneaPanel;
+    private JPanel miscellaneaPanel;
     private JButton saveButton;
-    JPanel introitusSelect;
-    JPanel exitusSelect;
+    private JPanel introitusSelect;
+    private JPanel exitusSelect;
     private JButton resetButton;
     private final JFileChooser fc = new JFileChooser();
 
-    private CriptographicAlgorithm encryptor;
+    private CryptographicAlgorithm encryptor;
     private File exitusFile;
     private File introitusFile;
     private boolean resetAvailable = false;
@@ -118,12 +118,12 @@ public class EncryptorGUI extends JFrame {
     private void encryptorSelection() throws IOException {
         try {
             if(introitusFile != null && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
-                encryptor = CriptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
+                encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
                 assert encryptor != null;
                 encryptor.readFileEntrata(introitusFile);
             } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
-                encryptor = CriptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
+                encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
         } catch (NullPointerException e) { return; }
         if(!resetAvailable) {

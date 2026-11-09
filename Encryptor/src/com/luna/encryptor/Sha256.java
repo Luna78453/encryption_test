@@ -9,7 +9,7 @@ import java.util.List;
 import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Integer.rotateRight;
 
-public class Sha256 extends CriptographicAlgorithm {
+public class Sha256 extends CryptographicAlgorithm {
     // TODOne: fix the fucking integer overloading problem
     /*  it wasn't a wrapping around problem I was just accessing the incorrect parts
         of the message Byte list buffer in the message schedule for loop lol

@@ -3,8 +3,6 @@ package com.luna.encryptor;
 import java.util.Arrays;
 
 public class Caesar extends Cipher {
-    private int intKey;
-
     public Caesar(String key, boolean decrypt){
         this.type = AlgorithmType.CAESAR;
         this.decrypt = decrypt;
