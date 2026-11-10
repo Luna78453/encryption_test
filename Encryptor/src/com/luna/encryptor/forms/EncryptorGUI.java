@@ -95,13 +95,13 @@ public class EncryptorGUI extends JFrame {
                     "Existing file",JOptionPane.OK_CANCEL_OPTION);
             switch(result){
                 case JOptionPane.OK_OPTION:
-                    encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
+                    encryptor.writeExitus(encryptor.getEventum(), exitusFile);
                     exitusFile = null;
                     return;
                 case JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION:
             }
         } else {
-            encryptor.makeFileUscita(encryptor.getEventum(), exitusFile);
+            encryptor.writeExitus(encryptor.getEventum(), exitusFile);
             exitusFile = null;
         }
         JOptionPane.showMessageDialog(null,"File saved successfully.");

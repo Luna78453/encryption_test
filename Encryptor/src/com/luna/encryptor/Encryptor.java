@@ -57,10 +57,10 @@ public class Encryptor {
                 default -> throw new MatchException("ENCRYPTION TYPE MATCH FAILURE", null);
             };
 
-            encryptor.readFileEntrata(introitus);
+            encryptor.readIntroitusFile(introitus);
             encryptor.Encrypt();
             exitus = (Objects.equals(exitus, "")) ? encryptor.getFileName()[0] + "_" + genusCryptographiae + "." + encryptor.getFileName()[1] : exitus;
-            encryptor.makeFileUscita(encryptor.getEventum(), exitus);
+            encryptor.writeExitus(encryptor.getEventum(), exitus);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ArrayIndexOutOfBoundsException("NOT ENOUGH ARGUMENTS PROVIDED");

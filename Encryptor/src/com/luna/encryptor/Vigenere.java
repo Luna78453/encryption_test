@@ -1,5 +1,6 @@
 package com.luna.encryptor;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
@@ -15,12 +16,13 @@ public class Vigenere extends Cipher {
     @Override
     public void Encrypt() {
         byte[] key_values = key.getBytes(StandardCharsets.UTF_8);
-        byte[] message = Arrays.copyOf(this.getBuffer(), this.getBuffer().length);
+        ByteBuffer message = cloneByteBuffer(this.getIntroitus());;
 
-        for(int i = 0; i < message.length; i++){
-            message[i] = (decrypt) ?
-                    (byte) ((message[i] - key_values[i % key_values.length]) % 256) :
-                    (byte) ((message[i] + key_values[i % key_values.length]) % 256);
+        for(int i = 0; i < message.capacity(); i++){
+            message.put(i, (this.decrypt) ?
+                    (byte) ((message.get(i) - key_values[i % key_values.length]) % 256) :
+                    (byte) ((message.get(i) + key_values[i % key_values.length]) % 256)
+            );
         }
 
         setEventum(message);

@@ -4,16 +4,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.StandardOpenOption;
 
 public class CryptographicAlgorithm {
     private File introitusFile;
     private ByteBuffer introitus;
     private ByteBuffer eventum;
     public AlgorithmType type;
+    public boolean unicode;
 
     public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
@@ -25,59 +24,18 @@ public class CryptographicAlgorithm {
     }
 
     // TODO: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
-    public void makeFileUscita(byte[] data, File exitus) {
+    public void writeExitus(File exitus) {
         try (var output = new FileOutputStream(exitus)) {
-            for(byte c : data){
-                output.write(c);
-            }
+            FileChannel channel = output.getChannel();
+            long _ = channel.write(this.eventum);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    /*public void readFileEntrata(String path) {
-        // TODOne: research how unicode utf8 works before doing anything retarded again
-        // NOTE: genuinely no idea why that worked
-        // NOTE(1): genuinely no idea why I was using a string on this
-        // NOTE(2): ***look into potentially more efficient way to read bytes***
-        fileName = path.substring(path.lastIndexOf(File.separator) + 1).split("\\.");
-        try (FileInputStream input = new FileInputStream(path)) {
-            buffer = new byte[input.available()];
-            int _ = input.read(getBuffer());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+        public void Encrypt(){}
 
-    public void readFileEntrata(File file) throws IOException {
-        fileName = file.getName().split("\\.");
-        try (FileInputStream input = new FileInputStream(file)) {
-            buffer = new byte[input.available()];
-            int _ = input.read(getBuffer());
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
-    }*/
-
-    private void makeIntroitus(){
-        ByteBuffer buffer;
-
-        try (FileChannel channel = FileChannel.open(introitusFile.toPath(), StandardOpenOption.READ)) {
-            buffer = ByteBuffer.allocate(Math.toIntExact(channel.size()));
-            while (buffer.hasRemaining()) {
-                if (channel.read(buffer) == -1) {
-                    break;
-                }
-            }
-            this.introitus = buffer;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void Encrypt(){}
-
-    public Buffer getEventum() {
+    public ByteBuffer getEventum() {
         return eventum;
     }
 
@@ -91,12 +49,21 @@ public class CryptographicAlgorithm {
         return introitusFile;
     }
 
-    public void setIntroitusFile(File introitusFile) {
-        this.introitusFile = introitusFile;
-        makeIntroitus();
+    private void readIntroitus(){
+        try (FileInputStream input = new FileInputStream(this.introitusFile)) {
+            FileChannel channel = input.getChannel();
+            long _ = channel.read(this.introitus);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void setIntroitusFile(String introitus) {
+    public void readIntroitusFile(File introitusFile) {
+        this.introitusFile = introitusFile;
+        readIntroitus();
+    }
+
+    public void readIntroitusFile(String introitus) {
         try {
             this.introitusFile = new File(introitus);
             if(!this.introitusFile.isFile()){
@@ -106,10 +73,30 @@ public class CryptographicAlgorithm {
             throw new RuntimeException(e);
         }
 
-        makeIntroitus();
+        readIntroitus();
     }
 
-    public Buffer getIntroitus() {
+    public ByteBuffer getIntroitus() {
         return introitus;
+    }
+
+    // Source - https://stackoverflow.com/a/21388198
+    // Posted by jdmichal, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-11-09, Licence - CC BY-SA 3.0
+    protected static ByteBuffer cloneByteBuffer(final ByteBuffer original) {
+        // Create clone with same capacity as original.
+        final ByteBuffer clone = (original.isDirect()) ?
+                ByteBuffer.allocateDirect(original.capacity()) :
+                ByteBuffer.allocate(original.capacity());
+
+        // Create a read-only copy of the original.
+        // This allows reading from the original without modifying it.
+        final ByteBuffer readOnlyCopy = original.asReadOnlyBuffer();
+
+        // Flip and read from the original.
+        readOnlyCopy.flip();
+        clone.put(readOnlyCopy);
+
+        return clone;
     }
 }

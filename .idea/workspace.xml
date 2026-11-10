@@ -10,13 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TestingShit/TestingShit.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestingShit/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,61 +42,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000175469" />
-      <entry key="MS500" value="1.0070605681783806" />
-      <entry key="S2" value="1.2907700900538117" />
-      <entry key="S5" value="1.676203351758054" />
-      <entry key="S10" value="2.146575842637829" />
-      <entry key="S30" value="3.5331987523361947" />
-      <entry key="S60" value="4.465044772762577" />
-      <entry key="M2" value="5.378532906365258" />
-      <entry key="M5" value="10.383244788097857" />
-      <entry key="M10" value="21.25669414318089" />
-      <entry key="M15" value="29.81488156427727" />
-      <entry key="M30" value="44.799087285398166" />
-      <entry key="H1" value="62.292616430520226" />
-      <entry key="H2" value="95.75968919632568" />
-      <entry key="H4" value="165.62407808318395" />
-      <entry key="D1" value="430.87847139585864" />
-      <entry key="W1" value="544.1651810718421" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.000000001324872" />
+      <entry key="S5" value="1.0002812868542637" />
+      <entry key="S10" value="1.017354712970519" />
+      <entry key="S30" value="1.4223703942433537" />
+      <entry key="S60" value="2.41047482333784" />
+      <entry key="M2" value="4.397248938741557" />
+      <entry key="M5" value="9.703184541683138" />
+      <entry key="M10" value="18.254638365252184" />
+      <entry key="M15" value="26.73446477204629" />
+      <entry key="M30" value="47.77536173017444" />
+      <entry key="H1" value="74.64236011633716" />
+      <entry key="H2" value="114.56226617595598" />
+      <entry key="H4" value="187.8408115074243" />
+      <entry key="D1" value="463.8980821185175" />
+      <entry key="W1" value="583.7266984827473" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="7.629731674283467E-172" />
-      <entry key="MS500" value="5.977255949289159E-35" />
-      <entry key="S2" value="2.7805164145248973E-9" />
-      <entry key="S5" value="3.781378802266821E-4" />
-      <entry key="S10" value="0.019445767668741756" />
-      <entry key="S30" value="0.2689108746486404" />
-      <entry key="S60" value="0.5186228983477635" />
-      <entry key="M2" value="0.737631544818629" />
-      <entry key="M5" value="1.5416274985817973" />
-      <entry key="M10" value="3.4780493992411476" />
-      <entry key="M15" value="5.038153427064959" />
-      <entry key="M30" value="7.887931417615447" />
-      <entry key="H1" value="12.281028427908893" />
-      <entry key="H2" value="21.712924540583856" />
-      <entry key="H4" value="40.44780657016052" />
-      <entry key="D1" value="117.40427635237077" />
-      <entry key="W1" value="152.75104495078438" />
+      <entry key="MS100" value="2.851645535352353E-281" />
+      <entry key="MS500" value="7.780707840276698E-57" />
+      <entry key="S2" value="9.392058542721742E-15" />
+      <entry key="S5" value="2.477610128615566E-6" />
+      <entry key="S10" value="0.0017404835253831596" />
+      <entry key="S30" value="0.19219639992514811" />
+      <entry key="S60" value="0.7463345246781887" />
+      <entry key="M2" value="1.6815218782728285" />
+      <entry key="M5" value="4.034262603492549" />
+      <entry key="M10" value="7.563426070934323" />
+      <entry key="M15" value="10.397916576646002" />
+      <entry key="M30" value="16.15931668277082" />
+      <entry key="H1" value="23.10512480646372" />
+      <entry key="H2" value="33.986064772230954" />
+      <entry key="H4" value="53.538591760612874" />
+      <entry key="D1" value="133.1842714328171" />
+      <entry key="W1" value="170.34111156910942" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.889342527199435E-5" />
-      <entry key="MS500" value="0.13998809277703522" />
-      <entry key="S2" value="0.8358468713436176" />
-      <entry key="S5" value="1.4288012014620044" />
-      <entry key="S10" value="2.0036784926345517" />
-      <entry key="S30" value="3.7012843097720602" />
-      <entry key="S60" value="4.915140263171461" />
-      <entry key="M2" value="6.074027080763841" />
-      <entry key="M5" value="11.898127040261326" />
-      <entry key="M10" value="24.71135830345961" />
-      <entry key="M15" value="34.83224528990903" />
-      <entry key="M30" value="52.67208641919482" />
-      <entry key="H1" value="74.56320465766439" />
-      <entry key="H2" value="117.46400219756079" />
-      <entry key="H4" value="206.0637162172608" />
-      <entry key="D1" value="548.2786460473963" />
-      <entry key="W1" value="696.9154638143301" />
+      <entry key="MS100" value="6.354208278525062E-4" />
+      <entry key="MS500" value="0.22940997057784124" />
+      <entry key="S2" value="0.6920748585165953" />
+      <entry key="S5" value="0.8632912863830817" />
+      <entry key="S10" value="0.9447378294086167" />
+      <entry key="S30" value="1.5500078167657507" />
+      <entry key="S60" value="3.0780682754391013" />
+      <entry key="M2" value="6.005208098181431" />
+      <entry key="M5" value="13.682673443411364" />
+      <entry key="M10" value="25.773360049501484" />
+      <entry key="M15" value="37.09288671393948" />
+      <entry key="M30" value="63.90486568091305" />
+      <entry key="H1" value="97.7269455547913" />
+      <entry key="H2" value="148.5339076460916" />
+      <entry key="H4" value="241.36816226508432" />
+      <entry key="D1" value="597.0776492662447" />
+      <entry key="W1" value="754.0669526777979" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -108,45 +108,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.CLI.executor": "Run",
-    "Application.Encryptor.executor": "Run",
-    "Application.GUI.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.test.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/luna/en",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/home/luna/en/TestingShit/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.CLI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Encryptor.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.test.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/luna/en&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/luna/en/TestingShit/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="AlgorithmType.caesar" />
@@ -164,15 +164,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="GUI" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="25" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.luna.encryptor.Encryptor" />
-      <module name="Encryptor" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="tests" factoryName="Autodetect">
       <module name="encryption_test" />
       <option name="ENV_FILES" value="" />
@@ -210,6 +201,15 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
+    </configuration>
+    <configuration name="GUI" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="25" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.luna.encryptor.Encryptor" />
+      <module name="Encryptor" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
   <component name="SharedIndexes">

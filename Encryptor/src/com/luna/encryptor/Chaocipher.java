@@ -10,7 +10,6 @@ public class Chaocipher extends Cipher{
     private Character[] plainCharWheel = new Character[26];
     private final Byte[] allBytes = new Byte[256];
     private final Character[] allLetters = new Character[26];
-    private boolean unicode;
     private boolean customConfiguration;
 
     public Chaocipher(){
