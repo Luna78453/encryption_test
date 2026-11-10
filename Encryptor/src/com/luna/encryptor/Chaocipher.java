@@ -30,7 +30,7 @@ public class Chaocipher extends Cipher{
         byte[] byteCipher;
 
         if(customConfiguration) {
-            if (unicode) {
+            if (isBytewise()) {
                 cipherByteWheel = this.cipherByteWheel;
                 plainByteWheel = this.plainByteWheel;
             }
@@ -39,7 +39,7 @@ public class Chaocipher extends Cipher{
                 plainCharWheel = this.plainCharWheel;
             }
         } else {
-            if (unicode) {
+            if (isBytewise()) {
                 cipherByteWheel = shuffleArray(this.allBytes);
                 plainByteWheel = shuffleArray(this.allBytes);
             }
@@ -110,11 +110,11 @@ public class Chaocipher extends Cipher{
     }
 
     public boolean isUnicode() {
-        return unicode;
+        return isBytewise();
     }
 
     public void setUnicode(boolean unicode) {
-        this.unicode = unicode;
+        this.setBytewise(unicode);
     }
 
     public Byte[] getCipherByteWheel() {

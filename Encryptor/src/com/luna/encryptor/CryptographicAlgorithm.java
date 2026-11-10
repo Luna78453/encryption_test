@@ -5,14 +5,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 
 public class CryptographicAlgorithm {
     private File introitusFile;
     private ByteBuffer introitus;
     private ByteBuffer eventum;
-    public AlgorithmType type;
-    public boolean unicode;
+    protected AlgorithmType type;
+    private boolean bytewise;
 
     public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
@@ -23,7 +24,11 @@ public class CryptographicAlgorithm {
         };
     }
 
-    // TODO: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
+    // TODOnt: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
+    // What the fuck are you talking about.
+    // TODO: DON'T LISTEN TO THIS ASSHOLE. JUST GET THE FUCKING BYTES TO CHARS SETUP DONE
+    // NOTE: BYTEBUFFER HAS A HANDY INTERFACE TO HANDLE THE BYTES AS CHARS
+    // USE THAT INSTEAD, DIPSHIT
     public void writeExitus(File exitus) {
         try (var output = new FileOutputStream(exitus)) {
             FileChannel channel = output.getChannel();
@@ -31,22 +36,6 @@ public class CryptographicAlgorithm {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-        public void Encrypt(){}
-
-    public ByteBuffer getEventum() {
-        return eventum;
-    }
-
-    protected void setEventum(ByteBuffer eventum) {
-        this.eventum = eventum;
-    }
-
-    public String[] getFileName() { return introitusFile.getName().split("\\."); }
-
-    public File getIntroitusFile() {
-        return introitusFile;
     }
 
     private void readIntroitus(){
@@ -76,10 +65,6 @@ public class CryptographicAlgorithm {
         readIntroitus();
     }
 
-    public ByteBuffer getIntroitus() {
-        return introitus;
-    }
-
     // Source - https://stackoverflow.com/a/21388198
     // Posted by jdmichal, modified by community. See post 'Timeline' for change history
     // Retrieved 2026-11-09, Licence - CC BY-SA 3.0
@@ -98,5 +83,33 @@ public class CryptographicAlgorithm {
         clone.put(readOnlyCopy);
 
         return clone;
+    }
+
+    public void Encrypt(){}
+
+    public ByteBuffer getEventum() {
+        return eventum;
+    }
+
+    protected void setEventum(ByteBuffer eventum) {
+        this.eventum = eventum;
+    }
+
+    public String[] getFileName() { return introitusFile.getName().split("\\."); }
+
+    public File getIntroitusFile() {
+        return introitusFile;
+    }
+
+    public ByteBuffer getIntroitus() {
+        return introitus;
+    }
+
+    public boolean isBytewise() {
+        return bytewise;
+    }
+
+    public void setBytewise(boolean bytewise) {
+        this.bytewise = bytewise;
     }
 }
