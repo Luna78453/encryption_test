@@ -3,6 +3,7 @@ package com.luna.encryptor;
 import com.luna.encryptor.forms.EncryptorGUI;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.Objects;
 
 public class Encryptor {
@@ -17,7 +18,7 @@ public class Encryptor {
         }
     }
 
-    private static void CLI(String[] args){
+    private static void CLI(String[] args) {
         try {
             String genusCryptographiae = args[0].toLowerCase();
             String introitus = args[1];
@@ -35,7 +36,9 @@ public class Encryptor {
                         clavis = args[3];
                     }
                     if (!clavis.chars().allMatch(Character::isDigit)){
-                        throw new IllegalArgumentException("CAESAR KEY MUST BE INTEGER NUMBER");
+                        throw new
+                                IllegalArgumentException
+                                ("CAESAR KEY MUST BE INTEGER NUMBER");
                     }
                     yield new Caesar(clavis, parseModus(modus));
                 }
@@ -54,26 +57,40 @@ public class Encryptor {
                     if (args.length > 2) exitus = args[2];
                     yield new Sha256();
                 }
-                default -> throw new MatchException("ENCRYPTION TYPE MATCH FAILURE", null);
+                default -> throw new
+                        MatchException
+                        ("ENCRYPTION TYPE MATCH FAILURE", null);
             };
 
             encryptor.readIntroitusFile(introitus);
             encryptor.Encrypt();
-            exitus = (Objects.equals(exitus, "")) ? encryptor.getFileName()[0] + "_" + genusCryptographiae + "." + encryptor.getFileName()[1] : exitus;
-            encryptor.writeExitus(encryptor.getEventum(), exitus);
+            exitus = (Objects.equals(exitus, "")) ?
+                    encryptor.getFileName()[0] + "_"
+                            + genusCryptographiae + "."
+                            + encryptor.getFileName()[1] :
+                    exitus;
+            encryptor.writeExitusFile(new File(exitus));
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ArrayIndexOutOfBoundsException("NOT ENOUGH ARGUMENTS PROVIDED");
-        } catch (Throwable _){}
+            throw new
+                    ArrayIndexOutOfBoundsException
+                    ("NOT ENOUGH ARGUMENTS PROVIDED");
+        }
     }
 
-    private static boolean parseModus(String modus){
-        if (modus.contentEquals("decrypt") || modus.contentEquals("de") || modus.contentEquals("d")){
-            return true;
-        } else if (modus.contentEquals("encrypt") || modus.contentEquals("en") || modus.contentEquals("e")) {
-            return false;
-        } else {
-            throw new IllegalArgumentException("ENCRYPTION DIRECTION NOT VALID");
-        }
+    private static boolean parseModus(String modus) {
+        if (
+                modus.contentEquals("decrypt")
+                || modus.contentEquals("de")
+                || modus.contentEquals("d")
+        ) return true;
+        else if (
+                modus.contentEquals("encrypt")
+                || modus.contentEquals("en")
+                || modus.contentEquals("e")
+        ) return false;
+        else throw new
+                    IllegalArgumentException
+                    ("ENCRYPTION DIRECTION NOT VALID");
     }
 }

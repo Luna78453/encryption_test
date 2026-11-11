@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Vigenere extends Cipher {
     public Vigenere(String key, boolean decrypt){
@@ -17,15 +16,6 @@ public class Vigenere extends Cipher {
 
     @Override
     public void Encrypt() {
-
-        /*ByteBuffer message = cloneByteBuffer(this.getIntroitus());;
-
-        for(int i = 0; i < message.capacity(); i++){
-            message.put(i, (this.decrypt) ?
-                    (byte) ((message.get(i) - key_values[i % key_values.length]) % 256) :
-                    (byte) ((message.get(i) + key_values[i % key_values.length]) % 256)
-            );
-        }*/
 
         if(isBytewise()) {
             byte[] keyValues = key.getBytes(StandardCharsets.UTF_8);
@@ -43,7 +33,7 @@ public class Vigenere extends Cipher {
                             );
             }
             CharBuffer message = StandardCharsets.ISO_8859_1.decode(this.getIntroitus());
-            bytewiseShift(message, keyValues.toArray(new int[0]));
+            alphabetShift(message, keyValues.toArray(new Integer[0]));
             setEventum(StandardCharsets.UTF_8.encode(message));
 
         }
@@ -58,30 +48,25 @@ public class Vigenere extends Cipher {
         }
     }
 
-    private void alphabetShift(CharBuffer message, int[] keyValues){
+    private void alphabetShift(CharBuffer message, Integer[] keyValues){
         for(int i = 0; i < message.capacity(); i++){
-            if (Character.isLetter(message.get(i))){
+            if (Character.isLetter(message.get(i)))
                 message.put(i, (Character.isUpperCase(message.get(i))) ?
                         (this.decrypt) ?
                                 (char) (
                                         ((message.get(i) - 65)
-                                                - keyValues[i % keyValues.length])%26 + 65
-                                ):
-                                (char) (
+                                                - keyValues[i % keyValues.length])%26 + 65)
+                                : (char) (
                                         ((message.get(i) - 65)
-                                                + keyValues[i % keyValues.length])%26 + 65
-                                )
+                                                + keyValues[i % keyValues.length])%26 + 65)
                         : (this.decrypt) ?
-                        (char) (
-                                ((message.get(i) - 97)
-                                        - keyValues[i % keyValues.length])%26 + 97
-                        ):
-                        (char) (
-                                ((message.get(i) - 97)
-                                        + keyValues[i % keyValues.length])%26 + 97
-                        )
+                                (char) (
+                                        ((message.get(i) - 97)
+                                                - keyValues[i % keyValues.length])%26 + 97)
+                                : (char) (
+                                        ((message.get(i) - 97)
+                                                + keyValues[i % keyValues.length])%26 + 97)
                 );
-            }
         }
     }
 }

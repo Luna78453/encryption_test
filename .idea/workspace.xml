@@ -14,8 +14,10 @@
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Caesar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Encryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Vigenere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingShit/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingShit/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/forms/EncryptorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

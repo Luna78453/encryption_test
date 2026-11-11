@@ -51,9 +51,11 @@ public class EncryptorGUI extends JFrame {
         int returnVal = fc.showOpenDialog(EncryptorGUI.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             introitusFile = fc.getSelectedFile();
-            encryptor.readFileEntrata(introitusFile);
-            introitusShowText.setText(new String(encryptor.getBuffer(),
-                    StandardCharsets.UTF_8));
+            encryptor.readIntroitusFile(introitusFile);
+            introitusShowText.setText(new String(
+                    encryptor.getIntroitus().asReadOnlyBuffer().array(),
+                    StandardCharsets.UTF_8
+            ));
             introitusPath.setText(introitusFile.getAbsolutePath());
             encryptButton.setEnabled(true);
         }
@@ -73,11 +75,13 @@ public class EncryptorGUI extends JFrame {
             return;
         }
         introitusFile = new File(introitusPath.getText());
-        try {encryptor.readFileEntrata(introitusFile);}
+        try {encryptor.readIntroitusFile(introitusFile);}
         catch (Exception e) {JOptionPane.showMessageDialog
                 (null, "INVALID FILE PATH");}
-        introitusShowText.setText(new String(encryptor.getBuffer(),
-                StandardCharsets.UTF_8));
+        introitusShowText.setText(new String(
+                encryptor.getIntroitus().asReadOnlyBuffer().array(),
+                StandardCharsets.UTF_8
+        ));
         encryptButton.setEnabled(true);
     }
 
@@ -95,13 +99,13 @@ public class EncryptorGUI extends JFrame {
                     "Existing file",JOptionPane.OK_CANCEL_OPTION);
             switch(result){
                 case JOptionPane.OK_OPTION:
-                    encryptor.writeExitus(encryptor.getEventum(), exitusFile);
+                    encryptor.writeExitusFile(exitusFile);
                     exitusFile = null;
                     return;
                 case JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION:
             }
         } else {
-            encryptor.writeExitus(encryptor.getEventum(), exitusFile);
+            encryptor.writeExitusFile(exitusFile);
             exitusFile = null;
         }
         JOptionPane.showMessageDialog(null,"File saved successfully.");
@@ -121,7 +125,7 @@ public class EncryptorGUI extends JFrame {
                 encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
                 assert encryptor != null;
-                encryptor.readFileEntrata(introitusFile);
+                encryptor.readIntroitusFile(introitusFile);
             } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
                 encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
@@ -166,7 +170,7 @@ public class EncryptorGUI extends JFrame {
     }
 
     private void encrypt() {
-        if (encryptor.getBuffer() != null) {
+        if (encryptor.getIntroitus() != null) {
             if (encryptor instanceof Cipher sc){
                 try {
                     if(
@@ -190,7 +194,9 @@ public class EncryptorGUI extends JFrame {
 
             encryptor.Encrypt();
             exitusShowText.setText(new String(
-                    encryptor.getEventum(), StandardCharsets.UTF_8));
+                    encryptor.getEventum().asReadOnlyBuffer().array(),
+                    StandardCharsets.UTF_8
+            ));
             saveButton.setEnabled(true);
         } else JOptionPane.showMessageDialog
                 (null,"NO FILE SELECTED.");

@@ -24,7 +24,7 @@ public class Chaocipher extends Cipher{
         Character[] cipherCharWheel = new Character[26];
         Character[] plainCharWheel = new Character[26];
 
-        byte[] byteMessage = this.getBuffer();
+        //byte[] byteMessage = this.getIntroitus();
         Character[] charMessage;
 
         byte[] byteCipher;

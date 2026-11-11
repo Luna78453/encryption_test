@@ -2,7 +2,6 @@ package com.luna.encryptor;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,28 +49,32 @@ public class Sha256 extends CryptographicAlgorithm {
         int work_g = hashes[6];
         int work_h = hashes[7];
 
-        long originalLen = getBuffer().length * 8L;
+        getIntroitus().flip();
+        long originalLen = getIntroitus().limit() * 8L;
         byte[] originalLenBytes = ByteBuffer.allocate(Long.BYTES).putLong(originalLen).array();
 
         //There should be a cleaner way to do this shit bro
         //from immutable original message to mutable message copy list
         //to make the following operations easier
-        List<Byte> message = new ArrayList<>();
-        for(byte b : getBuffer()){
-            message.add(b);
-        }
+        ByteBuffer message = cloneByteBuffer(this.getIntroitus());
 
-        message.add((byte)128);
+        message.put((byte)128);
 
         //I miss python floor divisions already
-        int numOfBlocks = Math.floorDiv(message.size(), 64) + 1;
+        int numOfBlocks = Math.floorDiv(message.capacity(), 64) + 1;
         int numOfBytes = 64*numOfBlocks;
 
         //go fuck yourself
-        message.addAll(Collections.nCopies(numOfBytes - 8 - message.size(), (byte) 0));
+        //go double fuck yourself
+        List<Byte> zeroList = Collections.nCopies(numOfBytes - 8 - message.capacity(), (byte) 0);
+        byte[] zeroArray = new byte[zeroList.size()];
+        for (int i = 0; i < zeroList.size(); i++)
+            zeroArray[i] = zeroList.get(i);
+
+        message.put(zeroArray);
 
         for(byte b : originalLenBytes){
-            message.add(b);
+            message.put(b);
         }
 
         //main message schedule encrypting
@@ -92,15 +95,15 @@ public class Sha256 extends CryptographicAlgorithm {
             }
 
             for(int offset = 0; offset < 64; offset++){
-                int captsigma0 = rotateRight(work_a, 2)^rotateRight(work_a, 13)^rotateRight(work_a, 22);
-                int captsigma1 = rotateRight(work_e, 6)^rotateRight(work_e, 11)^rotateRight(work_e, 25);
+                int captSigma0 = rotateRight(work_a, 2)^rotateRight(work_a, 13)^rotateRight(work_a, 22);
+                int captSigma1 = rotateRight(work_e, 6)^rotateRight(work_e, 11)^rotateRight(work_e, 25);
 
                 int choice = (work_e&work_f)^((~work_e)&work_g);
                 int majority = (work_a&work_b)^(work_a&work_c)^(work_b&work_c);
 
-                int temp1 = work_h + captsigma1 + choice + k[offset] + messageSchedule[offset];
+                int temp1 = work_h + captSigma1 + choice + k[offset] + messageSchedule[offset];
 
-                int temp2 = captsigma0 + majority;
+                int temp2 = captSigma0 + majority;
 
                 work_h = work_g;
                 work_g = work_f;
@@ -136,6 +139,6 @@ public class Sha256 extends CryptographicAlgorithm {
             o.repeat("0", Integer.numberOfLeadingZeros(hash) / 8).append(Integer.toHexString(hash));
         }
 
-        setEventum(o.toString().getBytes(StandardCharsets.UTF_8));
+        setEventum(StandardCharsets.ISO_8859_1.encode(o.toString()));
     }
 }

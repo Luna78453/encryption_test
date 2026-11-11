@@ -28,7 +28,8 @@ public class Caesar extends Cipher {
     }
 
     private void bytewiseShift(ByteBuffer message){
-        for(int i = 0; i < message.capacity(); i++){
+        message.flip();
+        for(int i = 0; i < message.limit(); i++){
             message.put(i, (this.decrypt) ?
                     (byte) ((message.get(i) - Integer.parseInt(this.key)) % 256) :
                     (byte) ((message.get(i) + Integer.parseInt(this.key)) % 256)
@@ -37,27 +38,24 @@ public class Caesar extends Cipher {
     }
 
     private void alphabetShift(CharBuffer message){
-        for(int i = 0; i < message.capacity(); i++){
+        message.flip();
+        for(int i = 0; i < message.limit(); i++){
             if (Character.isLetter(message.get(i))){
                 message.put(i, (Character.isUpperCase(message.get(i))) ?
                         (this.decrypt) ?
                                 (char) (
                                         ((message.get(i) - 65)
-                                        - Integer.parseInt(this.key))%26 + 65
-                                ):
-                                (char) (
+                                        - Integer.parseInt(this.key))%26 + 65)
+                                : (char) (
                                         ((message.get(i) - 65)
-                                        + Integer.parseInt(this.key))%26 + 65
-                                )
+                                        + Integer.parseInt(this.key))%26 + 65)
                         : (this.decrypt) ?
                                 (char) (
                                         ((message.get(i) - 97)
-                                        - Integer.parseInt(this.key))%26 + 97
-                                ):
-                                (char) (
+                                        - Integer.parseInt(this.key))%26 + 97)
+                                : (char) (
                                         ((message.get(i) - 97)
-                                        + Integer.parseInt(this.key))%26 + 97
-                                )
+                                        + Integer.parseInt(this.key))%26 + 97)
                 );
             }
         }
