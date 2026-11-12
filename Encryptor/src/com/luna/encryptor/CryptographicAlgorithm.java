@@ -108,8 +108,6 @@ public class CryptographicAlgorithm {
 
     public String[] getFileName() { return introitusFile.getName().split("\\."); }
 
-    public File getIntroitusFile() { return introitusFile; }
-
     public ByteBuffer getIntroitus() {
         return introitus;
     }

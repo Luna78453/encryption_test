@@ -59,25 +59,24 @@ public class Sha256 extends CryptographicAlgorithm {
         //to make the following operations easier
         ByteBuffer message = cloneByteBuffer(this.getIntroitus());
 
-        message.put((byte)128);
-
         //I miss python floor divisions already
         int numOfBlocks = Math.floorDiv(message.capacity(), 64) + 1;
         int numOfBytes = 64*numOfBlocks;
 
-        ByteBuffer message = ByteBuffer.allocate(numOfBytes);
+        ByteBuffer messageBlock = ByteBuffer.allocate(numOfBytes);
+        messageBlock.put((byte)128);
 
         //go fuck yourself
         //go double fuck yourself
-        List<Byte> zeroList = Collections.nCopies(numOfBytes - 8 - message.capacity(), (byte) 0);
+        List<Byte> zeroList = Collections.nCopies(numOfBytes - 9 - message.capacity(), (byte) 0);
         byte[] zeroArray = new byte[zeroList.size()];
         for (int i = 0; i < zeroList.size(); i++)
             zeroArray[i] = zeroList.get(i);
 
-        message.put(zeroArray);
+        messageBlock.put(zeroArray);
 
         for(byte b : originalLenBytes){
-            message.put(b);
+            messageBlock.put(b);
         }
 
         //main message schedule encrypting
@@ -85,10 +84,10 @@ public class Sha256 extends CryptographicAlgorithm {
             int[] messageSchedule = new int[64];
 
             for(int offset = 0; offset < 16; offset++){
-                messageSchedule[offset] = (toUnsignedInt(message.get(sec + offset*4))<<24) +
-                        (toUnsignedInt(message.get(sec + offset*4 + 1))<<16) +
-                        (toUnsignedInt(message.get(sec + offset*4 + 2))<<8) +
-                        (toUnsignedInt(message.get(sec + offset*4 + 3)));
+                messageSchedule[offset] = (toUnsignedInt(messageBlock.get(sec + offset*4))<<24) +
+                        (toUnsignedInt(messageBlock.get(sec + offset*4 + 1))<<16) +
+                        (toUnsignedInt(messageBlock.get(sec + offset*4 + 2))<<8) +
+                        (toUnsignedInt(messageBlock.get(sec + offset*4 + 3)));
             }
 
             for (int offset = 16; offset < 64; offset++){
