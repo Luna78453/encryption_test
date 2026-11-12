@@ -65,6 +65,8 @@ public class Sha256 extends CryptographicAlgorithm {
         int numOfBlocks = Math.floorDiv(message.capacity(), 64) + 1;
         int numOfBytes = 64*numOfBlocks;
 
+        ByteBuffer message = ByteBuffer.allocate(numOfBytes);
+
         //go fuck yourself
         //go double fuck yourself
         List<Byte> zeroList = Collections.nCopies(numOfBytes - 8 - message.capacity(), (byte) 0);
