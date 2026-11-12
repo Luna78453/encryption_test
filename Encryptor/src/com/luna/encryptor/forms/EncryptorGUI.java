@@ -53,7 +53,7 @@ public class EncryptorGUI extends JFrame {
             introitusFile = fc.getSelectedFile();
             encryptor.readIntroitusFile(introitusFile);
             introitusShowText.setText(new String(
-                    encryptor.getIntroitus().asReadOnlyBuffer().array(),
+                    encryptor.getIntroitus().array(),
                     StandardCharsets.UTF_8
             ));
             introitusPath.setText(introitusFile.getAbsolutePath());
@@ -79,7 +79,7 @@ public class EncryptorGUI extends JFrame {
         catch (Exception e) {JOptionPane.showMessageDialog
                 (null, "INVALID FILE PATH");}
         introitusShowText.setText(new String(
-                encryptor.getIntroitus().asReadOnlyBuffer().array(),
+                encryptor.getIntroitus().array(),
                 StandardCharsets.UTF_8
         ));
         encryptButton.setEnabled(true);
@@ -194,7 +194,7 @@ public class EncryptorGUI extends JFrame {
 
             encryptor.Encrypt();
             exitusShowText.setText(new String(
-                    encryptor.getEventum().asReadOnlyBuffer().array(),
+                    encryptor.getEventum().array(),
                     StandardCharsets.UTF_8
             ));
             saveButton.setEnabled(true);
@@ -209,6 +209,7 @@ public class EncryptorGUI extends JFrame {
         enableStuff(false);
         algorithmSelector.removeAllItems();
         populateAlgorithmComboBox();
+        resetAvailable = false;
     }
 
     private void Start(){

@@ -15,49 +15,53 @@ public class Caesar extends Cipher {
 
     @Override
     public void Encrypt() {
+        this.getIntroitus().rewind();
+
         if(isBytewise()) {
             ByteBuffer message = cloneByteBuffer(this.getIntroitus());
             bytewiseShift(message);
             setEventum(message);
         }
         else {
-            CharBuffer message = StandardCharsets.ISO_8859_1.decode(this.getIntroitus());
+            CharBuffer message = StandardCharsets.UTF_8.decode(this.getIntroitus());
             alphabetShift(message);
             setEventum(StandardCharsets.UTF_8.encode(message));
         }
     }
 
     private void bytewiseShift(ByteBuffer message){
-        message.flip();
         for(int i = 0; i < message.limit(); i++){
             message.put(i, (this.decrypt) ?
-                    (byte) ((message.get(i) - Integer.parseInt(this.key)) % 256) :
-                    (byte) ((message.get(i) + Integer.parseInt(this.key)) % 256)
+                    (byte) (Math.floorMod((message.get(i)
+                            - Math.floorMod(Integer.parseInt(this.key),256)),256)) :
+                    (byte) (Math.floorMod((message.get(i)
+                            + Math.floorMod(Integer.parseInt(this.key),256)),256))
             );
         }
+        message.rewind();
     }
 
     private void alphabetShift(CharBuffer message){
-        message.flip();
         for(int i = 0; i < message.limit(); i++){
             if (Character.isLetter(message.get(i))){
                 message.put(i, (Character.isUpperCase(message.get(i))) ?
                         (this.decrypt) ?
                                 (char) (
-                                        ((message.get(i) - 65)
-                                        - Integer.parseInt(this.key))%26 + 65)
+                                        Math.floorMod(((message.get(i) - 65)
+                                        - Math.floorMod(Integer.parseInt(this.key),26)),26) + 65)
                                 : (char) (
-                                        ((message.get(i) - 65)
-                                        + Integer.parseInt(this.key))%26 + 65)
+                                        Math.floorMod(((message.get(i) - 65)
+                                        + Math.floorMod(Integer.parseInt(this.key),26)),26) + 65)
                         : (this.decrypt) ?
                                 (char) (
-                                        ((message.get(i) - 97)
-                                        - Integer.parseInt(this.key))%26 + 97)
+                                        Math.floorMod(((message.get(i) - 97)
+                                        - Math.floorMod(Integer.parseInt(this.key),26)),26) + 97)
                                 : (char) (
-                                        ((message.get(i) - 97)
-                                        + Integer.parseInt(this.key))%26 + 97)
+                                        Math.floorMod(((message.get(i) - 97)
+                                        + Math.floorMod(Integer.parseInt(this.key),26)),26) + 97)
                 );
             }
         }
+        message.rewind();
     }
 }

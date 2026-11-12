@@ -19,6 +19,8 @@ public class Sha256 extends CryptographicAlgorithm {
 
     @Override
     public void Encrypt() {
+        this.getIntroitus().rewind();
+
         //this will become the output
         int[] hashes = {0x6a09e667,
             0xbb67ae85,
@@ -49,7 +51,6 @@ public class Sha256 extends CryptographicAlgorithm {
         int work_g = hashes[6];
         int work_h = hashes[7];
 
-        getIntroitus().flip();
         long originalLen = getIntroitus().limit() * 8L;
         byte[] originalLenBytes = ByteBuffer.allocate(Long.BYTES).putLong(originalLen).array();
 
