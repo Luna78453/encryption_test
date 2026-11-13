@@ -11,8 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb0b7332-8775-40ea-8ecb-38843fdf6533" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/CryptographicAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Sha256.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/Encryptor/src/com/luna/encryptor/Chaocipher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,61 +37,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.299397510827182E-30" />
-      <entry key="MS500" value="1.0539955286590821E-6" />
-      <entry key="S2" value="0.039959533689588204" />
-      <entry key="S5" value="0.5283423367896523" />
-      <entry key="S10" value="1.4102798514974697" />
-      <entry key="S30" value="2.808137384706864" />
-      <entry key="S60" value="3.349001471192657" />
-      <entry key="M2" value="3.659384541178237" />
-      <entry key="M5" value="3.8599375804182547" />
-      <entry key="M10" value="3.9293163549203687" />
-      <entry key="M15" value="3.952735516957603" />
-      <entry key="M30" value="3.9949397839070473" />
-      <entry key="H1" value="5.483380679865805" />
-      <entry key="H2" value="20.409284434699885" />
-      <entry key="H4" value="75.5396233283908" />
-      <entry key="D1" value="402.43198742759097" />
-      <entry key="W1" value="580.7904024770946" />
+      <entry key="MS100" value="1.0000000000002227" />
+      <entry key="MS500" value="1.0029480980272978" />
+      <entry key="S2" value="1.2391501237885199" />
+      <entry key="S5" value="1.7501821679017973" />
+      <entry key="S10" value="2.3775680765234553" />
+      <entry key="S30" value="3.673994442496118" />
+      <entry key="S60" value="5.211530143883089" />
+      <entry key="M2" value="8.452639726926732" />
+      <entry key="M5" value="15.355884100676262" />
+      <entry key="M10" value="20.287461312231954" />
+      <entry key="M15" value="22.47836888140818" />
+      <entry key="M30" value="25.042718387030355" />
+      <entry key="H1" value="27.814367595507495" />
+      <entry key="H2" value="42.858131030598834" />
+      <entry key="H4" value="97.44684305315174" />
+      <entry key="D1" value="424.7734087040727" />
+      <entry key="W1" value="604.4510553486986" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0002700634753834" />
-      <entry key="S2" value="1.185452032967396" />
-      <entry key="S5" value="1.7949267258900266" />
-      <entry key="S10" value="2.4182473080204456" />
-      <entry key="S30" value="3.2737437932521565" />
-      <entry key="S60" value="3.601345774911983" />
-      <entry key="M2" value="3.79067852095808" />
-      <entry key="M5" value="3.9137126944170135" />
-      <entry key="M10" value="3.9564157438940786" />
-      <entry key="M15" value="3.9708466626738765" />
-      <entry key="M30" value="3.992333379065569" />
-      <entry key="H1" value="4.49224856148247" />
-      <entry key="H2" value="9.138347626722872" />
-      <entry key="H4" value="25.14374573651282" />
-      <entry key="D1" value="120.07998818448634" />
-      <entry key="W1" value="174.2292085966468" />
+      <entry key="MS100" value="1.0000904369718843E-26" />
+      <entry key="MS500" value="6.309687564848345E-6" />
+      <entry key="S2" value="0.05026306417088962" />
+      <entry key="S5" value="0.3310767136189251" />
+      <entry key="S10" value="0.7234641288236207" />
+      <entry key="S30" value="1.7482055234602403" />
+      <entry key="S60" value="3.1737387333880167" />
+      <entry key="M2" value="5.315144375294204" />
+      <entry key="M5" value="8.663825367195342" />
+      <entry key="M10" value="10.797470198260827" />
+      <entry key="M15" value="11.718680062948078" />
+      <entry key="M30" value="12.783372654855063" />
+      <entry key="H1" value="13.820387275745151" />
+      <entry key="H2" value="18.578260360996506" />
+      <entry key="H4" value="34.48084058363533" />
+      <entry key="D1" value="129.58905314588517" />
+      <entry key="W1" value="184.127988143459" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.40409492588024E-5" />
-      <entry key="MS500" value="0.10704049908016311" />
-      <entry key="S2" value="0.7006383932025462" />
-      <entry key="S5" value="1.9155012935963052" />
-      <entry key="S10" value="3.5267044048748413" />
-      <entry key="S30" value="5.939181762561306" />
-      <entry key="S60" value="6.8712894073986925" />
-      <entry key="M2" value="7.408341764172591" />
-      <entry key="M5" value="7.756396804597218" />
-      <entry key="M10" value="7.877007747377167" />
-      <entry key="M15" value="7.917743982677841" />
-      <entry key="M30" value="7.984331773515053" />
-      <entry key="H1" value="9.97375274781906" />
-      <entry key="H2" value="29.544826463126974" />
-      <entry key="H4" value="100.67870474628731" />
-      <entry key="D1" value="522.5078686311031" />
-      <entry key="W1" value="755.0187543882921" />
+      <entry key="MS100" value="1.7996450407342773E-4" />
+      <entry key="MS500" value="0.17982529733628957" />
+      <entry key="S2" value="0.8852841275306667" />
+      <entry key="S5" value="1.8170835787895383" />
+      <entry key="S10" value="2.9061510195934415" />
+      <entry key="S30" value="5.3024098768923995" />
+      <entry key="S60" value="8.292386312249262" />
+      <entry key="M2" value="13.695001948983323" />
+      <entry key="M5" value="23.97144870120046" />
+      <entry key="M10" value="31.054214472442702" />
+      <entry key="M15" value="34.174631588022585" />
+      <entry key="M30" value="37.8137468132522" />
+      <entry key="H1" value="41.627900766463426" />
+      <entry key="H2" value="61.43109258990848" />
+      <entry key="H4" value="131.92180481818454" />
+      <entry key="D1" value="554.3581486039458" />
+      <entry key="W1" value="788.5781554408659" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -104,45 +103,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.CLI.executor": "Run",
-    "Application.Encryptor.executor": "Run",
-    "Application.GUI.executor": "Debug",
-    "Application.Main.executor": "Run",
-    "Application.test.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/luna/Downloads/uiDesigner-263.7307.112.zip",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/home/luna/en/TestingShit/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.CLI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Encryptor.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUI.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.test.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/luna/Downloads/uiDesigner-263.7307.112.zip&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/luna/en/TestingShit/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="AlgorithmType.caesar" />

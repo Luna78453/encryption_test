@@ -1,5 +1,8 @@
 package com.luna.encryptor;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -24,11 +27,6 @@ public class Chaocipher extends Cipher{
         Character[] cipherCharWheel = new Character[26];
         Character[] plainCharWheel = new Character[26];
 
-        //byte[] byteMessage = this.getIntroitus();
-        Character[] charMessage;
-
-        byte[] byteCipher;
-
         if(customConfiguration) {
             if (isBytewise()) {
                 cipherByteWheel = this.cipherByteWheel;
@@ -48,13 +46,25 @@ public class Chaocipher extends Cipher{
                 plainCharWheel = shuffleArray(this.allLetters);
             }
         }
+
+        if (isBytewise()){
+            ByteBuffer message = cloneByteBuffer(this.getIntroitus());
+            message = ByteEncrypt(message, plainByteWheel, cipherByteWheel);
+        } else {
+            CharBuffer message = StandardCharsets.UTF_8.decode(this.getIntroitus());
+            message = CharacterEncrypt(message, plainCharWheel, cipherCharWheel);
+        }
     }
 
-    private Character[] CharacterEncrypt(Character[] plainCharWheel, Character[] cipherCharWheel){
+    private ByteBuffer ByteEncrypt(ByteBuffer message, Byte[] plainByteWheel, Byte[] cipherByteWheel){
         return null;
     }
 
-    public <T> void instantiateWheel(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
+    private CharBuffer CharacterEncrypt(CharBuffer message, Character[] plainCharWheel, Character[] cipherCharWheel){
+        return null;
+    }
+
+    public <T> void instantiateCustomWheel(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
         try {
             if(plainWheelConfiguration instanceof Byte[]) {
                 if (!arraysEqualHash(allBytes, plainWheelConfiguration))
@@ -62,7 +72,7 @@ public class Chaocipher extends Cipher{
                 else this.plainByteWheel = (Byte[])plainWheelConfiguration;
             } else if(plainWheelConfiguration instanceof Character[]){
                 if (!arraysEqualHash(allLetters, plainWheelConfiguration))
-                    throw new IllegalAccessException("BYTE ALPHABET WHEEL NOT COMPLETE");
+                    throw new IllegalAccessException("CHARACTER ALPHABET WHEEL NOT COMPLETE");
                 else this.plainCharWheel = (Character[])plainWheelConfiguration;
             }
             if(cipherWheelConfiguration instanceof Byte[]) {
@@ -71,7 +81,7 @@ public class Chaocipher extends Cipher{
                 else this.plainByteWheel = (Byte[])cipherWheelConfiguration;
             } else if(cipherWheelConfiguration instanceof Character[]){
                 if (!arraysEqualHash(allLetters, cipherWheelConfiguration))
-                    throw new IllegalAccessException("BYTE ALPHABET WHEEL NOT COMPLETE");
+                    throw new IllegalAccessException("CHARACTER ALPHABET WHEEL NOT COMPLETE");
                 else this.plainCharWheel = (Character[])cipherWheelConfiguration;
             }
         } catch (IllegalAccessException e) {
