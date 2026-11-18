@@ -14,6 +14,7 @@ public class Chaocipher extends Cipher{
     private final Byte[] allBytes = new Byte[256];
     private final Character[] allLetters = new Character[26];
     private boolean customConfiguration;
+    private boolean customWheelsInstantiated = false;
 
     public Chaocipher(){
         for (int b = 0; b < 256; b++) allBytes[b] = (byte)b;
@@ -22,7 +23,7 @@ public class Chaocipher extends Cipher{
 
     @Override
     public void Encrypt() {
-        Byte[] cipherByteWheel = new Byte[256];
+        /*Byte[] cipherByteWheel = new Byte[256];
         Byte[] plainByteWheel = new Byte[256];
         Character[] cipherCharWheel = new Character[26];
         Character[] plainCharWheel = new Character[26];
@@ -45,23 +46,52 @@ public class Chaocipher extends Cipher{
                 cipherCharWheel = shuffleArray(this.allLetters);
                 plainCharWheel = shuffleArray(this.allLetters);
             }
-        }
+        }*/
 
         if (isBytewise()){
             ByteBuffer message = cloneByteBuffer(this.getIntroitus());
-            message = ByteEncrypt(message, plainByteWheel, cipherByteWheel);
+            ByteEncrypt(message);
         } else {
             CharBuffer message = StandardCharsets.UTF_8.decode(this.getIntroitus());
-            message = CharacterEncrypt(message, plainCharWheel, cipherCharWheel);
+            CharacterEncrypt(message);
         }
     }
 
-    private ByteBuffer ByteEncrypt(ByteBuffer message, Byte[] plainByteWheel, Byte[] cipherByteWheel){
-        return null;
+    // sum = clockwise; subtr = counter
+    private void ByteEncrypt(ByteBuffer message){
+        Byte[] cipherWheel = new Byte[256];
+        Byte[] plainWheel = new Byte[256];
+        int cipherZenith = 0;
+        int plainZenith = 0;
+
+        if (customConfiguration && customWheelsInstantiated) {
+            cipherWheel = this.cipherByteWheel;
+            plainWheel = this.plainByteWheel;
+        } else {
+            cipherWheel = shuffleArray(this.allBytes);
+            plainWheel = shuffleArray(this.allBytes);
+        }
     }
 
-    private CharBuffer CharacterEncrypt(CharBuffer message, Character[] plainCharWheel, Character[] cipherCharWheel){
-        return null;
+    private void CharacterEncrypt(CharBuffer message){
+        Character[] cipherWheel = new Character[256];
+        Character[] plainWheel = new Character[256];
+        //[0] = plain; [1] = cipher
+        int[] Zeniths = {0, 0};
+
+        if (customConfiguration && customWheelsInstantiated) {
+            cipherWheel = this.cipherCharWheel;
+            plainWheel = this.plainCharWheel;
+        } else {
+            cipherWheel = shuffleArray(this.allLetters);
+            plainWheel = shuffleArray(this.allLetters);
+        }
+    }
+
+    private void rotateWheel(byte mainWheel, int[] zeniths, int rotations){
+        int wheelSize = (isBytewise()) ? 256 : 26;
+        zeniths[mainWheel] += (rotations % wheelSize);
+        zeniths[mainWheel] += (-rotations % wheelSize);
     }
 
     public <T> void instantiateCustomWheel(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
@@ -87,6 +117,9 @@ public class Chaocipher extends Cipher{
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+
+        if (!customWheelsInstantiated)
+            customWheelsInstantiated = true;
     }
 
     //https://faceprep.in/article/program-to-check-if-two-arrays-are-equal-or-not-faceprep/
