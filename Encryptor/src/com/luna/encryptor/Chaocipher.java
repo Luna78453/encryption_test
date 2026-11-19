@@ -73,11 +73,11 @@ public class Chaocipher extends Cipher{
         }
     }
 
-    private void CharacterEncrypt(CharBuffer message){
-        Character[] cipherWheel = new Character[256];
-        Character[] plainWheel = new Character[256];
+    private void CharacterEncrypt(CharBuffer message) {
+        Character[] cipherWheel;
+        Character[] plainWheel;
         //[0] = plain; [1] = cipher
-        int[] Zeniths = {0, 0};
+        int[] zeniths = {0, 0};
 
         if (customConfiguration && customWheelsInstantiated) {
             cipherWheel = this.cipherCharWheel;
@@ -86,12 +86,57 @@ public class Chaocipher extends Cipher{
             cipherWheel = shuffleArray(this.allLetters);
             plainWheel = shuffleArray(this.allLetters);
         }
+
+        message.rewind();
+
+        while(message.hasRemaining()){
+            int nextPlainPosition = findIndex(plainWheel, message.get(message.position()));
+
+            //if further than nadir point go clockwise
+            if(nextPlainPosition > 13)
+                rotateEngagedWheels(zeniths, 26 - nextPlainPosition);
+            else
+                rotateEngagedWheels(zeniths, -nextPlainPosition);
+        }
+
+        message.put(cipherWheel[zeniths[1]]);
+
+        permuteCipherWheel(cipherWheel, zeniths[1]);
     }
 
-    private void rotateWheel(byte mainWheel, int[] zeniths, int rotations){
+    private <T> void permuteCipherWheel(T[] cipherWheel, int zenith){
         int wheelSize = (isBytewise()) ? 256 : 26;
-        zeniths[mainWheel] += (rotations % wheelSize);
-        zeniths[mainWheel] += (-rotations % wheelSize);
+        T foo = cipherWheel[Math.floorMod(zenith - 1, wheelSize)];
+
+        for(int i = 1; i < wheelSize/2; i++){
+            cipherWheel[Math.floorMod(zenith - i, wheelSize)]
+                    = cipherWheel[Math.floorMod(zenith - i - 1, wheelSize)];
+        }
+
+        cipherWheel[(zenith + wheelSize/2)%wheelSize] = foo;
+    }
+
+    private <T> void permutePlainWheel(T[] plainWheel, int zenith){
+        int wheelSize = (isBytewise()) ? 256 : 26;
+        zenith = Math.floorMod(--zenith, wheelSize);
+        T foo = plainWheel[Math.floorMod(--zenith, wheelSize)];
+    }
+
+    //engaged wheels always rotate with focus on plaintext wheel
+    private void rotateEngagedWheels(int[] zeniths, int rotations){
+        int wheelSize = (isBytewise()) ? 256 : 26;
+        zeniths[0] += (rotations % wheelSize);
+        zeniths[1] += (-rotations % wheelSize);
+    }
+    private static <T> int findIndex(T[] arr, T e){
+        int index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == e) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     public <T> void instantiateCustomWheel(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
