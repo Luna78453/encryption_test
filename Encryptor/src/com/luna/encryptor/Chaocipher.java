@@ -61,8 +61,7 @@ public class Chaocipher extends Cipher{
     private void ByteEncrypt(ByteBuffer message){
         Byte[] cipherWheel = new Byte[256];
         Byte[] plainWheel = new Byte[256];
-        int cipherZenith = 0;
-        int plainZenith = 0;
+        int[] Zeniths = {0, 0};
 
         if (customConfiguration && customWheelsInstantiated) {
             cipherWheel = this.cipherByteWheel;
