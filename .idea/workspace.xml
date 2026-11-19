@@ -37,61 +37,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="9.434590959387542E-84" />
-      <entry key="S5" value="6.1643777136288554E-34" />
-      <entry key="S10" value="2.483216813652302E-17" />
-      <entry key="S30" value="3.0760904290444836E-6" />
-      <entry key="S60" value="0.00210667416433748" />
-      <entry key="M2" value="0.06245316056681376" />
-      <entry key="M5" value="0.8776772496490635" />
-      <entry key="M10" value="5.370548425621751" />
-      <entry key="M15" value="12.254476567151404" />
-      <entry key="M30" value="31.13886595567083" />
-      <entry key="H1" value="52.19961659144046" />
-      <entry key="H2" value="78.16875409459894" />
-      <entry key="H4" value="135.83711803381118" />
-      <entry key="D1" value="471.66089320891285" />
-      <entry key="W1" value="661.0303545090413" />
+      <entry key="MS100" value="1.0044017204866051" />
+      <entry key="MS500" value="1.6335578815761753" />
+      <entry key="S2" value="3.3748478665897927" />
+      <entry key="S5" value="4.228755658884635" />
+      <entry key="S10" value="4.590290357309968" />
+      <entry key="S30" value="4.857654000654856" />
+      <entry key="S60" value="4.930102657326206" />
+      <entry key="M2" value="5.025122807790756" />
+      <entry key="M5" value="5.856511885745013" />
+      <entry key="M10" value="10.342876810879373" />
+      <entry key="M15" value="17.218566075667393" />
+      <entry key="M30" value="36.096946578582006" />
+      <entry key="H1" value="57.165289200076636" />
+      <entry key="H2" value="83.14334882686731" />
+      <entry key="H4" value="140.81526583009136" />
+      <entry key="D1" value="476.6483711063401" />
+      <entry key="W1" value="666.0278502811357" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000000024" />
-      <entry key="S60" value="1.0000000687652986" />
-      <entry key="M2" value="1.000425412575907" />
-      <entry key="M5" value="1.1217897829077266" />
-      <entry key="M10" value="2.3351624381346516" />
-      <entry key="M15" value="4.461153546655099" />
-      <entry key="M30" value="10.796021962451817" />
-      <entry key="H1" value="18.22895394251715" />
-      <entry key="H2" value="27.10487673301934" />
-      <entry key="H4" value="44.622999765511885" />
-      <entry key="D1" value="142.91415915975097" />
-      <entry key="W1" value="200.39343354066781" />
+      <entry key="MS100" value="1.1968820200488738E-10" />
+      <entry key="MS500" value="0.010365977660915323" />
+      <entry key="S2" value="0.31908219220723827" />
+      <entry key="S5" value="0.6332293365507333" />
+      <entry key="S10" value="0.7957570838834759" />
+      <entry key="S30" value="0.9266737007680208" />
+      <entry key="S60" value="0.9626389916339406" />
+      <entry key="M2" value="0.9815590339159798" />
+      <entry key="M5" value="1.113279376874088" />
+      <entry key="M10" value="2.3262877736470453" />
+      <entry key="M15" value="4.4498434524274835" />
+      <entry key="M30" value="10.782328025064714" />
+      <entry key="H1" value="18.217389249382634" />
+      <entry key="H2" value="27.09627752007566" />
+      <entry key="H4" value="44.615920723602606" />
+      <entry key="D1" value="142.91038023331" />
+      <entry key="W1" value="200.39267656216222" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.006215128779335299" />
-      <entry key="MS500" value="0.36198454309488975" />
-      <entry key="S2" value="0.7756619837272878" />
-      <entry key="S5" value="0.9033769447054993" />
-      <entry key="S10" value="0.9504614377793027" />
-      <entry key="S30" value="0.9832097441710557" />
-      <entry key="S60" value="0.9936598452343374" />
-      <entry key="M2" value="1.058431269341322" />
-      <entry key="M5" value="1.9965507219847225" />
-      <entry key="M10" value="7.700607050731788" />
-      <entry key="M15" value="16.707879469917852" />
-      <entry key="M30" value="41.92435768115958" />
-      <entry key="H1" value="70.4192746553066" />
-      <entry key="H2" value="105.26615495634326" />
-      <entry key="H4" value="180.45305118298862" />
-      <entry key="D1" value="614.5704725100632" />
-      <entry key="W1" value="861.4228483098527" />
+      <entry key="MS100" value="0.01968152866997944" />
+      <entry key="MS500" value="0.884384563630992" />
+      <entry key="S2" value="3.157615286888608" />
+      <entry key="S5" value="4.552078241709262" />
+      <entry key="S10" value="5.2081374539068435" />
+      <entry key="S30" value="5.719020618805142" />
+      <entry key="S60" value="5.859259179219056" />
+      <entry key="M2" value="5.989520738955148" />
+      <entry key="M5" value="6.961748389578486" />
+      <entry key="M10" value="12.661500861408136" />
+      <entry key="M15" value="21.65895789106057" />
+      <entry key="M30" value="46.86789684906447" />
+      <entry key="H1" value="75.37295789268441" />
+      <entry key="H2" value="110.23193752506702" />
+      <entry key="H4" value="185.42401338857783" />
+      <entry key="D1" value="619.5541536559751" />
+      <entry key="W1" value="866.419584543223" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -103,45 +103,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.CLI.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Encryptor.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GUI.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.test.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/luna/Downloads/uiDesigner-263.7307.112.zip&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/luna/en/TestingShit/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.CLI.executor": "Run",
+    "Application.Encryptor.executor": "Run",
+    "Application.GUI.executor": "Debug",
+    "Application.Main.executor": "Run",
+    "Application.test.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/luna/Downloads/uiDesigner-263.7307.112.zip",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/luna/en/TestingShit/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "com.maddyhome.idea.vim.ui.VimEmulationConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="AlgorithmType.caesar" />
