@@ -73,35 +73,55 @@ public class Chaocipher extends Cipher{
     }
 
     private void CharacterEncrypt(CharBuffer message) {
-        Character[] cipherWheel;
-        Character[] plainWheel;
-        //[0] = plain; [1] = cipher
+        // en : [0] = plain; [1] = cipher
+        // de : [1] = plain; [0] = cipher
+        // 0 : right; 1 : left
+        Character[][] wheels = new Character[2][];
         int[] zeniths = {0, 0};
+        int plainWheelIndex = (this.decrypt) ? 1 : 0;
+        int cipherWheelIndex = (this.decrypt) ? 0 : 1;
 
         if (customConfiguration && customWheelsInstantiated) {
-            cipherWheel = this.cipherCharWheel;
-            plainWheel = this.plainCharWheel;
+            wheels[plainWheelIndex] = this.cipherCharWheel;
+            wheels[cipherWheelIndex] = this.cipherCharWheel;
         } else {
-            cipherWheel = shuffleArray(this.allLetters);
-            plainWheel = shuffleArray(this.allLetters);
+            wheels[plainWheelIndex] = shuffleArray(this.allLetters);
+            wheels[cipherWheelIndex] = shuffleArray(this.allLetters);
         }
 
         message.rewind();
 
         while(message.hasRemaining()){
-            int nextPlainPosition = findIndex(plainWheel, message.get(message.position()));
+            findNextCharacter(
+                    findIndex(wheels[plainWheelIndex], message.get(message.position())),
+                    zeniths, plainWheelIndex
+            );
 
-            //if further than nadir point go clockwise
-            if(nextPlainPosition > 13)
-                rotateEngagedWheels(zeniths, 26 - nextPlainPosition);
-            else
-                rotateEngagedWheels(zeniths, -nextPlainPosition);
+            message.put(wheels[cipherWheelIndex][zeniths[cipherWheelIndex]]);
+
+            permuteLeftWheel(wheels[1], zeniths[1]);
+            permuteRightWheel(wheels[0], zeniths[0]);
         }
+    }
 
-        message.put(cipherWheel[zeniths[1]]);
-
-        permuteLeftWheel(cipherWheel, zeniths[1]);
-        permuteRightWheel(plainWheel, zeniths[0]);
+    private void findNextCharacter(int nextPlainPosition, int[] zeniths, int plainWheelIndex){
+        //if further than nadir point go counter-clockwise
+        if(nextPlainPosition > 13 + zeniths[plainWheelIndex])
+            rotateEngagedWheels(
+                    plainWheelIndex, zeniths,
+                    -Math.floorMod(
+                            (-nextPlainPosition - zeniths[plainWheelIndex]),
+                            26
+                    )
+            );
+        else
+            rotateEngagedWheels(
+                    plainWheelIndex, zeniths,
+                    Math.floorMod(
+                            (nextPlainPosition - zeniths[plainWheelIndex]),
+                            26
+                    )
+            );
     }
 
     private <T> void permuteLeftWheel(T[] cipherWheel, int zenith){
@@ -129,11 +149,10 @@ public class Chaocipher extends Cipher{
         plainWheel[(zenith + wheelSize/2)%wheelSize] = foo;
     }
 
-    //engaged wheels always rotate with focus on plaintext wheel
-    private void rotateEngagedWheels(int[] zeniths, int rotations){
+    private void rotateEngagedWheels(int rotatedWheel, int[] zeniths, int rotations){
         int wheelSize = (isBytewise()) ? 256 : 26;
-        zeniths[0] += (rotations % wheelSize);
-        zeniths[1] += (-rotations % wheelSize);
+        zeniths[rotatedWheel] += (rotations % wheelSize);
+        zeniths[(rotatedWheel + 1)%2] += Math.floorMod(-rotations, wheelSize);
     }
     private static <T> int findIndex(T[] arr, T e){
         int index = -1;
