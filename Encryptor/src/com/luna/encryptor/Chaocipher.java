@@ -100,10 +100,11 @@ public class Chaocipher extends Cipher{
 
         message.put(cipherWheel[zeniths[1]]);
 
-        permuteCipherWheel(cipherWheel, zeniths[1]);
+        permuteLeftWheel(cipherWheel, zeniths[1]);
+        permuteRightWheel(plainWheel, zeniths[0]);
     }
 
-    private <T> void permuteCipherWheel(T[] cipherWheel, int zenith){
+    private <T> void permuteLeftWheel(T[] cipherWheel, int zenith){
         int wheelSize = (isBytewise()) ? 256 : 26;
         T foo = cipherWheel[Math.floorMod(zenith - 1, wheelSize)];
 
@@ -115,10 +116,17 @@ public class Chaocipher extends Cipher{
         cipherWheel[(zenith + wheelSize/2)%wheelSize] = foo;
     }
 
-    private <T> void permutePlainWheel(T[] plainWheel, int zenith){
+    private <T> void permuteRightWheel(T[] plainWheel, int zenith){
         int wheelSize = (isBytewise()) ? 256 : 26;
         zenith = Math.floorMod(--zenith, wheelSize);
         T foo = plainWheel[Math.floorMod(--zenith, wheelSize)];
+
+        for(int i = 2; i < wheelSize/2; i++){
+            plainWheel[Math.floorMod(zenith + i, wheelSize)]
+                    = plainWheel[Math.floorMod(zenith + i + 1, wheelSize)];
+        }
+
+        plainWheel[(zenith + wheelSize/2)%wheelSize] = foo;
     }
 
     //engaged wheels always rotate with focus on plaintext wheel
