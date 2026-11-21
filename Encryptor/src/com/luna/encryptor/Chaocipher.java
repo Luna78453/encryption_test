@@ -15,6 +15,8 @@ public class Chaocipher extends Cipher{
     private final Character[] allLetters = new Character[26];
     private boolean customConfiguration;
     private boolean customWheelsInstantiated = false;
+    private String byteWheelCode;
+    private String charWheelCode;
 
     public Chaocipher(){
         for (int b = 0; b < 256; b++) allBytes[b] = (byte)b;
@@ -154,6 +156,7 @@ public class Chaocipher extends Cipher{
         zeniths[rotatedWheel] += (rotations % wheelSize);
         zeniths[(rotatedWheel + 1)%2] += Math.floorMod(-rotations, wheelSize);
     }
+
     private static <T> int findIndex(T[] arr, T e){
         int index = -1;
         for (int i = 0; i < arr.length; i++) {
