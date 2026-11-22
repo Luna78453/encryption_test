@@ -171,16 +171,17 @@ public class EncryptorGUI extends JFrame {
 
     private void encrypt() {
         if (encryptor.getIntroitus() != null) {
-            if (encryptor instanceof Cipher sc){
+            if (encryptor instanceof Cipher c){
                 try {
                     if(
                             !keyInput.getText().chars()
                             .allMatch(Character::isDigit)
-                            && sc instanceof Caesar
+                            && c instanceof Caesar
                     )
                         throw new NumberFormatException();
 
-                    sc.setKey(keyInput.getText());
+                    if(c instanceof SingleKeyCipher skc)
+                        skc.setKey(keyInput.getText());
                 }
                 catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog
@@ -189,7 +190,7 @@ public class EncryptorGUI extends JFrame {
                     return;
                 }
 
-                sc.setDecrypt(decryptSwitch.isSelected());
+                c.setDecrypt(decryptSwitch.isSelected());
             }
 
             encryptor.Encrypt();

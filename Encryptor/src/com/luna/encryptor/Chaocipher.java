@@ -6,17 +6,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Chaocipher extends Cipher{
-    private Byte[] cipherByteWheel = new Byte[256];
-    private Byte[] plainByteWheel = new Byte[256];
-    private Character[] cipherCharWheel = new Character[26];
-    private Character[] plainCharWheel = new Character[26];
+public class Chaocipher extends Cipher {
+    private Byte[] leftByteWheel = new Byte[256];
+    private Byte[] rightByteWheel = new Byte[256];
+    private Character[] leftCharWheel = new Character[26];
+    private Character[] rightCharWheel = new Character[26];
     private final Byte[] allBytes = new Byte[256];
     private final Character[] allLetters = new Character[26];
-    private boolean customConfiguration;
     private boolean customWheelsInstantiated = false;
-    private String byteWheelCode;
-    private String charWheelCode;
+    private String byteWheels;
+    private String charWheels;
 
     public Chaocipher(){
         for (int b = 0; b < 256; b++) allBytes[b] = (byte)b;
@@ -25,78 +24,46 @@ public class Chaocipher extends Cipher{
 
     @Override
     public void Encrypt() {
-        /*Byte[] cipherByteWheel = new Byte[256];
-        Byte[] plainByteWheel = new Byte[256];
-        Character[] cipherCharWheel = new Character[26];
-        Character[] plainCharWheel = new Character[26];
+        this.getIntroitus().rewind();
 
-        if(customConfiguration) {
-            if (isBytewise()) {
-                cipherByteWheel = this.cipherByteWheel;
-                plainByteWheel = this.plainByteWheel;
-            }
-            else {
-                cipherCharWheel = this.cipherCharWheel;
-                plainCharWheel = this.plainCharWheel;
-            }
-        } else {
-            if (isBytewise()) {
-                cipherByteWheel = shuffleArray(this.allBytes);
-                plainByteWheel = shuffleArray(this.allBytes);
-            }
-            else {
-                cipherCharWheel = shuffleArray(this.allLetters);
-                plainCharWheel = shuffleArray(this.allLetters);
-            }
-        }*/
-
-        if (isBytewise()){
+        if(isBytewise()){
             ByteBuffer message = cloneByteBuffer(this.getIntroitus());
             ByteEncrypt(message);
+            setEventum(message);
         } else {
             CharBuffer message = StandardCharsets.UTF_8.decode(this.getIntroitus());
             CharacterEncrypt(message);
+            setEventum(StandardCharsets.UTF_8.encode(message));
         }
     }
 
     // sum = clockwise; subtr = counter
+    // en : [0] = plain; [1] = cipher
+    // de : [1] = plain; [0] = cipher
+    // 0 : right; 1 : left
     private void ByteEncrypt(ByteBuffer message){
-        Byte[] cipherWheel = new Byte[256];
-        Byte[] plainWheel = new Byte[256];
-        int[] Zeniths = {0, 0};
-
-        if (customConfiguration && customWheelsInstantiated) {
-            cipherWheel = this.cipherByteWheel;
-            plainWheel = this.plainByteWheel;
-        } else {
-            cipherWheel = shuffleArray(this.allBytes);
-            plainWheel = shuffleArray(this.allBytes);
-        }
-    }
-
-    private void CharacterEncrypt(CharBuffer message) {
-        // en : [0] = plain; [1] = cipher
-        // de : [1] = plain; [0] = cipher
-        // 0 : right; 1 : left
-        Character[][] wheels = new Character[2][];
+        Byte[][] wheels = new Byte[2][];
         int[] zeniths = {0, 0};
         int plainWheelIndex = (this.decrypt) ? 1 : 0;
         int cipherWheelIndex = (this.decrypt) ? 0 : 1;
 
-        if (customConfiguration && customWheelsInstantiated) {
-            wheels[plainWheelIndex] = this.cipherCharWheel;
-            wheels[cipherWheelIndex] = this.cipherCharWheel;
+        if (customWheelsInstantiated) {
+            wheels[0] = this.rightByteWheel;
+            wheels[1] = this.leftByteWheel;
         } else {
-            wheels[plainWheelIndex] = shuffleArray(this.allLetters);
-            wheels[cipherWheelIndex] = shuffleArray(this.allLetters);
+            wheels = new Byte[][]{
+                    shuffleArray(this.allBytes),
+                    shuffleArray(this.allBytes)
+            };
         }
-
-        message.rewind();
 
         while(message.hasRemaining()){
             findNextCharacter(
-                    findIndex(wheels[plainWheelIndex], message.get(message.position())),
-                    zeniths, plainWheelIndex
+                    findIndex(
+                    wheels[plainWheelIndex],
+                    message.get(message.position())),
+                    zeniths,
+                    plainWheelIndex
             );
 
             message.put(wheels[cipherWheelIndex][zeniths[cipherWheelIndex]]);
@@ -106,22 +73,61 @@ public class Chaocipher extends Cipher{
         }
     }
 
+    private void CharacterEncrypt(CharBuffer message) {
+        Character[][] wheels = new Character[2][];
+        int[] zeniths = {0, 0};
+        int plainWheelIndex = (this.decrypt) ? 1 : 0;
+        int cipherWheelIndex = (this.decrypt) ? 0 : 1;
+
+        if (customWheelsInstantiated) {
+            wheels[0] = this.rightCharWheel;
+            wheels[1] = this.leftCharWheel;
+        } else {
+            wheels = new Character[][]{
+                    shuffleArray(this.allLetters),
+                    shuffleArray(this.allLetters)
+            };
+        }
+
+        while(message.hasRemaining()){
+            findNextCharacter(
+                    findIndex(wheels[plainWheelIndex],
+                    Character.toLowerCase(message.get(message.position()))),
+                    zeniths,
+                    plainWheelIndex
+            );
+
+            message.put(
+                    (Character.isUpperCase(message.get(message.position())))
+                    ? Character.toUpperCase(wheels[cipherWheelIndex][zeniths[cipherWheelIndex]])
+                    : wheels[cipherWheelIndex][zeniths[cipherWheelIndex]]
+            );
+
+            permuteLeftWheel(wheels[1], zeniths[1]);
+            permuteRightWheel(wheels[0], zeniths[0]);
+        }
+    }
+
     private void findNextCharacter(int nextPlainPosition, int[] zeniths, int plainWheelIndex){
+        int wheelSize = (isBytewise()) ? 256 : 26;
+
         //if further than nadir point go counter-clockwise
-        if(nextPlainPosition > 13 + zeniths[plainWheelIndex])
+        if(nextPlainPosition > wheelSize + zeniths[plainWheelIndex])
             rotateEngagedWheels(
-                    plainWheelIndex, zeniths,
+                    plainWheelIndex,
+                    zeniths,
                     -Math.floorMod(
                             (-nextPlainPosition - zeniths[plainWheelIndex]),
-                            26
+                            wheelSize
                     )
             );
         else
             rotateEngagedWheels(
-                    plainWheelIndex, zeniths,
+                    plainWheelIndex,
+                    zeniths,
                     Math.floorMod(
                             (nextPlainPosition - zeniths[plainWheelIndex]),
-                            26
+                            wheelSize
                     )
             );
     }
@@ -168,25 +174,25 @@ public class Chaocipher extends Cipher{
         return index;
     }
 
-    public <T> void instantiateCustomWheel(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
+    public <T> void verifyWheels(T[] plainWheelConfiguration, T[] cipherWheelConfiguration){
         try {
             if(plainWheelConfiguration instanceof Byte[]) {
                 if (!arraysEqualHash(allBytes, plainWheelConfiguration))
                     throw new IllegalAccessException("BYTE ALPHABET WHEEL NOT COMPLETE");
-                else this.plainByteWheel = (Byte[])plainWheelConfiguration;
+                else this.rightByteWheel = (Byte[])plainWheelConfiguration;
             } else if(plainWheelConfiguration instanceof Character[]){
                 if (!arraysEqualHash(allLetters, plainWheelConfiguration))
                     throw new IllegalAccessException("CHARACTER ALPHABET WHEEL NOT COMPLETE");
-                else this.plainCharWheel = (Character[])plainWheelConfiguration;
+                else this.rightCharWheel = (Character[])plainWheelConfiguration;
             }
             if(cipherWheelConfiguration instanceof Byte[]) {
                 if (!arraysEqualHash(allBytes, cipherWheelConfiguration))
                     throw new IllegalAccessException("BYTE ALPHABET WHEEL NOT COMPLETE");
-                else this.plainByteWheel = (Byte[])cipherWheelConfiguration;
+                else this.rightByteWheel = (Byte[])cipherWheelConfiguration;
             } else if(cipherWheelConfiguration instanceof Character[]){
                 if (!arraysEqualHash(allLetters, cipherWheelConfiguration))
                     throw new IllegalAccessException("CHARACTER ALPHABET WHEEL NOT COMPLETE");
-                else this.plainCharWheel = (Character[])cipherWheelConfiguration;
+                else this.rightCharWheel = (Character[])cipherWheelConfiguration;
             }
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -226,6 +232,9 @@ public class Chaocipher extends Cipher{
         return ar;
     }
 
+    public void wheelStringToArray(){
+    }
+
     public boolean isUnicode() {
         return isBytewise();
     }
@@ -234,43 +243,51 @@ public class Chaocipher extends Cipher{
         this.setBytewise(unicode);
     }
 
-    public Byte[] getCipherByteWheel() {
-        return cipherByteWheel;
+    public Byte[] getLeftByteWheel() {
+        return leftByteWheel;
     }
 
-    public void setCipherByteWheel(Byte[] cipherByteWheel) {
-        this.cipherByteWheel = cipherByteWheel;
+    public void setLeftByteWheel(Byte[] leftByteWheel) {
+        this.leftByteWheel = leftByteWheel;
     }
 
-    public Byte[] getPlainByteWheel() {
-        return plainByteWheel;
+    public Byte[] getRightByteWheel() {
+        return rightByteWheel;
     }
 
-    public void setPlainByteWheel(Byte[] plainByteWheel) {
-        this.plainByteWheel = plainByteWheel;
+    public void setRightByteWheel(Byte[] rightByteWheel) {
+        this.rightByteWheel = rightByteWheel;
     }
 
-    public Character[] getCipherCharWheel() {
-        return cipherCharWheel;
+    public Character[] getLeftCharWheel() {
+        return leftCharWheel;
     }
 
-    public void setCipherCharWheel(Character[] cipherCharWheel) {
-        this.cipherCharWheel = cipherCharWheel;
+    public void setLeftCharWheel(Character[] leftCharWheel) {
+        this.leftCharWheel = leftCharWheel;
     }
 
-    public Character[] getPlainCharWheel() {
-        return plainCharWheel;
+    public Character[] getRightCharWheel() {
+        return rightCharWheel;
     }
 
-    public void setPlainCharWheel(Character[] plainCharWheel) {
-        this.plainCharWheel = plainCharWheel;
+    public void setRightCharWheel(Character[] rightCharWheel) {
+        this.rightCharWheel = rightCharWheel;
     }
 
-    public boolean isCustomConfiguration() {
-        return customConfiguration;
+    public String getByteWheels() {
+        return byteWheels;
     }
 
-    public void setCustomConfiguration(boolean customConfiguration) {
-        this.customConfiguration = customConfiguration;
+    public void setByteWheels(String byteWheels) {
+        this.byteWheels = byteWheels;
+    }
+
+    public String getCharWheels() {
+        return charWheels;
+    }
+
+    public void setCharWheels(String charWheels) {
+        this.charWheels = charWheels;
     }
 }

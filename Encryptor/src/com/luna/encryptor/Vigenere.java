@@ -5,7 +5,9 @@ import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class Vigenere extends Cipher {
+public class Vigenere extends SingleKeyCipher {
+    private String key;
+
     public Vigenere(String key, boolean decrypt){
         this.type = AlgorithmType.VIGENERE;
         this.decrypt = decrypt;
@@ -16,14 +18,14 @@ public class Vigenere extends Cipher {
 
     @Override
     public void Encrypt() {
+        this.getIntroitus().rewind();
 
         if(isBytewise()) {
             byte[] keyValues = key.getBytes(StandardCharsets.UTF_8);
             ByteBuffer message = cloneByteBuffer(this.getIntroitus());
             bytewiseShift(message, keyValues);
             setEventum(message);
-        }
-        else {
+        } else {
             ArrayList<Integer> keyValues = new ArrayList<>(0);
             for(int i = 0; i < key.length(); i++){
                 if(Character.isLetter(key.charAt(i)))
@@ -35,7 +37,6 @@ public class Vigenere extends Cipher {
             CharBuffer message = StandardCharsets.UTF_8.decode(this.getIntroitus());
             alphabetShift(message, keyValues.toArray(new Integer[0]));
             setEventum(StandardCharsets.UTF_8.encode(message));
-
         }
     }
 
