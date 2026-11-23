@@ -20,19 +20,29 @@ public class Encryptor {
 
     private static void CLI(String[] args) {
         try {
-            String genusCryptographiae = args[0].toLowerCase();
+            AlgorithmType genusCryptographiae = switch(args[0].toLowerCase()) {
+                case "caesar" -> AlgorithmType.CAESAR;
+                case "vigenere" -> AlgorithmType.VIGENERE;
+                case "chaocipher" -> AlgorithmType.CHAOCIPHER;
+                case "sha256" -> AlgorithmType.SHA256;
+                default ->
+                        throw new IllegalStateException
+                                ("Unexpected value: " + args[0].toLowerCase());
+            };
+
             String introitus = args[1];
-            String modus;
+            String directio;
             String clavis;
             String exitus = "";
+
             CryptographicAlgorithm encryptor = switch(genusCryptographiae){
-                case "caesar" -> {
+                case AlgorithmType.CIPHER.getChildren() -> {
                     if (args.length > 4) {
                         exitus = args[2];
-                        modus = args[3].toLowerCase();
+                        directio = args[3].toLowerCase();
                         clavis = args[4];
                     } else {
-                        modus = args[2].toLowerCase();
+                        directio = args[2].toLowerCase();
                         clavis = args[3];
                     }
                     if (!clavis.chars().allMatch(Character::isDigit)){
@@ -40,18 +50,18 @@ public class Encryptor {
                                 IllegalArgumentException
                                 ("CAESAR KEY MUST BE INTEGER NUMBER");
                     }
-                    yield new Caesar(clavis, parseModus(modus));
+                    yield new Caesar(clavis, parseDirectio(directio));
                 }
                 case "vigenere" -> {
                     if (args.length > 4) {
                         exitus = args[2];
-                        modus = args[3].toLowerCase();
+                        directio = args[3].toLowerCase();
                         clavis = args[4].toLowerCase();
                     } else {
-                        modus = args[2].toLowerCase();
+                        directio = args[2].toLowerCase();
                         clavis = args[3].toLowerCase();
                     }
-                    yield new Vigenere(clavis, parseModus(modus));
+                    yield new Vigenere(clavis, parseDirectio(directio));
                 }
                 case "sha256" -> {
                     if (args.length > 2) exitus = args[2];
@@ -78,16 +88,16 @@ public class Encryptor {
         }
     }
 
-    private static boolean parseModus(String modus) {
+    private static boolean parseDirectio(String directio) {
         if (
-                modus.contentEquals("decrypt")
-                || modus.contentEquals("de")
-                || modus.contentEquals("d")
+                directio.contentEquals("decrypt")
+                || directio.contentEquals("de")
+                || directio.contentEquals("d")
         ) return true;
         else if (
-                modus.contentEquals("encrypt")
-                || modus.contentEquals("en")
-                || modus.contentEquals("e")
+                directio.contentEquals("encrypt")
+                || directio.contentEquals("en")
+                || directio.contentEquals("e")
         ) return false;
         else throw new
                     IllegalArgumentException
