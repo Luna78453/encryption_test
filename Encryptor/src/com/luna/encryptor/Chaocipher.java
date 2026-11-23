@@ -3,8 +3,12 @@ package com.luna.encryptor;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.stream.Collectors;
+
+import static java.lang.Byte.toUnsignedInt;
 
 public class Chaocipher extends Cipher {
     private Byte[] leftByteWheel = new Byte[256];
@@ -13,7 +17,8 @@ public class Chaocipher extends Cipher {
     private Character[] rightCharWheel = new Character[26];
     private final Byte[] allBytes = new Byte[256];
     private final Character[] allLetters = new Character[26];
-    private boolean customWheelsInstantiated = false;
+    private boolean byteWheelsInstantiated = false;
+    private boolean charWheelsInstantiated = false;
     private String byteWheels;
     private String charWheels;
 
@@ -47,14 +52,19 @@ public class Chaocipher extends Cipher {
         int plainWheelIndex = (this.decrypt) ? 1 : 0;
         int cipherWheelIndex = (this.decrypt) ? 0 : 1;
 
-        if (customWheelsInstantiated) {
+        if (byteWheelsInstantiated) {
             wheels[0] = this.rightByteWheel;
             wheels[1] = this.leftByteWheel;
         } else {
+            this.rightByteWheel = shuffleArray(this.allBytes);
+            this.leftByteWheel = shuffleArray(this.allBytes);
+
             wheels = new Byte[][]{
-                    shuffleArray(this.allBytes),
-                    shuffleArray(this.allBytes)
+                    this.rightByteWheel,
+                    this.leftByteWheel
             };
+
+                byteWheelsInstantiated = true;
         }
 
         while(message.hasRemaining()){
@@ -79,14 +89,19 @@ public class Chaocipher extends Cipher {
         int plainWheelIndex = (this.decrypt) ? 1 : 0;
         int cipherWheelIndex = (this.decrypt) ? 0 : 1;
 
-        if (customWheelsInstantiated) {
+        if (charWheelsInstantiated) {
             wheels[0] = this.rightCharWheel;
             wheels[1] = this.leftCharWheel;
         } else {
+            this.rightCharWheel = shuffleArray(this.allLetters);
+            this.leftCharWheel = shuffleArray(this.allLetters);
+
             wheels = new Character[][]{
-                    shuffleArray(this.allLetters),
-                    shuffleArray(this.allLetters)
+                    this.rightCharWheel,
+                    this.leftCharWheel
             };
+
+                charWheelsInstantiated = true;
         }
 
         while(message.hasRemaining()){
@@ -198,8 +213,8 @@ public class Chaocipher extends Cipher {
             throw new RuntimeException(e);
         }
 
-        if (!customWheelsInstantiated)
-            customWheelsInstantiated = true;
+        if (!byteWheelsInstantiated)
+            byteWheelsInstantiated = true;
     }
 
     //https://faceprep.in/article/program-to-check-if-two-arrays-are-equal-or-not-faceprep/
@@ -232,7 +247,64 @@ public class Chaocipher extends Cipher {
         return ar;
     }
 
-    public void wheelStringToArray(){
+    public void wheelStringToArray(String s, char wheelType){
+        if(wheelType == 'c'){
+            Character[] leftWheel = s.substring(0, s.length()/2).chars()
+                    .mapToObj(c -> (char) c)
+                    .toArray(Character[]::new);
+
+            Character[] rightWheel = s.substring(s.length()/2).chars()
+                    .mapToObj(c -> (char) c)
+                    .toArray(Character[]::new);
+
+            this.leftCharWheel = leftWheel;
+            this.rightCharWheel = rightWheel;
+        } else if (wheelType == 'b') {
+            String[] substrings = new String[512];
+
+            for (int i = 0; i < 512; i++){
+                substrings[i] = s.substring(i, i + 1);
+            }
+        }
+    }
+
+    public <T> String wheelArrayToString(T[] leftWheel, T[] rightWheel){
+        String s = "";
+
+        if(leftWheel instanceof Character[] lC && rightWheel instanceof Character[] rC){
+            s = Arrays.stream(lC)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining())
+                    + Arrays.stream(rC)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining());
+        } else if (leftWheel instanceof Byte[] lB && rightWheel instanceof Byte[] rB) {
+            Integer[] words = new Integer[128];
+
+            for(int offset = 0; offset < 16; offset++){
+                words[offset] = (toUnsignedInt(lB[offset*4])<<24) +
+                        (toUnsignedInt(lB[offset*4 + 1])<<16) +
+                        (toUnsignedInt(lB[offset*4 + 2])<<8) +
+                        (toUnsignedInt(lB[offset*4 + 3]));
+            }
+
+            for(int offset = 0; offset < 32; offset++){
+                words[offset] = (toUnsignedInt(rB[offset*4])<<24) +
+                        (toUnsignedInt(rB[offset*4 + 1])<<16) +
+                        (toUnsignedInt(rB[offset*4 + 2])<<8) +
+                        (toUnsignedInt(rB[offset*4 + 3]));
+            }
+
+            StringBuilder o = new StringBuilder();
+
+            for(int word : words){
+                o.repeat("0", Integer.numberOfLeadingZeros(word) / 8).append(Integer.toHexString(word));
+            }
+
+            s = o.toString();
+        }
+
+        return s;
     }
 
     public boolean isUnicode() {
