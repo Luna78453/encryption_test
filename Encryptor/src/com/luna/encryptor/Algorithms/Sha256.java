@@ -1,4 +1,4 @@
-package com.luna.encryptor;
+package com.luna.encryptor.Algorithms;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;

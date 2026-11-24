@@ -1,4 +1,4 @@
-package com.luna.encryptor;
+package com.luna.encryptor.Algorithms;
 
 public class SingleKeyCipher extends Cipher{
     protected String key;

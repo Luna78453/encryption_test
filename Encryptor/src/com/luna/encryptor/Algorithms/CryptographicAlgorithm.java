@@ -1,4 +1,4 @@
-package com.luna.encryptor;
+package com.luna.encryptor.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +13,7 @@ public class CryptographicAlgorithm {
     private ByteBuffer eventum = null;
     protected AlgorithmType type;
     private boolean bytewise;
+    private boolean extrasRequired = false;
 
     public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
@@ -24,28 +25,58 @@ public class CryptographicAlgorithm {
         };
     }
 
-    // TODOnt: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
-    // What the fuck are you talking about.
-    // TODOne: DON'T LISTEN TO THIS ASSHOLE. JUST GET THE FUCKING BYTES TO CHARS SETUP DONE
-    // NOTE: BYTEBUFFER HAS A HANDY INTERFACE TO HANDLE THE BYTES AS CHARS
-    // USE THAT INSTEAD, DIPSHIT
-    // OK SO IT SEEMS WHOEVER WROTE THE ASCHARBUFFER INTERFACE DIDN'T THINK SOMEONE MIGHT BE
-    // READING BYTE BUFFERS TO SUPPORT READING POTENTIALLY LARGE FILES
-    // (NOTE TO SELF: WHO THE FUCK IS GONNA ENCRYPT LARGE FILES? PEDOPHILES??? WHY AM I DOING THIS?)
-    // WHICH MAY OR MAY NOT BE JUST TEXT AND DIDN'T CARE TO PUT AN OPTION TO HAVE IT DECODE
-    // THAT SHIT LIKE YOU DO WITH CHARSET WITHOUT HAVING TO CREATE A WHOLE COPY OF THE OBJECT
-    // I MEAN, WHO COULD POSSIBLY NEED TO DO SUCH A THING?!
-    // (NOTE TO SELF: YOU DRIVE YORUSELF AGAINST A WALL AND WONDER WHY YOUR CAR IS TOTALLED
-    // YOU FUCKING IMBECILE YOU DIDN'T HAVE TO DO THIS SHIT EITHER GO FUCK YOURSELF.
-    // ((NOTE TO NOTE TO SELF: SHOULD'VE JUST GONE WITH THE DUAL FILE READER OPTION.))
-    // TODOnt: TRY OUT THE DUAL FILE READER OPTION.
-    // nah I think this is good
+    /* TODOnt: DON'T DO THIS HERE. MAKE A CLASS FOR FILE READING. MAKE THE INPUT TAKE IN BYTES AND CHARS TOO.
+       What the fuck are you talking about.
+       TODOne: DON'T LISTEN TO THIS ASSHOLE. JUST GET THE FUCKING BYTES TO CHARS SETUP DONE
+       NOTE: BYTEBUFFER HAS A HANDY INTERFACE TO HANDLE THE BYTES AS CHARS
+       USE THAT INSTEAD, DIPSHIT
+       OK SO IT SEEMS WHOEVER WROTE THE ASCHARBUFFER INTERFACE DIDN'T THINK SOMEONE MIGHT BE
+       READING BYTE BUFFERS TO SUPPORT READING POTENTIALLY LARGE FILES
+       (NOTE TO SELF: WHO THE FUCK IS GONNA ENCRYPT LARGE FILES? PEDOPHILES??? WHY AM I DOING THIS?)
+       WHICH MAY OR MAY NOT BE JUST TEXT AND DIDN'T CARE TO PUT AN OPTION TO HAVE IT DECODE
+       THAT SHIT LIKE YOU DO WITH CHARSET WITHOUT HAVING TO CREATE A WHOLE COPY OF THE OBJECT
+       I MEAN, WHO COULD POSSIBLY NEED TO DO SUCH A THING?!
+       (NOTE TO SELF: YOU DRIVE YORUSELF AGAINST A WALL AND WONDER WHY YOUR CAR IS TOTALLED
+       YOU FUCKING IMBECILE YOU DIDN'T HAVE TO DO THIS SHIT EITHER GO FUCK YOURSELF.
+       ((NOTE TO NOTE TO SELF: SHOULD'VE JUST GONE WITH THE DUAL FILE READER OPTION.))
+       TODOnt: TRY OUT THE DUAL FILE READER OPTION.
+       nah I think this is good */
     public void writeExitusFile(File exitus) {
         try (var output = new FileOutputStream(exitus)) {
             FileChannel channel = output.getChannel();
             long _ = channel.write(this.eventum);
         } catch (IOException e) {
+            System.out.println("ERROR WRITING OUTPUT FILE");
             throw new RuntimeException(e);
+        }
+
+        if(this.extrasRequired){
+            writeExitusExtras(exitus);
+        }
+    }
+
+    private void writeExitusExtras(File exitus){
+        if(this instanceof Chaocipher ch){
+            try {
+                String extrasPath =
+                        exitus.toPath().getParent().toString()
+                        + getFileName()[0]
+                        + "_wheels.txt";
+                try (FileWriter myWriter = new FileWriter(extrasPath)) {
+
+                    myWriter.write((bytewise)
+                            ? ch.getByteWheels().substring(0, 256)
+                            : ch.getCharWheels().substring(0, 26));
+                    myWriter.write("\n");
+                    myWriter.write((bytewise)
+                            ? ch.getByteWheels().substring(256)
+                            : ch.getCharWheels().substring(26));
+                }
+                System.out.println("Generated wheel found in :" + extrasPath);
+            } catch (IOException e) {
+                System.out.println("ERROR WRITING EXTRAS FILE");
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -61,6 +92,7 @@ public class CryptographicAlgorithm {
                 throw new IllegalArgumentException("Ingressus non est fasciculus");
             }
         } catch (IllegalArgumentException e){
+            System.out.println("ERROR READING INPUT FILE PATH");
             throw new RuntimeException(e);
         }
 
@@ -73,6 +105,7 @@ public class CryptographicAlgorithm {
             this.introitus = ByteBuffer.allocate(Math.toIntExact(channel.size()));
             long _ = channel.read(this.introitus);
         } catch (IOException e) {
+            System.out.println("ERROR READING INPUT FILE");
             throw new RuntimeException(e);
         }
     }
@@ -119,5 +152,9 @@ public class CryptographicAlgorithm {
 
     public void setBytewise(boolean bytewise) {
         this.bytewise = bytewise;
+    }
+
+    protected void setExtrasRequired() {
+        this.extrasRequired = true;
     }
 }

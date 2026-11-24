@@ -1,4 +1,4 @@
-package com.luna.encryptor;
+package com.luna.encryptor.Algorithms;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -38,7 +38,8 @@ public class Chaocipher extends Cipher {
             setEventum(message);
         } else {
             CharBuffer message =
-                    StandardCharsets.UTF_8.decode(this.getIntroitus());
+                    StandardCharsets.UTF_8
+                            .decode(this.getIntroitus());
             CharacterEncrypt(message);
             setEventum(StandardCharsets.UTF_8.encode(message));
         }
@@ -318,11 +319,13 @@ public class Chaocipher extends Cipher {
     public void generateRandomByteWheels(){
         instantiateWheels(shuffleArray(this.allBytes), shuffleArray(this.allBytes));
         this.byteWheels = wheelArrayToString(this.leftByteWheel, this.rightByteWheel);
+        setExtrasRequired();
     }
 
     public void generateRandomCharWheels(){
         instantiateWheels(shuffleArray(this.allLetters), shuffleArray(this.allLetters));
         this.charWheels = wheelArrayToString(this.leftCharWheel, this.rightCharWheel);
+        setExtrasRequired();
     }
 
     public boolean isUnicode() {

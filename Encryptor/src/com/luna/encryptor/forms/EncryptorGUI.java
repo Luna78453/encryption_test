@@ -1,6 +1,6 @@
 package com.luna.encryptor.forms;
 
-import com.luna.encryptor.*;
+import com.luna.encryptor.Algorithms.*;
 
 import javax.swing.*;
 import java.awt.*;
