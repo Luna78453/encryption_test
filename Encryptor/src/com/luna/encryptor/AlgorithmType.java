@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum AlgorithmType {
     NONE(null, "Select an algorithm..."),
-    ALGORITHM(null, "There's something wrong here."),
+    ALGORITHM(null, "Algoritm"),
         CIPHER(ALGORITHM, "Cipher"),
             CAESAR(CIPHER, "Caesar"),
             VIGENERE(CIPHER, "Vigenere"),

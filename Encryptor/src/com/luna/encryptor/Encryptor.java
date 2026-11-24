@@ -29,14 +29,14 @@ public class Encryptor {
                         throw new IllegalStateException
                                 ("Unexpected value: " + args[0].toLowerCase());
             };
-
             String introitus = args[1];
             String directio;
             String clavis;
             String exitus = "";
+            CryptographicAlgorithm encryptor = CryptographicAlgorithm.instantiateAlgorithm(genusCryptographiae);
 
-            CryptographicAlgorithm encryptor = switch(genusCryptographiae){
-                case AlgorithmType.CIPHER.getChildren() -> {
+            switch(encryptor){
+                case SingleKeyCipher skc-> {
                     if (args.length > 4) {
                         exitus = args[2];
                         directio = args[3].toLowerCase();
@@ -50,27 +50,16 @@ public class Encryptor {
                                 IllegalArgumentException
                                 ("CAESAR KEY MUST BE INTEGER NUMBER");
                     }
-                    yield new Caesar(clavis, parseDirectio(directio));
+
+                    skc.setDecrypt(parseDirectio(directio));
                 }
-                case "vigenere" -> {
-                    if (args.length > 4) {
-                        exitus = args[2];
-                        directio = args[3].toLowerCase();
-                        clavis = args[4].toLowerCase();
-                    } else {
-                        directio = args[2].toLowerCase();
-                        clavis = args[3].toLowerCase();
-                    }
-                    yield new Vigenere(clavis, parseDirectio(directio));
-                }
-                case "sha256" -> {
+                case Sha256 ignored -> {
                     if (args.length > 2) exitus = args[2];
-                    yield new Sha256();
                 }
-                default -> throw new
+                case null, default -> throw new
                         MatchException
                         ("ENCRYPTION TYPE MATCH FAILURE", null);
-            };
+            }
 
             encryptor.readIntroitusFile(introitus);
             encryptor.Encrypt();

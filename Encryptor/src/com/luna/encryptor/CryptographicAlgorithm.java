@@ -16,10 +16,11 @@ public class CryptographicAlgorithm {
 
     public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
-            case NONE -> null;
+            case NONE, CIPHER, ALGORITHM -> null;
             case CAESAR -> new Caesar();
             case VIGENERE -> new Vigenere();
             case SHA256 -> new Sha256();
+            case CHAOCIPHER -> new Chaocipher();
         };
     }
 
