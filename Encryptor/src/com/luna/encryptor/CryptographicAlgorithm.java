@@ -16,7 +16,7 @@ public class CryptographicAlgorithm {
 
     public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
-            case NONE, CIPHER, ALGORITHM -> null;
+            case NONE -> null;
             case CAESAR -> new Caesar();
             case VIGENERE -> new Vigenere();
             case SHA256 -> new Sha256();

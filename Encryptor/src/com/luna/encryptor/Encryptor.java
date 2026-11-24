@@ -31,12 +31,13 @@ public class Encryptor {
             };
             String introitus = args[1];
             String directio;
+            String modus;
             String clavis;
             String exitus = "";
             CryptographicAlgorithm encryptor = CryptographicAlgorithm.instantiateAlgorithm(genusCryptographiae);
 
             switch(encryptor){
-                case SingleKeyCipher skc-> {
+                case SingleKeyCipher skc -> {
                     if (args.length > 4) {
                         exitus = args[2];
                         directio = args[3].toLowerCase();
@@ -52,6 +53,8 @@ public class Encryptor {
                     }
 
                     skc.setDecrypt(parseDirectio(directio));
+                }
+                case Chaocipher ch -> {
                 }
                 case Sha256 ignored -> {
                     if (args.length > 2) exitus = args[2];
