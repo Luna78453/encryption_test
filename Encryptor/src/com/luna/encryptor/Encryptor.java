@@ -21,10 +21,12 @@ public class Encryptor {
 
     private static void CLI(String[] args) {
         try {
-            AlgorithmType genusCryptographiae = AlgorithmType.fromName(args[0]);
-            String introitus = args[1];
-            String modus = args[2].toLowerCase();
-            String directio = "";
+            int i = 0;
+            AlgorithmType genusCryptographiae =
+                    AlgorithmType
+                    .fromName(args[i++].toLowerCase());
+            String introitus = args[i++];
+            String modus = args[i++].toLowerCase();
             String exitus = "";
             CryptographicAlgorithm encryptor =
                     CryptographicAlgorithm.
@@ -35,30 +37,32 @@ public class Encryptor {
             encryptor.setBytewise(parseModus(modus));
 
             switch(encryptor){
-                case SingleKeyCipher skc -> {
-                    String clavis;
+                case Cipher c-> {
+                    String clavis = args[i++];
+                    String directio = args[i++];
 
-                    if (args.length > 5) {
-                        exitus = args[3];
-                        directio = args[4].toLowerCase();
-                        clavis = args[5];
-                    } else if (args.length > 4) {
-                        directio = args[3].toLowerCase();
-                        clavis = args[4];
-                    } else {
-                        clavis = args[3];
-                    }
-                    if (skc instanceof Caesar
-                            && !clavis.chars().allMatch(Character::isDigit)){
+                    if (c instanceof Caesar
+                        && !clavis.chars().allMatch(Character::isDigit))
                         throw new
                                 IllegalArgumentException
                                 ("CAESAR KEY MUST BE INTEGER NUMBER");
-                    }
 
-                    skc.setDecrypt(parseDirectio(directio));
-                    skc.setKey(clavis);
-                }
-                case Chaocipher ch -> {
+
+                    if (args.length > 5)
+                        exitus = args[i];
+
+                    c.setDecrypt(parseDirectio(directio));
+
+                    switch(c) {
+                        case Cipher.SingleKeyCipher skc -> skc.setKey(clavis);
+                        case Chaocipher chc -> {
+
+                        }
+                        default ->
+                                throw new
+                                        IllegalStateException
+                                        ("Unexpected value: " + c);
+                    }
                 }
                 case Sha256 ignored -> {
                     if (args.length > 3) exitus = args[3];
@@ -115,5 +119,10 @@ public class Encryptor {
         else throw new
                     IllegalArgumentException
                     ("ENCRYPTION DIRECTION NOT VALID");
+    }
+
+    private static String flattenFileContent(File file){
+        String s;
+        return s;
     }
 }

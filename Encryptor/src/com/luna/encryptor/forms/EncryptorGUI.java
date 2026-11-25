@@ -180,7 +180,7 @@ public class EncryptorGUI extends JFrame {
                     )
                         throw new NumberFormatException();
 
-                    if(c instanceof SingleKeyCipher skc)
+                    if(c instanceof Cipher.SingleKeyCipher skc)
                         skc.setKey(keyInput.getText());
                 }
                 catch (NumberFormatException e) {

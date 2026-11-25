@@ -19,11 +19,13 @@ public enum AlgorithmType {
 
     public static AlgorithmType fromName(String text) {
         for (AlgorithmType a : AlgorithmType.values()) {
-            if (a.name.equalsIgnoreCase(text)
+            if (a.name.toLowerCase().equalsIgnoreCase(text)
                     && a != NONE) {
                 return a;
             }
         }
-        throw new IllegalArgumentException("No algorithm named " + text + " found");
+        throw new
+                IllegalArgumentException
+                ("No algorithm named " + text + " found");
     }
 }

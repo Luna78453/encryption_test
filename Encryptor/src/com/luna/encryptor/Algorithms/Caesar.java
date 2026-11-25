@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 
-public class Caesar extends SingleKeyCipher {
+public class Caesar extends Cipher.SingleKeyCipher {
     private String key;
 
     public Caesar(String key, boolean decrypt){

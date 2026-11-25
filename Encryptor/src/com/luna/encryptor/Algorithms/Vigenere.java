@@ -5,7 +5,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class Vigenere extends SingleKeyCipher {
+public class Vigenere extends Cipher.SingleKeyCipher {
     private String key;
 
     public Vigenere(String key, boolean decrypt){

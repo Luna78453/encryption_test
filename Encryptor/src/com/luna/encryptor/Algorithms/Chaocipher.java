@@ -328,14 +328,6 @@ public class Chaocipher extends Cipher {
         setExtrasRequired();
     }
 
-    public boolean isUnicode() {
-        return isBytewise();
-    }
-
-    public void setUnicode(boolean unicode) {
-        this.setBytewise(unicode);
-    }
-
     public String getByteWheels() {
         return byteWheels;
     }
