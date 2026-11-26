@@ -8,6 +8,13 @@ public class Cipher extends CryptographicAlgorithm {
     public static class SingleKeyCipher extends Cipher{
         protected String key;
 
+        SingleKeyCipher(){}
+
+        SingleKeyCipher(String key, boolean decrypt){
+            this.decrypt = decrypt;
+            this.key = key;
+        }
+
         public void setKey(String key) {
             this.key = key;
         }

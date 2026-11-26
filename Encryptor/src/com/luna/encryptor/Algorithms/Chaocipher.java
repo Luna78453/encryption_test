@@ -187,7 +187,7 @@ public class Chaocipher extends Cipher {
         return index;
     }
 
-    public <T> void instantiateWheels(T[] leftWheelConfiguration, T[] rightWheelConfiguration){
+    private <T> void instantiateWheels(T[] leftWheelConfiguration, T[] rightWheelConfiguration){
         try {
             if(leftWheelConfiguration instanceof Byte[] bw) {
                 if (!arraysEqualHash(allBytes, bw))

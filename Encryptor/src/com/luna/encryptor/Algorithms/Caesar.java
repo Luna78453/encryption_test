@@ -5,15 +5,14 @@ import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 
 public class Caesar extends Cipher.SingleKeyCipher {
-    private String key;
-
     public Caesar(String key, boolean decrypt){
+        super(key, decrypt);
         this.type = AlgorithmType.CAESAR;
-        this.decrypt = decrypt;
-        this.key = key;
     }
 
-    public Caesar() { this.type = AlgorithmType.CAESAR; }
+    public Caesar() {
+        this.type = AlgorithmType.CAESAR;
+    }
 
     @Override
     public void Encrypt() {

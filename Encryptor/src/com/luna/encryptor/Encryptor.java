@@ -5,7 +5,9 @@ import com.luna.encryptor.forms.EncryptorGUI;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Encryptor {
     static void main(String[] args) {
@@ -56,7 +58,15 @@ public class Encryptor {
                     switch(c) {
                         case Cipher.SingleKeyCipher skc -> skc.setKey(clavis);
                         case Chaocipher chc -> {
+                            File archivus = new File(clavis);
+                            if(archivus.isFile()){
+                                String rotusClavis = flattenFileContent(archivus);
 
+                                if(chc.isBytewise())
+                                    chc.setByteWheels(rotusClavis);
+                                else
+                                    chc.setCharWheels(rotusClavis);
+                            }
                         }
                         default ->
                                 throw new
@@ -122,7 +132,16 @@ public class Encryptor {
     }
 
     private static String flattenFileContent(File file){
-        String s;
-        return s;
+        StringBuilder s = new StringBuilder();
+
+        try (Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                s.append(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error flattening wheel file occurred.");
+        }
+
+        return s.toString();
     }
 }

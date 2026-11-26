@@ -6,15 +6,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Vigenere extends Cipher.SingleKeyCipher {
-    private String key;
-
     public Vigenere(String key, boolean decrypt){
+        super(key, decrypt);
         this.type = AlgorithmType.VIGENERE;
-        this.decrypt = decrypt;
-        this.key = key;
     }
 
-    public Vigenere() { this.type = AlgorithmType.VIGENERE; }
+    public Vigenere() {
+        this.type = AlgorithmType.VIGENERE;
+    }
 
     @Override
     public void Encrypt() {

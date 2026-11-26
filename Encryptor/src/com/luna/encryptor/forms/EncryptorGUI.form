@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="804" height="400"/>
+      <xy x="20" y="20" width="804" height="417"/>
     </constraints>
     <properties/>
     <clientProperties>
@@ -17,7 +17,7 @@
         </constraints>
         <properties/>
       </component>
-      <grid id="f79ba" binding="miscellaneaPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="f79ba" binding="miscellaneaPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -25,24 +25,43 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="e1ca2" class="javax.swing.JTextField" binding="keyInput">
+          <grid id="9c42" binding="cipherPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties>
-              <enabled value="false"/>
-              <text value="Write the key..."/>
-            </properties>
-          </component>
-          <component id="4f583" class="javax.swing.JCheckBox" binding="decryptSwitch">
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="4f583" class="javax.swing.JCheckBox" binding="decryptSwitch">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Decrypt"/>
+                </properties>
+              </component>
+              <component id="e1ca2" class="javax.swing.JTextField" binding="keyInput">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Write the key..."/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="3498d" class="javax.swing.JCheckBox" binding="modusSwitch">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <enabled value="false"/>
-              <text value="Decrypt"/>
+              <text value="Bytewise"/>
             </properties>
           </component>
         </children>

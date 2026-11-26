@@ -35,6 +35,8 @@ public class EncryptorGUI extends JFrame {
     private JPanel introitusSelect;
     private JPanel exitusSelect;
     private JButton resetButton;
+    private JCheckBox modusSwitch;
+    private JPanel cipherPanel;
     private final JFileChooser fc = new JFileChooser();
 
     private CryptographicAlgorithm encryptor;
@@ -108,6 +110,7 @@ public class EncryptorGUI extends JFrame {
             encryptor.writeExitusFile(exitusFile);
             exitusFile = null;
         }
+
         JOptionPane.showMessageDialog(null,"File saved successfully.");
     }
 
@@ -121,20 +124,25 @@ public class EncryptorGUI extends JFrame {
 
     private void encryptorSelection() throws IOException {
         try {
-            if(introitusFile != null && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
+            if(introitusFile != null
+                    && algorithmSelector.getSelectedItem() != AlgorithmType.NONE){
                 encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
+
                 assert encryptor != null;
+
                 encryptor.readIntroitusFile(introitusFile);
             } else if(algorithmSelector.getSelectedItem() != AlgorithmType.NONE)
                 encryptor = CryptographicAlgorithm.instantiateAlgorithm((AlgorithmType)
                         Objects.requireNonNull(algorithmSelector.getSelectedItem()));
         } catch (NullPointerException e) { return; }
+
         if(!resetAvailable) {
             resetAvailable = true;
             enableStuff(true);
             algorithmSelector.removeItemAt(0);
         }
+
         switch (algorithmSelector.getSelectedItem()){
             case AlgorithmType.CAESAR, AlgorithmType.VIGENERE -> {
                 keyInput.setEnabled(true);
@@ -287,7 +295,8 @@ public class EncryptorGUI extends JFrame {
         });
         introitusPath.addActionListener(_ -> {
             try { introitusFieldFileChoose(); }
-            catch (IOException e) { JOptionPane
+            catch (IOException e) {
+                JOptionPane
                     .showMessageDialog(null,
                             "INVALID FILE PATH."); }
         });
@@ -295,7 +304,8 @@ public class EncryptorGUI extends JFrame {
         encryptButton.addActionListener(_ -> encrypt());
         saveButton.addActionListener(_ -> {
             try { writeEventum(); }
-            catch (IOException e) { JOptionPane
+            catch (IOException e) {
+                JOptionPane
                     .showMessageDialog(null,
                             "INVALID FILE PATH."); }
             catch (NullPointerException _) {}
