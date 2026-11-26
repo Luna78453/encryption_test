@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,7 @@ public class Chaocipher extends Cipher {
     }
 
     @Override
-    public void Encrypt() {
+    public void Encrypt() throws IllegalArgumentException{
         this.getIntroitus().rewind();
 
         if(isBytewise()){
@@ -49,7 +48,7 @@ public class Chaocipher extends Cipher {
     // en : [0] = plain; [1] = cipher
     // de : [1] = plain; [0] = cipher
     // 0 : right; 1 : left
-    private void ByteEncrypt(ByteBuffer message){
+    private void ByteEncrypt(ByteBuffer message) throws IllegalArgumentException{
         Byte[][] wheels = new Byte[2][];
         int[] zeniths = {0, 0};
         int plainWheelIndex = (this.decrypt) ? 1 : 0;
@@ -82,7 +81,7 @@ public class Chaocipher extends Cipher {
         }
     }
 
-    private void CharacterEncrypt(CharBuffer message) {
+    private void CharacterEncrypt(CharBuffer message) throws IllegalArgumentException{
         Character[][] wheels = new Character[2][];
         int[] zeniths = {0, 0};
         int plainWheelIndex = (this.decrypt) ? 1 : 0;
@@ -187,48 +186,31 @@ public class Chaocipher extends Cipher {
         return index;
     }
 
-    private <T> void instantiateWheels(T[] leftWheelConfiguration, T[] rightWheelConfiguration){
-        try {
+    private <T> void instantiateWheels(T[] leftWheelConfiguration, T[] rightWheelConfiguration) throws IllegalArgumentException{
             if(leftWheelConfiguration instanceof Byte[] bw) {
                 if (!arraysEqualHash(allBytes, bw))
-                    throw new IllegalAccessException("INVALID LEFT BYTE ALPHABET WHEEL");
+                    throw new IllegalArgumentException("INVALID LEFT BYTE ALPHABET WHEEL");
                 else this.leftByteWheel = bw;
             } else if(leftWheelConfiguration instanceof Character[] cw){
                 if (!arraysEqualHash(allLetters, cw))
-                    throw new IllegalAccessException("INVALID LEFT CHARACTER ALPHABET WHEEL");
+                    throw new IllegalArgumentException("INVALID LEFT CHARACTER ALPHABET WHEEL");
                 else this.leftCharWheel = cw;
             }
             if(rightWheelConfiguration instanceof Byte[] bw) {
                 if (!arraysEqualHash(allBytes, bw))
-                    throw new IllegalAccessException("INVALID RIGHT BYTE ALPHABET WHEEL");
+                    throw new IllegalArgumentException("INVALID RIGHT BYTE ALPHABET WHEEL");
                 else this.rightByteWheel = bw;
             } else if(rightWheelConfiguration instanceof Character[] cw){
                 if (!arraysEqualHash(allLetters, cw))
-                    throw new IllegalAccessException("INVALID RIGHT CHARACTER ALPHABET WHEEL");
+                    throw new IllegalArgumentException("INVALID RIGHT CHARACTER ALPHABET WHEEL");
                 else this.rightCharWheel = cw;
             }
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
 
-        if (leftWheelConfiguration instanceof Byte[] && !byteWheelsInstantiated)
+
+        if (this.isBytewise() && !byteWheelsInstantiated)
             byteWheelsInstantiated = true;
-        if (leftWheelConfiguration instanceof Character[] && !charWheelsInstantiated)
+        if (!this.isBytewise() && !charWheelsInstantiated)
             charWheelsInstantiated = true;
-    }
-
-    //https://faceprep.in/article/program-to-check-if-two-arrays-are-equal-or-not-faceprep/
-    public <T> boolean arraysEqualHash(T[] a, T[] b) {
-        if (a.length != b.length) return false;
-        HashMap<T, Integer> freq = new HashMap<>();
-        for (T x : a) freq.merge(x, 1, Integer::sum);
-        for (T x : b) {
-            if (!freq.containsKey(x)) return false;
-            int updated = freq.get(x) - 1;
-            if (updated == 0) freq.remove(x);
-            else freq.put(x, updated);
-        }
-        return freq.isEmpty();
     }
 
     private <T> T[] shuffleArray(T[] ar) {
@@ -247,7 +229,7 @@ public class Chaocipher extends Cipher {
         return ar;
     }
 
-    private void wheelStringToArray(String s, char wheelType){
+    private void wheelStringToArray(String s, char wheelType) throws IllegalArgumentException{
         if(wheelType == 'c'){
             Character[] leftWheel = s.substring(0, s.length()/2).chars()
                     .mapToObj(c -> (char) c)
@@ -316,13 +298,13 @@ public class Chaocipher extends Cipher {
         return s;
     }
 
-    public void generateRandomByteWheels(){
+    public void generateRandomByteWheels() throws IllegalArgumentException{
         instantiateWheels(shuffleArray(this.allBytes), shuffleArray(this.allBytes));
         this.byteWheels = wheelArrayToString(this.leftByteWheel, this.rightByteWheel);
         setExtrasRequired();
     }
 
-    public void generateRandomCharWheels(){
+    public void generateRandomCharWheels() throws IllegalArgumentException{
         instantiateWheels(shuffleArray(this.allLetters), shuffleArray(this.allLetters));
         this.charWheels = wheelArrayToString(this.leftCharWheel, this.rightCharWheel);
         setExtrasRequired();
@@ -332,7 +314,7 @@ public class Chaocipher extends Cipher {
         return byteWheels;
     }
 
-    public void setByteWheels(String byteWheels) {
+    public void setByteWheels(String byteWheels) throws IllegalArgumentException{
         wheelStringToArray(byteWheels, 'b');
 
         this.byteWheels = byteWheels;
@@ -342,7 +324,7 @@ public class Chaocipher extends Cipher {
         return charWheels;
     }
 
-    public void setCharWheels(String charWheels) {
+    public void setCharWheels(String charWheels) throws IllegalArgumentException{
         wheelStringToArray(charWheels, 'c');
 
         this.charWheels = charWheels;

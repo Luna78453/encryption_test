@@ -26,39 +26,42 @@ public class Encryptor {
             int i = 0;
             AlgorithmType genusCryptographiae =
                     AlgorithmType
-                    .fromName(args[i++].toLowerCase());
+                    .fromName(args[i++]);
             String introitus = args[i++];
             String modus = args[i++].toLowerCase();
             String exitus = "";
+
             CryptographicAlgorithm encryptor =
                     CryptographicAlgorithm.
                             instantiateAlgorithm(genusCryptographiae);
 
             assert encryptor != null;
+
             encryptor.readIntroitusFile(introitus);
             encryptor.setBytewise(parseModus(modus));
 
             switch(encryptor){
                 case Cipher c-> {
-                    String clavis = args[i++];
                     String directio = args[i++];
-
-                    if (c instanceof Caesar
-                        && !clavis.chars().allMatch(Character::isDigit))
-                        throw new
-                                IllegalArgumentException
-                                ("CAESAR KEY MUST BE INTEGER NUMBER");
-
-
-                    if (args.length > 5)
-                        exitus = args[i];
 
                     c.setDecrypt(parseDirectio(directio));
 
                     switch(c) {
-                        case Cipher.SingleKeyCipher skc -> skc.setKey(clavis);
+                        case Cipher.SingleKeyCipher skc -> {
+                            String clavis = args[i++];
+
+                            if (c instanceof Caesar
+                                    && !clavis.chars().allMatch(Character::isDigit))
+                                throw new
+                                        IllegalArgumentException
+                                        ("CAESAR KEY MUST BE INTEGER NUMBER");
+
+                            skc.setKey(clavis);
+                        }
                         case Chaocipher chc -> {
+                            String clavis = args[i++];
                             File archivus = new File(clavis);
+
                             if(archivus.isFile()){
                                 String rotusClavis = flattenFileContent(archivus);
 
@@ -66,6 +69,11 @@ public class Encryptor {
                                     chc.setByteWheels(rotusClavis);
                                 else
                                     chc.setCharWheels(rotusClavis);
+                            } else {
+                                if(chc.isBytewise())
+                                    chc.setByteWheels(clavis);
+                                else
+                                    chc.setCharWheels(clavis);
                             }
                         }
                         default ->
@@ -73,6 +81,9 @@ public class Encryptor {
                                         IllegalStateException
                                         ("Unexpected value: " + c);
                     }
+
+                    if (args.length > 5)
+                        exitus = args[i];
                 }
                 case Sha256 ignored -> {
                     if (args.length > 3) exitus = args[3];
@@ -84,17 +95,17 @@ public class Encryptor {
             }
 
             encryptor.Encrypt();
+
             exitus = (Objects.equals(exitus, "")) ?
                     encryptor.getFileName()[0] + "_"
                             + genusCryptographiae.getName() + "."
                             + encryptor.getFileName()[1] :
                     exitus;
+
             encryptor.writeExitusFile(new File(exitus));
 
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new
-                    ArrayIndexOutOfBoundsException
-                    ("NOT ENOUGH ARGUMENTS PROVIDED");
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -118,13 +129,13 @@ public class Encryptor {
     private static boolean parseModus(String modus) {
         if (
                 modus.contentEquals("byte")
-                        || modus.contentEquals("b")
+                || modus.contentEquals("b")
         ) return true;
         else if (
                 modus.contentEquals("character")
-                        || modus.contentEquals("char")
-                        || modus.contentEquals("c")
-                        || modus.contentEquals("")
+                || modus.contentEquals("char")
+                || modus.contentEquals("c")
+                || modus.contentEquals("")
         ) return false;
         else throw new
                     IllegalArgumentException

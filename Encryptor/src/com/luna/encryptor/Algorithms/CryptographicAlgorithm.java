@@ -1,11 +1,11 @@
 package com.luna.encryptor.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
 
 public class CryptographicAlgorithm {
     private File introitusFile;
@@ -15,7 +15,7 @@ public class CryptographicAlgorithm {
     private boolean bytewise;
     private boolean extrasRequired = false;
 
-    public static @Nullable CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
+    public static CryptographicAlgorithm instantiateAlgorithm(@NotNull AlgorithmType type){
         return switch(type){
             case NONE -> null;
             case CAESAR -> new Caesar();
@@ -130,7 +130,21 @@ public class CryptographicAlgorithm {
         return clone;
     }
 
-    public void Encrypt(){}
+    //https://faceprep.in/article/program-to-check-if-two-arrays-are-equal-or-not-faceprep/
+    public static <T> boolean arraysEqualHash(T[] a, T[] b) {
+        if (a.length != b.length) return false;
+        HashMap<T, Integer> freq = new HashMap<>();
+        for (T x : a) freq.merge(x, 1, Integer::sum);
+        for (T x : b) {
+            if (!freq.containsKey(x)) return false;
+            int updated = freq.get(x) - 1;
+            if (updated == 0) freq.remove(x);
+            else freq.put(x, updated);
+        }
+        return freq.isEmpty();
+    }
+
+    public void Encrypt() {}
 
     public ByteBuffer getEventum() {
         return eventum;
@@ -140,7 +154,9 @@ public class CryptographicAlgorithm {
         this.eventum = eventum;
     }
 
-    public String[] getFileName() { return introitusFile.getName().split("\\."); }
+    public String[] getFileName() {
+        return introitusFile.getName().split("\\.");
+    }
 
     public ByteBuffer getIntroitus() {
         return introitus;

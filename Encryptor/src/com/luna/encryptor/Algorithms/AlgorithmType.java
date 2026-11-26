@@ -19,7 +19,7 @@ public enum AlgorithmType {
 
     public static AlgorithmType fromName(String text) {
         for (AlgorithmType a : AlgorithmType.values()) {
-            if (a.name.toLowerCase().equalsIgnoreCase(text)
+            if (a.name.equalsIgnoreCase(text)
                     && a != NONE) {
                 return a;
             }

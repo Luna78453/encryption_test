@@ -177,7 +177,7 @@ public class EncryptorGUI extends JFrame {
         }
     }
 
-    private void encrypt() {
+    private void encrypt() throws IllegalArgumentException {
         if (encryptor.getIntroitus() != null) {
             if (encryptor instanceof Cipher c){
                 try {
@@ -202,10 +202,12 @@ public class EncryptorGUI extends JFrame {
             }
 
             encryptor.Encrypt();
+
             exitusShowText.setText(new String(
                     encryptor.getEventum().array(),
                     StandardCharsets.UTF_8
             ));
+
             saveButton.setEnabled(true);
         } else JOptionPane.showMessageDialog
                 (null,"NO FILE SELECTED.");
@@ -301,7 +303,13 @@ public class EncryptorGUI extends JFrame {
                             "INVALID FILE PATH."); }
         });
         exitusFilePickButton.addActionListener(_ -> exitusFileChoose());
-        encryptButton.addActionListener(_ -> encrypt());
+        encryptButton.addActionListener(_ -> {
+            try {
+                encrypt();
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            }
+        });
         saveButton.addActionListener(_ -> {
             try { writeEventum(); }
             catch (IOException e) {
