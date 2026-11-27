@@ -59,7 +59,7 @@ public class CryptographicAlgorithm {
         if(this instanceof Chaocipher ch){
             try {
                 String extrasPath =
-                        exitus.toPath().getParent().toString()
+                        "." + File.separator
                         + getFileName()[0]
                         + "_wheels.txt";
                 try (FileWriter myWriter = new FileWriter(extrasPath)) {
@@ -72,7 +72,7 @@ public class CryptographicAlgorithm {
                             ? ch.getByteWheels().substring(256)
                             : ch.getCharWheels().substring(26));
                 }
-                System.out.println("Generated wheel found in :" + extrasPath);
+                System.out.println("Generated wheel found in : " + extrasPath);
             } catch (IOException e) {
                 System.out.println("ERROR WRITING EXTRAS FILE");
                 throw new RuntimeException(e);

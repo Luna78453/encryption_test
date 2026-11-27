@@ -62,7 +62,13 @@ public class Encryptor {
                             String clavis = args[i++];
                             File archivus = new File(clavis);
 
-                            if(archivus.isFile()){
+                            if(clavis.contentEquals("r")){
+                                if(chc.isBytewise())
+                                    chc.generateRandomByteWheels();
+                                else
+                                    chc.generateRandomCharWheels();
+                            }
+                            else if(archivus.isFile()){
                                 String rotusClavis = flattenFileContent(archivus);
 
                                 if(chc.isBytewise())
@@ -97,15 +103,16 @@ public class Encryptor {
             encryptor.Encrypt();
 
             exitus = (Objects.equals(exitus, "")) ?
-                    encryptor.getFileName()[0] + "_"
+                    "." + File.separator
+                            + encryptor.getFileName()[0] + "_"
                             + genusCryptographiae.getName() + "."
                             + encryptor.getFileName()[1] :
                     exitus;
 
             encryptor.writeExitusFile(new File(exitus));
 
-        } catch (Throwable e) {
-            System.out.println(e.getMessage());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
     }
 

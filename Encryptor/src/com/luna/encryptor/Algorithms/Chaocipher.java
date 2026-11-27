@@ -34,12 +34,14 @@ public class Chaocipher extends Cipher {
             ByteBuffer message =
                     cloneByteBuffer(this.getIntroitus());
             ByteEncrypt(message);
+            message.rewind();
             setEventum(message);
         } else {
             CharBuffer message =
                     StandardCharsets.UTF_8
                             .decode(this.getIntroitus());
             CharacterEncrypt(message);
+            message.rewind();
             setEventum(StandardCharsets.UTF_8.encode(message));
         }
     }
@@ -113,10 +115,13 @@ public class Chaocipher extends Cipher {
                                 ? Character.toUpperCase(wheels[cipherWheelIndex][zeniths[cipherWheelIndex]])
                                 : wheels[cipherWheelIndex][zeniths[cipherWheelIndex]]
                 );
-            }
+            } else
+                message.put(message.get(message.position()));
 
             permuteLeftWheel(wheels[1], zeniths[1]);
             permuteRightWheel(wheels[0], zeniths[0]);
+
+
         }
     }
 
@@ -124,7 +129,7 @@ public class Chaocipher extends Cipher {
         int wheelSize = (isBytewise()) ? 256 : 26;
 
         //if further than nadir point go counter-clockwise
-        if(nextPlainPosition > wheelSize + zeniths[plainWheelIndex])
+        if(Math.floorMod(nextPlainPosition - zeniths[plainWheelIndex], 26) > wheelSize/2)
             rotateEngagedWheels(
                     plainWheelIndex,
                     zeniths,
@@ -159,7 +164,7 @@ public class Chaocipher extends Cipher {
     private <T> void permuteRightWheel(T[] plainWheel, int zenith){
         int wheelSize = (isBytewise()) ? 256 : 26;
         zenith = Math.floorMod(--zenith, wheelSize);
-        T foo = plainWheel[Math.floorMod(--zenith, wheelSize)];
+        T foo = plainWheel[Math.floorMod(zenith + 2, wheelSize)];
 
         for(int i = 2; i < wheelSize/2; i++){
             plainWheel[Math.floorMod(zenith + i, wheelSize)]
@@ -171,8 +176,10 @@ public class Chaocipher extends Cipher {
 
     private void rotateEngagedWheels(int rotatedWheel, int[] zeniths, int rotations){
         int wheelSize = (isBytewise()) ? 256 : 26;
-        zeniths[rotatedWheel] += (rotations % wheelSize);
+        zeniths[rotatedWheel] += Math.floorMod(rotations, wheelSize);
+        zeniths[rotatedWheel] = Math.floorMod(zeniths[rotatedWheel], wheelSize);
         zeniths[(rotatedWheel + 1)%2] += Math.floorMod(-rotations, wheelSize);
+        zeniths[(rotatedWheel + 1)%2] = Math.floorMod(zeniths[(rotatedWheel + 1)%2], wheelSize);
     }
 
     private static <T> int findIndex(T[] arr, T e){
@@ -299,13 +306,17 @@ public class Chaocipher extends Cipher {
     }
 
     public void generateRandomByteWheels() throws IllegalArgumentException{
-        instantiateWheels(shuffleArray(this.allBytes), shuffleArray(this.allBytes));
+        Byte[] leftWheel = shuffleArray(this.allBytes);
+        Byte[] rightWheel = shuffleArray(this.allBytes);
+        instantiateWheels(leftWheel, rightWheel);
         this.byteWheels = wheelArrayToString(this.leftByteWheel, this.rightByteWheel);
         setExtrasRequired();
     }
 
     public void generateRandomCharWheels() throws IllegalArgumentException{
-        instantiateWheels(shuffleArray(this.allLetters), shuffleArray(this.allLetters));
+        Character[] leftWheel = shuffleArray(this.allLetters);
+        Character[] rightWheel = shuffleArray(this.allLetters);
+        instantiateWheels(leftWheel, rightWheel);
         this.charWheels = wheelArrayToString(this.leftCharWheel, this.rightCharWheel);
         setExtrasRequired();
     }
